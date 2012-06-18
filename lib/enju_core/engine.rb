@@ -5,6 +5,7 @@ require 'acts_as_list'
 require 'attribute_normalizer'
 require 'friendly_id'
 require 'addressable/uri'
+require 'sunspot_rails'
 
 module EnjuCore
   class Engine < ::Rails::Engine
