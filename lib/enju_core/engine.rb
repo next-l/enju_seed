@@ -6,6 +6,7 @@ require 'attribute_normalizer'
 require 'friendly_id'
 require 'addressable/uri'
 require 'sunspot_rails'
+require 'will_paginate/array'
 
 module EnjuCore
   class Engine < ::Rails::Engine
