@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency "addressable"
   s.add_dependency "sunspot_rails", "~> 2.0.0.pre.120417"
   s.add_dependency "resque"
+  s.add_dependency "configatron"
   # s.add_dependency "jquery-rails"
 
   s.add_development_dependency "sqlite3"

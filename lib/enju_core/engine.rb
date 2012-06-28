@@ -8,6 +8,7 @@ require 'addressable/uri'
 require 'sunspot_rails'
 require 'will_paginate/array'
 require 'resque'
+require 'configatron'
 
 module EnjuCore
   class Engine < ::Rails::Engine
