@@ -7,6 +7,7 @@ require 'friendly_id'
 require 'addressable/uri'
 require 'sunspot_rails'
 require 'will_paginate/array'
+require 'resque'
 
 module EnjuCore
   class Engine < ::Rails::Engine
