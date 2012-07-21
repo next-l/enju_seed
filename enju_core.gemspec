@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency "acts_as_list"
   s.add_dependency "attribute_normalizer", "~> 1.1"
   s.add_dependency "addressable"
-  s.add_dependency "sunspot_rails", "~> 2.0.0.pre.120417"
+  s.add_dependency "sunspot_rails", "~> 2.0.0.pre.120720"
   s.add_dependency "resque"
   s.add_dependency "configatron"
   # s.add_dependency "jquery-rails"
