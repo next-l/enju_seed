@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 3.2"
   s.add_dependency "friendly_id", "~> 4.0"
-  s.add_dependency "will_paginate"
+  s.add_dependency "kaminari"
   s.add_dependency "devise"
   s.add_dependency "cancan"
   s.add_dependency "acts_as_list"
