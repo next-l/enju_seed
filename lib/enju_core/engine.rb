@@ -7,7 +7,7 @@ require 'friendly_id'
 require 'addressable/uri'
 require 'sunspot_rails'
 require 'resque'
-require 'configatron'
+require 'settingslogic'
 
 module EnjuCore
   class Engine < ::Rails::Engine
