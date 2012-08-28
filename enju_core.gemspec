@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = EnjuCore::VERSION
   s.authors     = ["Kosuke Tanabe"]
   s.email       = ["tanabe@mwr.mediacom.keio.ac.jp"]
-  s.homepage    = "https://github.com/nabeta/enju_circulation"
+  s.homepage    = "https://github.com/next-l/enju_core"
   s.summary     = "enju_core plugin"
   s.description = "Core module for Next-L Enju"
 
