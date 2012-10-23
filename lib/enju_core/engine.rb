@@ -8,6 +8,7 @@ require 'addressable/uri'
 require 'sunspot_rails'
 require 'resque'
 require 'settingslogic'
+require 'mobile-fu'
 
 module EnjuCore
   class Engine < ::Rails::Engine
