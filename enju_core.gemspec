@@ -27,7 +27,6 @@ Gem::Specification.new do |s|
   s.add_dependency "sunspot_rails", "~> 2.0.0.pre.130115"
   s.add_dependency "resque"
   s.add_dependency "settingslogic"
-  s.add_dependency "mobile-fu"
   s.add_dependency "dalli"
   # s.add_dependency "jquery-rails"
 
