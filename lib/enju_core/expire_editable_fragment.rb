@@ -10,7 +10,7 @@ module ExpireEditableFragment
       I18n.available_locales.each do |locale|
         Role.all_cache.each do |role|
           fragments.each do |fragment|
-            expire_fragment(":#{record.class.to_s.downcase}" => record.id, :fragment => fragment, :role => role.name, :locale => locale)
+            ActionController::Base.new.expire_fragment(":#{record.class.to_s.downcase}" => record.id, :fragment => fragment, :role => role.name, :locale => locale)
           end
         end
       end
