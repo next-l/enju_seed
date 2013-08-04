@@ -6,7 +6,7 @@ module MasterModel
       acts_as_list
       validates_uniqueness_of :name, :case_sensitive => false,
         :message => I18n.t('Only lowercase letters and numbers are allowed.')
-      validates :name, :presence => true, :format => {:with => /\A[0-9a-z][0-9a-z_\-]*[0-9a-z]\Z/}
+      validates :name, :presence => true, :format => {:with => /\A[0-9A-Za-z][0-9a-z_\-]*[0-9a-z]\Z/}
       validates :display_name, :presence => true
       before_validation :set_display_name, :on => :create
       normalize_attributes :name
