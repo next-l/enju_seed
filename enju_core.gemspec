@@ -29,7 +29,6 @@ Gem::Specification.new do |s|
   s.add_dependency "settingslogic"
   s.add_dependency "dalli"
   s.add_dependency "nested_form"
-  s.add_dependency "rails-observers"
   s.add_dependency "protected_attributes"
   # s.add_dependency "jquery-rails"
 

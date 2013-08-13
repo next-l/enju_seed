@@ -10,7 +10,6 @@ require 'resque'
 require 'settingslogic'
 require 'nested_form'
 require 'protected_attributes'
-require 'rails-observers'
 
 module EnjuCore
   class Engine < ::Rails::Engine
