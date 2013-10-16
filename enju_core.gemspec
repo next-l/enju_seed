@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["spec/**/*"]
 
   s.add_dependency "rails", "~> 4.0.0"
-  s.add_dependency "friendly_id", "~> 5.0.0.rc3"
+  s.add_dependency "friendly_id", "~> 5.0"
   s.add_dependency "kaminari"
   s.add_dependency "devise", "~> 3.1"
   s.add_dependency "cancan"
