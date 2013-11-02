@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"]
 
-  s.add_dependency "rails", "~> 3.2.14"
+  s.add_dependency "rails", "~> 3.2.15"
   s.add_dependency "friendly_id", "~> 4.0"
   s.add_dependency "kaminari"
   s.add_dependency "devise", "~> 3.1"
@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency "acts_as_list"
   s.add_dependency "attribute_normalizer", "~> 1.1"
   s.add_dependency "addressable"
-  s.add_dependency "sunspot_rails", "~> 2.0.0"
+  s.add_dependency "sunspot_rails", "~> 2.1"
   s.add_dependency "resque"
   s.add_dependency "settingslogic"
   s.add_dependency "dalli"
