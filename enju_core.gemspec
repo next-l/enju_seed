@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"]
 
-  s.add_dependency "rails", "~> 4.0.0"
+  s.add_dependency "rails", "~> 4.0.1"
   s.add_dependency "friendly_id", "~> 5.0"
   s.add_dependency "kaminari"
   s.add_dependency "devise", "~> 3.1"
@@ -30,7 +30,6 @@ Gem::Specification.new do |s|
   s.add_dependency "dalli"
   s.add_dependency "nested_form"
   s.add_dependency "protected_attributes"
-  # s.add_dependency "jquery-rails"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
