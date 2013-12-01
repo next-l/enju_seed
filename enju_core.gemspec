@@ -18,8 +18,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 4.0.1"
   s.add_dependency "friendly_id", "~> 5.0"
-  s.add_dependency "kaminari"
-  s.add_dependency "devise", "~> 3.1"
+  s.add_dependency "kaminari", "~> 0.15"
+  s.add_dependency "devise", "~> 3.2"
   s.add_dependency "cancan"
   s.add_dependency "acts_as_list", "~> 0.3"
   s.add_dependency "attribute_normalizer", "~> 1.1"
