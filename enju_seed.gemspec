@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
   s.add_dependency "settingslogic"
   s.add_dependency "dalli"
   s.add_dependency "nested_form"
-  s.add_dependency "protected_attributes"
+  #s.add_dependency "protected_attributes"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
