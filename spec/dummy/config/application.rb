@@ -2,8 +2,8 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
-Bundler.require
-require "enju_core"
+Bundler.require(*Rails.groups)
+require "enju_seed"
 
 module Dummy
   class Application < Rails::Application

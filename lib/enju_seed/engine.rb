@@ -10,7 +10,7 @@ require 'resque/server'
 require 'settingslogic'
 require 'nested_form'
 
-module EnjuCore
+module EnjuSeed
   class Engine < ::Rails::Engine
   end
 end
