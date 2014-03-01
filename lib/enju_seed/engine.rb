@@ -9,7 +9,7 @@ require 'sunspot_rails'
 require 'resque/server'
 require 'settingslogic'
 require 'nested_form'
-#require 'protected_attributes'
+require 'authority'
 
 module EnjuSeed
   class Engine < ::Rails::Engine
