@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.name        = "enju_seed"
   s.version     = EnjuSeed::VERSION
   s.authors     = ["Kosuke Tanabe"]
-  s.email       = ["kosuke@e23.jp"]
+  s.email       = ["nabeta@fastmail.fm"]
   s.homepage    = "https://github.com/next-l/enju_seed"
   s.summary     = "enju_seed plugin"
   s.description = "Seed module for Next-L Enju"
@@ -16,12 +16,12 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"]
 
-  s.add_dependency "rails", "~> 3.2.16"
+  s.add_dependency "rails", "~> 3.2.18"
   s.add_dependency "friendly_id", "~> 4.0"
   s.add_dependency "kaminari", "~> 0.15"
   s.add_dependency "devise", "~> 3.2"
-  s.add_dependency "cancan"
-  s.add_dependency "acts_as_list", "~> 0.3"
+  s.add_dependency "cancancan", "~> 1.8"
+  s.add_dependency "acts_as_list", "~> 0.4"
   s.add_dependency "attribute_normalizer", "~> 1.1"
   s.add_dependency "addressable"
   s.add_dependency "sunspot_rails", "~> 2.0"
