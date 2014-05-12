@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency "acts_as_list", "~> 0.4"
   s.add_dependency "attribute_normalizer", "~> 1.1"
   s.add_dependency "addressable"
-  s.add_dependency "sunspot_rails", "~> 2.0"
+  s.add_dependency "sunspot_rails", "~> 2.1"
   s.add_dependency "resque"
   s.add_dependency "settingslogic"
   s.add_dependency "dalli"
