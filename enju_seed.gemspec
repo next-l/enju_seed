@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency "kaminari", "~> 0.15.1"
   s.add_dependency "devise", "~> 3.4"
   s.add_dependency "cancancan", "~> 1.9"
-  s.add_dependency "acts_as_list", "~> 0.5"
+  s.add_dependency "acts_as_list", "~> 0.6"
   s.add_dependency "attribute_normalizer", "~> 1.2"
   s.add_dependency "addressable"
   s.add_dependency "sunspot_rails", "~> 2.1"
