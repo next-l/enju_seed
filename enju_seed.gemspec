@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", ">= 3.2.21", "< 5.0"
   s.add_dependency "friendly_id", ">= 4.0"
-  s.add_dependency "kaminari", "~> 0.15.1"
+  s.add_dependency "kaminari", "~> 0.16.2"
   s.add_dependency "devise", "~> 3.4"
   s.add_dependency "cancancan", "~> 1.10"
   s.add_dependency "acts_as_list", "~> 0.6"
