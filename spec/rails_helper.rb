@@ -6,6 +6,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'factory_girl'
+require 'sunspot_matchers'
 # Add additional requires below this line. Rails is not loaded until this point!
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
@@ -58,6 +59,10 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   config.extend ControllerMacros, type: :controller
 
+  config.before do
+    Sunspot.session = SunspotMatchers::SunspotSessionSpy.new(Sunspot.session)
+  end
+  config.include SunspotMatchers
 end
 
 FactoryGirl.definition_file_paths << "#{::Rails.root}/../../spec/factories"
