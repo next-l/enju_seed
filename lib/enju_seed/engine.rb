@@ -11,6 +11,7 @@ require 'kramdown'
 require 'rails_autolink'
 require 'sitemap_generator'
 require 'browser'
+require 'simple_form'
 
 module EnjuSeed
   class Engine < ::Rails::Engine

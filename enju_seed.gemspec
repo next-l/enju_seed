@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
   s.add_dependency "kramdown"
   s.add_dependency "browser", "~> 2.2"
   s.add_dependency "json_pure", "~> 1.8.3"
+  s.add_dependency "simple_form"
 
   s.add_development_dependency "enju_leaf", "~> 1.2.0.beta.1"
   s.add_development_dependency "enju_library", "~> 0.2.0.beta.2"
