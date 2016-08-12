@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
   s.add_dependency "json_pure", "~> 1.8.3"
 
   s.add_development_dependency "enju_leaf", "~> 1.2.0.beta.1"
-  s.add_development_dependency "enju_library", "~> 0.2.0.beta.1"
+  s.add_development_dependency "enju_library", "~> 0.2.0.beta.2"
   s.add_development_dependency "enju_biblio", "~> 0.2.0.beta.1"
   s.add_development_dependency "enju_manifestation_viewer", "~> 0.2.0.beta.1"
   s.add_development_dependency "enju_circulation", "~> 0.2.0.beta.1"
