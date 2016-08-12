@@ -1,16 +1,19 @@
+# -*- encoding: utf-8 -*-
 require 'rails_helper'
 
 describe ProfilesController do
   fixtures :all
 
-  describe "GET index" do
+  describe "GET index", :solr => true do
+    before do
+      Profile.reindex
+    end
+
     describe "When logged in as Administrator" do
       login_fixture_admin
 
       it "assigns all profiles as @profiles" do
         get :index
-        Sunspot.session.should be_a_search_for(Profile)
-        Sunspot.session.should have_search_params(:fulltext, '')
         assigns(:profiles).should_not be_nil
       end
     end
@@ -20,26 +23,19 @@ describe ProfilesController do
 
       it "assigns all profiles as @profiles" do
         get :index
-        Sunspot.session.should be_a_search_for(Profile)
-        Sunspot.session.should have_search_params(:fulltext, '')
         assigns(:profiles).should_not be_nil
       end
 
       it "should get index with query" do
         get :index, :query => 'user1'
         response.should be_success
-        Sunspot.session.should be_a_search_for(Profile)
-        Sunspot.session.should have_search_params(:fulltext, 'user1')
-        assigns(:profiles).should_not be_nil
+        assigns(:profiles).should_not be_empty
       end
 
       it "should get sorted index" do
         get :index, :query => 'user1', :sort_by => 'username', :order => 'desc'
         response.should be_success
-        Sunspot.session.should be_a_search_for(Profile)
-        Sunspot.session.should have_search_params(:fulltext, 'user1')
-        Sunspot.session.should have_search_params(:order_by, :username, :desc)
-        assigns(:profiles).should_not be_nil
+        assigns(:profiles).should_not be_empty
       end
     end
 
@@ -69,12 +65,6 @@ describe ProfilesController do
       it "assigns the requested user as @profile" do
         get :show, id: profiles(:admin).id
         assigns(:profile).should eq(profiles(:admin))
-      end
-      it "assigns the another requested user as @profile" do
-        admin_profile = FactoryGirl.create :admin_profile
-        get :show, id: admin_profile.id
-        expect(response).not_to be_forbidden
-        expect(assigns(:profile)).to eq admin_profile
       end
     end
 
@@ -151,7 +141,7 @@ describe ProfilesController do
 
       it "should not assign the requested user as @profile" do
         get :new
-        assigns(:profile).should be_nil
+        assigns(:profile).should_not be_valid
         response.should be_forbidden
       end
     end
@@ -159,7 +149,7 @@ describe ProfilesController do
     describe "When not logged in" do
       it "should not assign the requested user as @profile" do
         get :new
-        assigns(:profile).should be_nil
+        assigns(:profile).should_not be_valid
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -556,8 +546,8 @@ describe ProfilesController do
 
       it "should not be able to delete other librarian user" do
         librarian = FactoryGirl.create(:librarian_profile)
-        delete :destroy, id: librarian.id
-        response.should be_forbidden
+        ability = EnjuLeaf::Ability.new(@user, "0.0.0.0")
+        ability.should_not be_able_to( :destroy, librarian )
       end
     end
 

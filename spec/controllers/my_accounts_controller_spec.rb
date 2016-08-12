@@ -7,7 +7,7 @@ describe MyAccountsController do
   describe "GET show" do
     describe "When logged in as Administrator" do
       before(:each) do
-        sign_in User.where(username: 'enjuadmin').first
+        sign_in User.find('enjuadmin')
       end
 
       it "assigns the requested user as @user" do
