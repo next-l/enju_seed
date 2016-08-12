@@ -29,7 +29,6 @@ Gem::Specification.new do |s|
   s.add_dependency "sitemap_generator", "~> 5.1"
   s.add_dependency "rails_autolink"
   s.add_dependency "paperclip", "~> 5.0"
-  s.add_dependency "statesman", "~> 1.3"
   s.add_dependency "kramdown"
   s.add_dependency "browser", "~> 2.2"
   s.add_dependency "json_pure", "~> 1.8.3"
