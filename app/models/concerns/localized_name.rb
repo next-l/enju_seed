@@ -1,4 +1,6 @@
 module LocalizedName
+  extend ActiveSupport::Concern
+
   def localize(locale = I18n.locale)
     string = YAML.load(self)
     if string.is_a?(Hash) and string[locale.to_s]
