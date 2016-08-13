@@ -118,25 +118,6 @@ describe User do
     end
   end
 
-  if defined?(EnjuCirculation)
-    it "should get checked_item_count" do
-      count = users(:user1).checked_item_count
-      count.should eq({:book=>2, :serial=>1, :cd=>0})
-    end
-
-    it "should get reserves_count" do
-      users(:user1).reserves.waiting.count.should eq 1
-    end
-  end
-
-  if defined?(EnjuCirculation)
-    it "should send_message" do
-      assert users(:librarian1).send_message('reservation_expired_for_patron', :manifestations => users(:librarian1).reserves.not_sent_expiration_notice_to_patron.collect(&:manifestation))
-      users(:librarian1).reload
-      users(:librarian1).reserves.not_sent_expiration_notice_to_patron.should be_empty
-    end
-  end
-
   describe ".export" do
     it "should export all user's information" do
       lines = User.export
