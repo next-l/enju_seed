@@ -4,6 +4,4 @@ class User < ActiveRecord::Base
     :lockable, :lock_strategy => :none, :unlock_strategy => :none
 
   include EnjuSeed::EnjuUser
-  include EnjuCirculation::EnjuUser
-  include EnjuMessage::EnjuUser
 end

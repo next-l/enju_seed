@@ -8,13 +8,6 @@ describe "profiles/show" do
     view.stub(:current_user).and_return(User.friendly.find('enjuadmin'))
   end
 
-  it "renders attributes in <p>" do
-    allow(view).to receive(:policy).and_return double(update?: true, destroy?: true)
-    render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/Checkout/)
-  end
-
   describe "when logged in as Librarian" do
     before(:each) do
       @profile = assign(:profile, profiles(:librarian2))
