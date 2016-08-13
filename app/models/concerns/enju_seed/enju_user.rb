@@ -1,4 +1,4 @@
-module EnjuLeaf
+module EnjuSeed
   module EnjuUser
     extend ActiveSupport::Concern
 
