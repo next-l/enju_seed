@@ -94,8 +94,6 @@ end
 #  checkout_icalendar_token :string
 #  save_checkout_history    :boolean          default(FALSE), not null
 #  expired_at               :datetime
-#  save_search_history      :boolean
-#  share_bookmarks          :boolean
 #  full_name_transcription  :text
 #  date_of_birth            :datetime
 #
