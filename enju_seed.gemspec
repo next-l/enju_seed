@@ -36,7 +36,7 @@ Gem::Specification.new do |s|
   s.add_dependency "validates_timeliness", "~> 4.0"
 
   s.add_development_dependency "enju_leaf", "~> 1.2.0.beta.2"
-  #s.add_development_dependency "globalize"
+  s.add_development_dependency "globalize"
   s.add_development_dependency "globalize-accessors"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"

@@ -10,8 +10,6 @@ gemspec
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 gem 'jquery-rails'
-gem 'enju_leaf', path: '../enju_leaf'
-gem 'globalize', github: 'globalize/globalize'
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
