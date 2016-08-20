@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160703190209) do
+ActiveRecord::Schema.define(version: 20160813203039) do
 
   create_table "accepts", force: :cascade do |t|
     t.integer  "basket_id"
@@ -587,9 +587,9 @@ ActiveRecord::Schema.define(version: 20160703190209) do
   add_index "library_group_translations", ["locale"], name: "index_library_group_translations_on_locale"
 
   create_table "library_groups", force: :cascade do |t|
-    t.string   "name",                                              null: false
+    t.string   "name",                                                             null: false
     t.text     "display_name"
-    t.string   "short_name",                                        null: false
+    t.string   "short_name",                                                       null: false
     t.text     "my_networks"
     t.text     "login_banner"
     t.text     "note"
@@ -598,12 +598,17 @@ ActiveRecord::Schema.define(version: 20160703190209) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "admin_networks"
-    t.string   "url",            default: "http://localhost:3000/"
+    t.string   "url",                           default: "http://localhost:3000/"
     t.text     "settings"
     t.text     "html_snippet"
+    t.integer  "max_number_of_results",         default: 500
+    t.boolean  "family_name_first",             default: true
+    t.integer  "pub_year_facet_range_interval", default: 10
+    t.integer  "user_id"
   end
 
   add_index "library_groups", ["short_name"], name: "index_library_groups_on_short_name"
+  add_index "library_groups", ["user_id"], name: "index_library_groups_on_user_id"
 
   create_table "licenses", force: :cascade do |t|
     t.string   "name",         null: false
@@ -901,6 +906,8 @@ ActiveRecord::Schema.define(version: 20160703190209) do
   end
 
   add_index "profiles", ["checkout_icalendar_token"], name: "index_profiles_on_checkout_icalendar_token", unique: true
+  add_index "profiles", ["library_id"], name: "index_profiles_on_library_id"
+  add_index "profiles", ["user_group_id"], name: "index_profiles_on_user_group_id"
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
   add_index "profiles", ["user_number"], name: "index_profiles_on_user_number", unique: true
 
@@ -1276,8 +1283,8 @@ ActiveRecord::Schema.define(version: 20160703190209) do
   end
 
   create_table "user_has_roles", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "role_id"
+    t.integer  "user_id",    null: false
+    t.integer  "role_id",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -4,7 +4,9 @@ require 'rails/all'
 
 Bundler.require(*Rails.groups)
 require "enju_seed"
-require "enju_circulation"
+require "enju_leaf"
+require 'globalize'
+require 'globalize-accessors'
 
 module Dummy
   class Application < Rails::Application
