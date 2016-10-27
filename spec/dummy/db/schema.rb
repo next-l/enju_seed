@@ -906,6 +906,8 @@ ActiveRecord::Schema.define(version: 20160813203039) do
   end
 
   add_index "profiles", ["checkout_icalendar_token"], name: "index_profiles_on_checkout_icalendar_token", unique: true
+  add_index "profiles", ["library_id"], name: "index_profiles_on_library_id"
+  add_index "profiles", ["user_group_id"], name: "index_profiles_on_user_group_id"
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
   add_index "profiles", ["user_number"], name: "index_profiles_on_user_number", unique: true
 
@@ -1281,8 +1283,8 @@ ActiveRecord::Schema.define(version: 20160813203039) do
   end
 
   create_table "user_has_roles", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "role_id"
+    t.integer  "user_id",    null: false
+    t.integer  "role_id",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
