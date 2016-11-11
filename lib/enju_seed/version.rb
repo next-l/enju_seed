@@ -1,3 +1,3 @@
 module EnjuSeed
-  VERSION = "0.2.0.pre7"
+  VERSION = "0.3.0.beta.1"
 end

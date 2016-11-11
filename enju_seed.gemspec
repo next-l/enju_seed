@@ -14,21 +14,32 @@ Gem::Specification.new do |s|
   s.description = "Seed module for Next-L Enju"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
-  s.test_files = Dir["spec/**/*"]
+  s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/{log,tmp}/**/*"] - Dir["spec/dummy/db/*.sqlite3"]
 
-  s.add_dependency "rails", "~> 4.2"
+  #s.add_dependency "rails", ">= 4.2.7.1"
   s.add_dependency "friendly_id", "~> 5.1"
-  s.add_dependency "kaminari", "~> 0.15.1"
-  s.add_dependency "devise", "~> 3.4"
-  s.add_dependency "pundit"
-  s.add_dependency "acts_as_list", "~> 0.6"
-  s.add_dependency "normalizr", "~> 0.1"
+  s.add_dependency "devise", "~> 4.2"
+  s.add_dependency "pundit", "~> 1.1"
+  s.add_dependency "acts_as_list", "~> 0.8"
+  s.add_dependency "strip_attributes", "~> 1.8"
+  s.add_dependency "kaminari", "~> 0.17"
   s.add_dependency "addressable", "~> 2.3"
-  s.add_dependency "elasticsearch-model", "~> 0.1.6"
-  s.add_dependency "elasticsearch-rails", "~> 0.1.6"
-  s.add_dependency "nested_form"
+  s.add_dependency "sunspot_rails", "~> 2.2.7"
+  s.add_dependency "cocoon"
+  s.add_dependency "sitemap_generator", "~> 5.2"
+  s.add_dependency "rails_autolink"
+  s.add_dependency "kramdown"
+  s.add_dependency "browser", "~> 2.2"
+  s.add_dependency "json_pure", "~> 1.8.3"
+  s.add_dependency "simple_form"
+  s.add_dependency "validates_timeliness", "~> 4.0"
 
-  s.add_development_dependency "sqlite3"
+  #s.add_development_dependency "enju_leaf", "~> 1.2.0.beta.4"
+  s.add_development_dependency "pg"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "factory_girl_rails"
+  s.add_development_dependency "capybara"
+  s.add_development_dependency "rspec-activemodel-mocks"
+  s.add_development_dependency "sunspot_matchers"
+  s.add_development_dependency "coveralls"
 end
