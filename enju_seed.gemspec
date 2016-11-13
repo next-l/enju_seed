@@ -35,12 +35,12 @@ Gem::Specification.new do |s|
   s.add_dependency "simple_form"
   s.add_dependency "validates_timeliness", "~> 4.0"
 
-  s.add_development_dependency "enju_leaf", "~> 1.2.0"
+  #s.add_development_dependency "enju_leaf", "~> 1.2.0"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "factory_girl_rails"
   s.add_development_dependency "capybara"
   s.add_development_dependency "rspec-activemodel-mocks"
   s.add_development_dependency "sunspot_matchers"
-  s.add_development_dependency "coveralls"
+  s.add_development_dependency "simplecov"
 end
