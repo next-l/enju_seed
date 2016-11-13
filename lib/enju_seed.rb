@@ -1,5 +1,5 @@
 require "enju_seed/engine"
-require "enju_seed/version"
 
 module EnjuSeed
+  # Your code goes here...
 end

@@ -13,6 +13,7 @@ require 'sitemap_generator'
 require 'browser'
 require 'simple_form'
 require 'validates_timeliness'
+require 'shrine'
 
 module EnjuSeed
   class Engine < ::Rails::Engine

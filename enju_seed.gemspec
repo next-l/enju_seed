@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/{log,tmp}/**/*"] - Dir["spec/dummy/db/*.sqlite3"]
 
-  #s.add_dependency "rails", ">= 4.2.7.1"
+  s.add_dependency "rails", "~> 5.0.0"
   s.add_dependency "friendly_id", "~> 5.1"
   s.add_dependency "devise", "~> 4.2"
   s.add_dependency "pundit", "~> 1.1"
@@ -28,14 +28,15 @@ Gem::Specification.new do |s|
   s.add_dependency "cocoon"
   s.add_dependency "sitemap_generator", "~> 5.2"
   s.add_dependency "rails_autolink"
+  s.add_dependency "shrine"
   s.add_dependency "kramdown"
-  s.add_dependency "browser", "~> 2.2"
+  s.add_dependency "browser", "~> 2.3"
   s.add_dependency "json_pure", "~> 1.8.3"
   s.add_dependency "simple_form"
   s.add_dependency "validates_timeliness", "~> 4.0"
 
-  #s.add_development_dependency "enju_leaf", "~> 1.2.0.beta.4"
-  s.add_development_dependency "pg"
+  s.add_development_dependency "enju_leaf", "~> 1.2.0"
+  s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "factory_girl_rails"
   s.add_development_dependency "capybara"
