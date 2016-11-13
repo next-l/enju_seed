@@ -6,14 +6,14 @@ class Profile < ActiveRecord::Base
   belongs_to :user, dependent: :destroy
   belongs_to :library, validate: true
   belongs_to :user_group
-  belongs_to :required_role, class_name: 'Role', foreign_key: 'required_role_id' #, validate: true
+  belongs_to :required_role, class_name: 'Role', foreign_key: 'required_role_id' # , validate: true
   has_many :identities
   has_many :agents
   accepts_nested_attributes_for :identities, allow_destroy: true, reject_if: :all_blank
 
   validates_associated :user_group, :library
   validates_associated :user
-  validates_presence_of :user_group, :library, :locale #, :user_number
+  validates :user_group, :library, :locale, presence: true # , :user_number
   validates :user_number, uniqueness: true, format: { with: /\A[0-9A-Za-z_]+\z/ }, allow_blank: true
   validates :user_id, uniqueness: true, allow_blank: true
   validates :birth_date, format: { with: /\A\d{4}-\d{1,2}-\d{1,2}\z/ }, allow_blank: true

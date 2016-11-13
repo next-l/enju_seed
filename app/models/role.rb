@@ -15,7 +15,7 @@ class Role < ActiveRecord::Base
 
   def self.all_cache
     if Rails.env == 'production'
-      Rails.cache.fetch('role_all'){ Role.select(:name).all }
+      Rails.cache.fetch('role_all') { Role.select(:name).all }
     else
       Role.select(:name)
     end
@@ -30,6 +30,7 @@ class Role < ActiveRecord::Base
   end
 
   private
+
   def valid_name?
     true
   end

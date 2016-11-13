@@ -3,10 +3,8 @@ class AddTranslationTableToLibraryGroup < ActiveRecord::Migration
   def up
     if defined?(Globalize)
       LibraryGroup.create_translation_table!({
-        login_banner: :text
-      }, {
-        migrate_data: true
-      })
+                                               login_banner: :text
+                                             }, migrate_data: true)
     end
 
     if defined?(AwesomeHstoreTranslate)

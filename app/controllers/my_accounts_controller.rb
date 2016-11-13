@@ -18,9 +18,11 @@ class MyAccountsController < ApplicationController
     user_attrs = [
       :id, :email, :current_password, :password, :password_confirmation
     ]
-    user_attrs += [
-      {:user_has_role_attributes => [:id, :role_id]}
-    ] if current_user.has_role?('Administrator')
+    if current_user.has_role?('Administrator')
+      user_attrs += [
+        { user_has_role_attributes: [:id, :role_id] }
+      ]
+    end
 
     user_params = ActionController::Parameters.new(params[:profile][:user_attributes]).permit(*user_attrs)
 
@@ -35,7 +37,7 @@ class MyAccountsController < ApplicationController
           format.json { head :no_content }
         else
           prepare_options
-          format.html { render action: "edit" }
+          format.html { render action: 'edit' }
           format.json { render json: current_user.errors, status: :unprocessable_entity }
         end
       else
@@ -43,7 +45,7 @@ class MyAccountsController < ApplicationController
           @profile.errors[:base] << msg
         end
         prepare_options
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
         format.json { render json: current_user.errors, status: :unprocessable_entity }
       end
     end
@@ -59,6 +61,7 @@ class MyAccountsController < ApplicationController
   end
 
   private
+
   def set_profile
     @profile = current_user.profile
     authorize @profile
@@ -73,9 +76,7 @@ class MyAccountsController < ApplicationController
       :save_checkout_history, :checkout_icalendar_token, # EnjuCirculation
       :save_search_history # EnjuSearchLog
     ]
-    if current_user.has_role?('Librarian')
-      attrs << :user_group_id
-    end
+    attrs << :user_group_id if current_user.has_role?('Librarian')
     params.require(:profile).permit(*attrs)
   end
 
@@ -84,10 +85,10 @@ class MyAccountsController < ApplicationController
     @roles = Role.order(:position)
     @libraries = Library.order(:position)
     @languages = Language.order(:position)
-    if current_user.active_for_authentication?
-      current_user.locked = '0'
-    else
-      current_user.locked = '1'
-    end
+    current_user.locked = if current_user.active_for_authentication?
+                            '0'
+                          else
+                            '1'
+                          end
   end
 end

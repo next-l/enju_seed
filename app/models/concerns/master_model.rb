@@ -3,7 +3,7 @@ module MasterModel
 
   included do
     acts_as_list
-    validates_uniqueness_of :name, case_sensitive: false
+    validates :name, uniqueness: { case_sensitive: false }
     validates :name, presence: true
     validate :name do
       valid_name?
@@ -22,6 +22,7 @@ module MasterModel
   end
 
   private
+
   def valid_name?
     unless name =~ /\A[a-z][0-9a-z_]*[0-9a-z]\z/
       errors.add(:name, I18n.t('page.only_lowercase_letters_and_numbers_are_allowed'))
@@ -29,10 +30,8 @@ module MasterModel
   end
 
   def valid_yaml?
-    begin
-      YAML.load(display_name)
-    rescue Psych::SyntaxError
-      errors.add(:display_name, I18n.t('page.cannot_parse_yaml_header'))
-    end
+    YAML.load(display_name)
+  rescue Psych::SyntaxError
+    errors.add(:display_name, I18n.t('page.cannot_parse_yaml_header'))
   end
 end

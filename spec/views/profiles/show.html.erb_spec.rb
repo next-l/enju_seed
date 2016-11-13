@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "profiles/show" do
+describe 'profiles/show' do
   fixtures :all
 
   before(:each) do
@@ -8,14 +8,14 @@ describe "profiles/show" do
     view.stub(:current_user).and_return(User.friendly.find('enjuadmin'))
   end
 
-  describe "when logged in as Librarian" do
+  describe 'when logged in as Librarian' do
     before(:each) do
       @profile = assign(:profile, profiles(:librarian2))
       user = users(:librarian1)
       view.stub(:current_user).and_return(user)
     end
 
-    it "cannot be deletable by other librarian" do
+    it 'cannot be deletable by other librarian' do
       allow(view).to receive(:policy).and_return double(update?: true, destroy?: true)
       render
     end

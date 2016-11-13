@@ -1,0 +1,17 @@
+language: ruby
+cache: bundler
+rvm:
+  - 2.2.5
+  - 2.3.1
+before_script:
+  - psql -c 'create database enju_seed_dummy_test;' -U postgres
+  - bundle exec rake db:migrate
+services:
+  - redis-server
+env:
+  - DB=postgresql
+sudo: false
+addons:
+  postgresql: "9.4"
+  code_climate:
+    repo_token: c706c861676e6100b84b7101da2c59fae56010f5c17c1a6ccee7e59cb3f976ad
