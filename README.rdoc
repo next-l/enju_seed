@@ -1,3 +1,11 @@
 = EnjuSeed
+{<img src="https://travis-ci.org/next-l/enju_seed.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/next-l/enju_seed]
+{<img src="https://codeclimate.com/github/next-l/enju_seed/badges/gpa.svg" />}[https://codeclimate.com/github/next-l/enju_seed]
+{<img src="https://codeclimate.com/github/next-l/enju_seed/badges/coverage.svg" />}[https://codeclimate.com/github/next-l/enju_seed/coverage]
+{<img src="https://hakiri.io/github/next-l/enju_seed/master.svg" alt="security" />}[https://hakiri.io/github/next-l/enju_seed/master]
 
 This project rocks and uses MIT-LICENSE.
+
+== 製作者・貢献者 (Authors and contributors)
+* {TANABE, Kosuke}[https://github.com/nabeta] ({@nabeta}[https://twitter.com/nabeta])
+* {Project Next-L}[http://www.next-l.jp] ({@ProjectNextL}[https://twitter.com/ProjectNextL])
