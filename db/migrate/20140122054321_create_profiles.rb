@@ -1,6 +1,11 @@
 class CreateProfiles < ActiveRecord::Migration
   def change
-    create_table :profiles do |t|
+    if ENV['ENJU_ID_TYPE'] == 'uuid'
+      options = {id: :uuid, default: 'gen_random_uuid()'}
+    else
+      options = {}
+    end
+    create_table :profiles, options do |t|
       t.references :user, index: true, foreign_key: true
       t.references :user_group, index: true
       t.references :library, index: true
