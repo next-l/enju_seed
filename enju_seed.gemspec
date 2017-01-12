@@ -31,9 +31,9 @@ Gem::Specification.new do |s|
   s.add_dependency 'shrine'
   s.add_dependency 'kramdown'
   s.add_dependency 'browser', '~> 2.3'
-  s.add_dependency 'json_pure'
   s.add_dependency 'simple_form'
   s.add_dependency 'validates_timeliness', '~> 4.0'
+  s.add_dependency 'json_translate'
 
   # s.add_development_dependency "enju_leaf", "~> 1.2.0"
   s.add_development_dependency 'pg'
