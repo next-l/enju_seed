@@ -16,14 +16,14 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib}/**/*'] + ['MIT-LICENSE', 'Rakefile', 'README.rdoc']
   s.test_files = Dir['spec/**/*'] - Dir['spec/dummy/{log,tmp}/**/*'] - Dir['spec/dummy/db/*.sqlite3']
 
-  s.add_dependency 'rails', '~> 5.0.0'
-  s.add_dependency 'friendly_id', '~> 5.1'
+  s.add_dependency 'rails', '~> 5.0.1'
+  s.add_dependency 'friendly_id', '~> 5.2'
   s.add_dependency 'devise', '~> 4.2'
   s.add_dependency 'pundit', '~> 1.1'
   s.add_dependency 'acts_as_list', '~> 0.8'
   s.add_dependency 'strip_attributes', '~> 1.8'
-  s.add_dependency 'kaminari', '~> 0.17'
-  s.add_dependency 'addressable', '~> 2.3'
+  s.add_dependency 'kaminari', '~> 1.0.0'
+  s.add_dependency 'addressable', '~> 2.5'
   s.add_dependency 'sunspot_rails', '~> 2.2.7'
   s.add_dependency 'cocoon'
   s.add_dependency 'sitemap_generator', '~> 5.2'
@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'shrine'
   s.add_dependency 'kramdown'
   s.add_dependency 'browser', '~> 2.3'
-  s.add_dependency 'json_pure', '~> 1.8.3'
+  s.add_dependency 'json_pure'
   s.add_dependency 'simple_form'
   s.add_dependency 'validates_timeliness', '~> 4.0'
 
