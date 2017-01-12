@@ -81,8 +81,8 @@ end
 #
 #  id                       :uuid             not null, primary key
 #  user_id                  :integer
-#  user_group_id            :integer
-#  library_id               :integer
+#  user_group_id            :uuid
+#  library_id               :uuid
 #  locale                   :string
 #  user_number              :string
 #  full_name                :text
