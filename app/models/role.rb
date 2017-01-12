@@ -8,6 +8,7 @@ class Role < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :name
+  translates :display_name
 
   def localized_name
     display_name.localize
