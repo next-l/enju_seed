@@ -3,7 +3,7 @@ class Profile < ActiveRecord::Base
 
   scope :administrators, -> { joins(user: :role).where('roles.name = ?', 'Administrator') }
   scope :librarians, -> { joins(user: :role).where('roles.name = ? OR roles.name = ?', 'Administrator', 'Librarian') }
-  belongs_to :user, dependent: :destroy
+  has_one :user
   belongs_to :library, validate: true
   belongs_to :user_group
   belongs_to :required_role, class_name: 'Role', foreign_key: 'required_role_id' # , validate: true
@@ -15,7 +15,6 @@ class Profile < ActiveRecord::Base
   validates_associated :user
   validates :user_group, :library, :locale, presence: true # , :user_number
   validates :user_number, uniqueness: true, format: { with: /\A[0-9A-Za-z_]+\z/ }, allow_blank: true
-  validates :user_id, uniqueness: true, allow_blank: true
   validates :birth_date, format: { with: /\A\d{4}-\d{1,2}-\d{1,2}\z/ }, allow_blank: true
 
   strip_attributes only: :user_number

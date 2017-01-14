@@ -6,13 +6,13 @@ module EnjuSeed
       scope :administrators, -> { joins(:role).where('roles.name = ?', 'Administrator') }
       scope :librarians, -> { joins(:role).where('roles.name = ? OR roles.name = ?', 'Administrator', 'Librarian') }
       scope :suspended, -> { where('locked_at IS NOT NULL') }
-      has_one :profile
       if defined?(EnjuBiblio)
         has_many :import_requests
         has_many :picture_files, as: :picture_attachable, dependent: :destroy
       end
       has_one :user_has_role, dependent: :destroy
       has_one :role, through: :user_has_role
+      belongs_to :profile
       belongs_to :user_group
       belongs_to :library
       belongs_to :required_role, class_name: 'Role', foreign_key: 'required_role_id'
