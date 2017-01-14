@@ -1457,7 +1457,7 @@ ActiveRecord::Schema.define(version: 20170114174536) do
   add_foreign_key "subscriptions", "users"
   add_foreign_key "user_has_roles", "roles"
   add_foreign_key "user_has_roles", "users"
-  add_foreign_key "users", "profiles", on_delete: :nullify
+  add_foreign_key "users", "profiles"
   add_foreign_key "withdraws", "baskets", on_delete: :nullify
   add_foreign_key "withdraws", "items"
 end
