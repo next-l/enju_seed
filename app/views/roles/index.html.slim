@@ -21,7 +21,7 @@
         td
           = link_to role.name, role
         td
-          = link_to role.display_name.localize, role
+          = link_to role.display_name, role
         td
           = link_to t('page.edit'), edit_role_path(role)
           = link_to t('page.destroy'), role, data: {confirm: t('page.are_you_sure')}, method: :delete
