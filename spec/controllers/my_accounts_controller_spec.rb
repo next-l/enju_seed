@@ -27,9 +27,7 @@ describe MyAccountsController do
   describe 'GET edit' do
     describe 'When logged in as Administrator' do
       before(:each) do
-        profile = FactoryGirl.create(:profile)
         @user = FactoryGirl.create(:admin)
-        @user.profile = profile
         sign_in @user
       end
 
@@ -41,9 +39,7 @@ describe MyAccountsController do
 
     describe 'When logged in as Librarian' do
       before(:each) do
-        profile = FactoryGirl.create(:profile)
         @user = FactoryGirl.create(:librarian)
-        @user.profile = profile
         sign_in @user
       end
 
@@ -55,9 +51,7 @@ describe MyAccountsController do
 
     describe 'When logged in as User' do
       before(:each) do
-        profile = FactoryGirl.create(:profile)
         @user = FactoryGirl.create(:user)
-        @user.profile = profile
         sign_in @user
       end
 
@@ -86,9 +80,7 @@ describe MyAccountsController do
 
     describe 'When logged in as Administrator' do
       before(:each) do
-        profile = FactoryGirl.create(:profile)
         @user = FactoryGirl.create(:admin, password: 'password', password_confirmation: 'password')
-        @user.profile = profile
         sign_in @user
       end
 
@@ -134,9 +126,7 @@ describe MyAccountsController do
 
     describe 'When logged in as Librarian' do
       before(:each) do
-        profile = FactoryGirl.create(:profile)
         @user = FactoryGirl.create(:librarian, password: 'password', password_confirmation: 'password')
-        @user.profile = profile
         sign_in @user
       end
 
@@ -177,9 +167,7 @@ describe MyAccountsController do
 
     describe 'When logged in as User' do
       before(:each) do
-        profile = FactoryGirl.create(:profile)
         @user = FactoryGirl.create(:user, password: 'password', password_confirmation: 'password')
-        @user.profile = profile
         sign_in @user
       end
 
