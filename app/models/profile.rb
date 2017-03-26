@@ -12,7 +12,7 @@ class Profile < ActiveRecord::Base
   accepts_nested_attributes_for :identities, allow_destroy: true, reject_if: :all_blank
 
   validates_associated :user_group, :library
-  validates_associated :user
+  validates :user, uniqueness: true, associated: true, allow_blank: true
   validates_presence_of :user_group, :library, :locale #, :user_number
   validates :user_number, uniqueness: true, format: { with: /\A[0-9A-Za-z_]+\z/ }, allow_blank: true
   validates :user_id, uniqueness: true, allow_blank: true
