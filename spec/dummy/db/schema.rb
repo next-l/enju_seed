@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.jsonb    "metadata",             default: "{}"
     t.integer  "sort_key"
     t.integer  "agent_import_file_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.boolean  "most_recent"
     t.index ["agent_import_file_id"], name: "index_agent_import_file_transitions_on_agent_import_file_id", using: :btree
     t.index ["sort_key", "agent_import_file_id"], name: "index_agent_import_file_transitions_on_sort_key_and_file_id", unique: true, using: :btree
@@ -49,8 +49,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.string   "agent_import_content_type"
     t.integer  "agent_import_size"
     t.datetime "agent_import_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.string   "agent_import_fingerprint"
     t.text     "error_message"
     t.string   "edit_mode"
@@ -66,21 +66,21 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.integer  "agent_import_file_id"
     t.integer  "agent_id"
     t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "agent_merge_lists", force: :cascade do |t|
     t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "agent_merges", force: :cascade do |t|
     t.integer  "agent_id",            null: false
     t.integer  "agent_merge_list_id", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.index ["agent_id"], name: "index_agent_merges_on_agent_id", using: :btree
     t.index ["agent_merge_list_id"], name: "index_agent_merges_on_agent_merge_list_id", using: :btree
   end
@@ -109,16 +109,16 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "display_name"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "agent_relationships", force: :cascade do |t|
     t.integer  "parent_id"
     t.integer  "child_id"
     t.integer  "agent_relationship_type_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "position"
     t.index ["child_id"], name: "index_agent_relationships_on_child_id", using: :btree
     t.index ["parent_id"], name: "index_agent_relationships_on_parent_id", using: :btree
@@ -129,8 +129,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "display_name"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "agents", force: :cascade do |t|
@@ -145,8 +145,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.string   "full_name"
     t.text     "full_name_transcription"
     t.text     "full_name_alternative"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.datetime "deleted_at"
     t.string   "zip_code_1"
     t.string   "zip_code_2"
@@ -216,8 +216,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "display_name"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "carrier_type_has_checkout_types", force: :cascade do |t|
@@ -225,8 +225,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.integer  "checkout_type_id", null: false
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.index ["carrier_type_id"], name: "index_carrier_type_has_checkout_types_on_m_form_id", using: :btree
     t.index ["checkout_type_id"], name: "index_carrier_type_has_checkout_types_on_checkout_type_id", using: :btree
   end
@@ -249,8 +249,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.integer  "item_id",      null: false
     t.integer  "basket_id",    null: false
     t.datetime "due_date",     null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "librarian_id"
     t.index ["basket_id"], name: "index_checked_items_on_basket_id", using: :btree
     t.index ["item_id"], name: "index_checked_items_on_item_id", using: :btree
@@ -260,8 +260,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.integer  "item_id",                  null: false
     t.integer  "librarian_id"
     t.integer  "basket_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.integer  "lock_version", default: 0, null: false
     t.index ["basket_id"], name: "index_checkins_on_basket_id", using: :btree
     t.index ["item_id"], name: "index_checkins_on_item_id", using: :btree
@@ -272,8 +272,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.integer  "manifestation_checkout_stat_id", null: false
     t.integer  "manifestation_id",               null: false
     t.integer  "checkouts_count"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.index ["manifestation_checkout_stat_id"], name: "index_checkout_stat_has_manifestations_on_checkout_stat_id", using: :btree
     t.index ["manifestation_id"], name: "index_checkout_stat_has_manifestations_on_manifestation_id", using: :btree
   end
@@ -282,8 +282,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.integer  "user_checkout_stat_id",             null: false
     t.integer  "user_id",                           null: false
     t.integer  "checkouts_count",       default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.index ["user_checkout_stat_id"], name: "index_checkout_stat_has_users_on_user_checkout_stat_id", using: :btree
     t.index ["user_id"], name: "index_checkout_stat_has_users_on_user_id", using: :btree
   end
@@ -293,8 +293,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "display_name"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.index ["name"], name: "index_checkout_types_on_name", using: :btree
   end
 
@@ -307,8 +307,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.datetime "due_date"
     t.integer  "checkout_renewal_count", default: 0, null: false
     t.integer  "lock_version",           default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.integer  "shelf_id"
     t.integer  "library_id"
     t.index ["basket_id"], name: "index_checkouts_on_basket_id", using: :btree
@@ -326,8 +326,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "display_name"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "colors", force: :cascade do |t|
@@ -335,8 +335,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.string   "property"
     t.string   "code"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.index ["library_group_id"], name: "index_colors_on_library_group_id", using: :btree
   end
 
@@ -373,8 +373,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "display_name"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "creates", force: :cascade do |t|
@@ -413,8 +413,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
   create_table "donates", force: :cascade do |t|
     t.integer  "agent_id",   null: false
     t.integer  "item_id",    null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["agent_id"], name: "index_donates_on_agent_id", using: :btree
     t.index ["item_id"], name: "index_donates_on_item_id", using: :btree
   end
@@ -423,9 +423,10 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.uuid     "manifestation_id", null: false
     t.uuid     "item_id",          null: false
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.index ["item_id"], name: "index_exemplifies_on_item_id", unique: true, using: :btree
+    t.index ["manifestation_id"], name: "index_exemplifies_on_manifestation_id", using: :btree
   end
 
   create_table "form_of_works", force: :cascade do |t|
@@ -451,8 +452,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "display_name"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "identifiers", force: :cascade do |t|
@@ -485,8 +486,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.jsonb    "metadata",          default: "{}"
     t.integer  "sort_key"
     t.integer  "import_request_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.boolean  "most_recent"
     t.index ["import_request_id"], name: "index_import_request_transitions_on_import_request_id", using: :btree
     t.index ["sort_key", "import_request_id"], name: "index_import_request_transitions_on_sort_key_and_request_id", unique: true, using: :btree
@@ -528,8 +529,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
   create_table "item_has_use_restrictions", force: :cascade do |t|
     t.integer  "item_id",            null: false
     t.integer  "use_restriction_id", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.index ["item_id"], name: "index_item_has_use_restrictions_on_item_id", using: :btree
     t.index ["use_restriction_id"], name: "index_item_has_use_restrictions_on_use_restriction_id", using: :btree
   end
@@ -603,8 +604,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.integer  "fine",           default: 0, null: false
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.index ["item_id", "user_group_id"], name: "index_lending_policies_on_item_id_and_user_group_id", unique: true, using: :btree
   end
 
@@ -669,8 +670,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.string   "display_name"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "manifestation_checkout_stat_transitions", force: :cascade do |t|
@@ -678,8 +679,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "metadata",                       default: "{}"
     t.integer  "sort_key"
     t.integer  "manifestation_checkout_stat_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
     t.boolean  "most_recent"
     t.index ["manifestation_checkout_stat_id"], name: "index_manifestation_checkout_stat_transitions_on_stat_id", using: :btree
     t.index ["sort_key", "manifestation_checkout_stat_id"], name: "index_manifestation_checkout_stat_transitions_on_transition", unique: true, using: :btree
@@ -689,8 +690,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.text     "note"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.datetime "started_at"
     t.datetime "completed_at"
     t.integer  "user_id"
@@ -702,8 +703,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "display_name"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "manifestation_relationships", force: :cascade do |t|
@@ -723,8 +724,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "metadata",                      default: "{}"
     t.integer  "sort_key"
     t.integer  "manifestation_reserve_stat_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.boolean  "most_recent"
     t.index ["manifestation_reserve_stat_id"], name: "index_manifestation_reserve_stat_transitions_on_stat_id", using: :btree
     t.index ["sort_key", "manifestation_reserve_stat_id"], name: "index_manifestation_reserve_stat_transitions_on_transition", unique: true, using: :btree
@@ -734,8 +735,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.text     "note"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.datetime "started_at"
     t.datetime "completed_at"
     t.integer  "user_id"
@@ -826,8 +827,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "metadata",           default: "{}"
     t.integer  "sort_key"
     t.integer  "message_request_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.index ["message_request_id"], name: "index_message_request_transitions_on_message_request_id", using: :btree
     t.index ["sort_key", "message_request_id"], name: "index_message_request_transitions_on_sort_key_and_request_id", unique: true, using: :btree
   end
@@ -839,8 +840,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.datetime "sent_at"
     t.datetime "deleted_at"
     t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "message_templates", force: :cascade do |t|
@@ -849,8 +850,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "body",                      null: false
     t.integer  "position"
     t.string   "locale",     default: "en"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.index ["status"], name: "index_message_templates_on_status", unique: true, using: :btree
   end
 
@@ -859,8 +860,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "metadata",    default: "{}"
     t.integer  "sort_key"
     t.integer  "message_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.boolean  "most_recent"
     t.index ["message_id"], name: "index_message_transitions_on_message_id", using: :btree
     t.index ["sort_key", "message_id"], name: "index_message_transitions_on_sort_key_and_message_id", unique: true, using: :btree
@@ -874,8 +875,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "body"
     t.integer  "message_request_id"
     t.integer  "parent_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "lft"
     t.integer  "rgt"
     t.integer  "depth"
@@ -911,8 +912,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "title"
     t.string   "thumbnail"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.string   "picture_file_name"
     t.string   "picture_content_type"
     t.integer  "picture_size"
@@ -930,8 +931,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "display_name"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "produces", force: :cascade do |t|
@@ -972,8 +973,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "display_name"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "realizes", force: :cascade do |t|
@@ -1011,8 +1012,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.integer  "manifestation_reserve_stat_id", null: false
     t.integer  "manifestation_id",              null: false
     t.integer  "reserves_count"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.index ["manifestation_id"], name: "index_reserve_stat_has_manifestations_on_manifestation_id", using: :btree
     t.index ["manifestation_reserve_stat_id"], name: "index_reserve_stat_has_manifestations_on_m_reserve_stat_id", using: :btree
   end
@@ -1021,8 +1022,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.integer  "user_reserve_stat_id", null: false
     t.integer  "user_id",              null: false
     t.integer  "reserves_count"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.index ["user_id"], name: "index_reserve_stat_has_users_on_user_id", using: :btree
     t.index ["user_reserve_stat_id"], name: "index_reserve_stat_has_users_on_user_reserve_stat_id", using: :btree
   end
@@ -1032,8 +1033,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "metadata",    default: "{}"
     t.integer  "sort_key"
     t.integer  "reserve_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.boolean  "most_recent"
     t.index ["reserve_id"], name: "index_reserve_transitions_on_reserve_id", using: :btree
     t.index ["sort_key", "reserve_id"], name: "index_reserve_transitions_on_sort_key_and_reserve_id", unique: true, using: :btree
@@ -1045,8 +1046,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.integer  "item_id"
     t.integer  "request_status_type_id",                       null: false
     t.datetime "checked_out_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.datetime "canceled_at"
     t.datetime "expired_at"
     t.datetime "deleted_at"
@@ -1068,8 +1069,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.jsonb    "metadata",                default: "{}"
     t.integer  "sort_key"
     t.integer  "resource_export_file_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.boolean  "most_recent"
     t.index ["resource_export_file_id"], name: "index_resource_export_file_transitions_on_file_id", using: :btree
     t.index ["sort_key", "resource_export_file_id"], name: "index_resource_export_file_transitions_on_sort_key_and_file_id", unique: true, using: :btree
@@ -1078,8 +1079,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
   create_table "resource_export_files", force: :cascade do |t|
     t.integer  "user_id"
     t.datetime "executed_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.string   "resource_export_id"
     t.integer  "resource_export_size"
     t.string   "resource_export_filename"
@@ -1092,8 +1093,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.jsonb    "metadata",                default: "{}"
     t.integer  "sort_key"
     t.integer  "resource_import_file_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.boolean  "most_recent"
     t.index ["resource_import_file_id"], name: "index_resource_import_file_transitions_on_file_id", using: :btree
     t.index ["sort_key", "resource_import_file_id"], name: "index_resource_import_file_transitions_on_sort_key_and_file_id", unique: true, using: :btree
@@ -1110,8 +1111,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.string   "resource_import_content_type"
     t.integer  "resource_import_size"
     t.datetime "resource_import_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "edit_mode"
     t.string   "resource_import_fingerprint"
     t.text     "error_message"
@@ -1129,8 +1130,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.integer  "manifestation_id"
     t.integer  "item_id"
     t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.text     "error_message"
     t.index ["item_id"], name: "index_resource_import_results_on_item_id", using: :btree
     t.index ["manifestation_id"], name: "index_resource_import_results_on_manifestation_id", using: :btree
@@ -1157,21 +1158,21 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "additional_param"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "series_statement_merge_lists", force: :cascade do |t|
     t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "series_statement_merges", force: :cascade do |t|
     t.integer  "series_statement_id",            null: false
     t.integer  "series_statement_merge_list_id", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.index ["series_statement_id"], name: "index_series_statement_merges_on_series_statement_id", using: :btree
     t.index ["series_statement_merge_list_id"], name: "index_series_statement_merges_on_list_id", using: :btree
   end
@@ -1182,8 +1183,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "title_subseries"
     t.text     "numbering_subseries"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.text     "title_transcription"
     t.text     "title_alternative"
     t.string   "series_statement_identifier"
@@ -1243,8 +1244,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "display_name"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "user_checkout_stat_transitions", force: :cascade do |t|
@@ -1252,8 +1253,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "metadata",              default: "{}"
     t.integer  "sort_key"
     t.integer  "user_checkout_stat_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.boolean  "most_recent"
     t.index ["sort_key", "user_checkout_stat_id"], name: "index_user_checkout_stat_transitions_on_sort_key_and_stat_id", unique: true, using: :btree
     t.index ["user_checkout_stat_id"], name: "index_user_checkout_stat_transitions_on_user_checkout_stat_id", using: :btree
@@ -1263,8 +1264,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.text     "note"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.datetime "started_at"
     t.datetime "completed_at"
     t.integer  "user_id"
@@ -1276,8 +1277,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "metadata",            default: "{}"
     t.integer  "sort_key"
     t.integer  "user_export_file_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.boolean  "most_recent"
     t.index ["sort_key", "user_export_file_id"], name: "index_user_export_file_transitions_on_sort_key_and_file_id", unique: true, using: :btree
     t.index ["user_export_file_id"], name: "index_user_export_file_transitions_on_file_id", using: :btree
@@ -1286,8 +1287,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
   create_table "user_export_files", force: :cascade do |t|
     t.integer  "user_id"
     t.datetime "executed_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.jsonb    "attachment_data"
   end
 
@@ -1303,8 +1304,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.datetime "fixed_due_date"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.integer  "current_checkout_count"
     t.index ["checkout_type_id"], name: "index_user_group_has_checkout_types_on_checkout_type_id", using: :btree
     t.index ["user_group_id"], name: "index_user_group_has_checkout_types_on_user_group_id", using: :btree
@@ -1339,8 +1340,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "metadata",            default: "{}"
     t.integer  "sort_key"
     t.integer  "user_import_file_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.boolean  "most_recent"
     t.index ["sort_key", "user_import_file_id"], name: "index_user_import_file_transitions_on_sort_key_and_file_id", unique: true, using: :btree
     t.index ["user_import_file_id"], name: "index_user_import_file_transitions_on_user_import_file_id", using: :btree
@@ -1357,8 +1358,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.string   "user_import_fingerprint"
     t.string   "edit_mode"
     t.text     "error_message"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.string   "user_encoding"
     t.integer  "default_library_id"
     t.integer  "default_user_group_id"
@@ -1369,8 +1370,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.integer  "user_import_file_id"
     t.integer  "user_id"
     t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.text     "error_message"
   end
 
@@ -1379,8 +1380,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "metadata",             default: "{}"
     t.integer  "sort_key"
     t.integer  "user_reserve_stat_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.boolean  "most_recent"
     t.index ["sort_key", "user_reserve_stat_id"], name: "index_user_reserve_stat_transitions_on_sort_key_and_stat_id", unique: true, using: :btree
     t.index ["user_reserve_stat_id"], name: "index_user_reserve_stat_transitions_on_user_reserve_stat_id", using: :btree
@@ -1390,8 +1391,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.text     "note"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.datetime "started_at"
     t.datetime "completed_at"
     t.integer  "user_id"
@@ -1409,8 +1410,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.string   "username"
     t.datetime "deleted_at"
     t.datetime "expired_at"
