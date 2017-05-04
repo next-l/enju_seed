@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.string   "agent_import_fingerprint"
-    t.text     "error_message"
     t.string   "edit_mode"
     t.string   "user_encoding"
     t.string   "agent_import_id"
@@ -822,70 +821,6 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.datetime "updated_at",                null: false
   end
 
-  create_table "message_request_transitions", force: :cascade do |t|
-    t.string   "to_state"
-    t.text     "metadata",           default: "{}"
-    t.integer  "sort_key"
-    t.integer  "message_request_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.index ["message_request_id"], name: "index_message_request_transitions_on_message_request_id", using: :btree
-    t.index ["sort_key", "message_request_id"], name: "index_message_request_transitions_on_sort_key_and_request_id", unique: true, using: :btree
-  end
-
-  create_table "message_requests", force: :cascade do |t|
-    t.integer  "sender_id"
-    t.integer  "receiver_id"
-    t.integer  "message_template_id"
-    t.datetime "sent_at"
-    t.datetime "deleted_at"
-    t.text     "body"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-  end
-
-  create_table "message_templates", force: :cascade do |t|
-    t.string   "status",                    null: false
-    t.text     "title",                     null: false
-    t.text     "body",                      null: false
-    t.integer  "position"
-    t.string   "locale",     default: "en"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.index ["status"], name: "index_message_templates_on_status", unique: true, using: :btree
-  end
-
-  create_table "message_transitions", force: :cascade do |t|
-    t.string   "to_state"
-    t.text     "metadata",    default: "{}"
-    t.integer  "sort_key"
-    t.integer  "message_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.boolean  "most_recent"
-    t.index ["message_id"], name: "index_message_transitions_on_message_id", using: :btree
-    t.index ["sort_key", "message_id"], name: "index_message_transitions_on_sort_key_and_message_id", unique: true, using: :btree
-  end
-
-  create_table "messages", force: :cascade do |t|
-    t.datetime "read_at"
-    t.integer  "receiver_id"
-    t.integer  "sender_id"
-    t.string   "subject",            null: false
-    t.text     "body"
-    t.integer  "message_request_id"
-    t.integer  "parent_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.integer  "lft"
-    t.integer  "rgt"
-    t.integer  "depth"
-    t.index ["message_request_id"], name: "index_messages_on_message_request_id", using: :btree
-    t.index ["parent_id"], name: "index_messages_on_parent_id", using: :btree
-    t.index ["receiver_id"], name: "index_messages_on_receiver_id", using: :btree
-    t.index ["sender_id"], name: "index_messages_on_sender_id", using: :btree
-  end
-
   create_table "owns", force: :cascade do |t|
     t.integer  "agent_id",   null: false
     t.uuid     "item_id",    null: false
@@ -1115,7 +1050,6 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.datetime "updated_at",                   null: false
     t.string   "edit_mode"
     t.string   "resource_import_fingerprint"
-    t.text     "error_message"
     t.string   "user_encoding"
     t.integer  "default_shelf_id"
     t.string   "resource_import_id"
@@ -1132,7 +1066,6 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "body"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
-    t.text     "error_message"
     t.index ["item_id"], name: "index_resource_import_results_on_item_id", using: :btree
     t.index ["manifestation_id"], name: "index_resource_import_results_on_manifestation_id", using: :btree
     t.index ["resource_import_file_id"], name: "index_resource_import_results_on_resource_import_file_id", using: :btree
@@ -1372,7 +1305,6 @@ ActiveRecord::Schema.define(version: 20170114174536) do
     t.text     "body"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
-    t.text     "error_message"
   end
 
   create_table "user_reserve_stat_transitions", force: :cascade do |t|
