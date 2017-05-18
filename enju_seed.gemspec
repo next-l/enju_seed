@@ -16,9 +16,9 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib}/**/*'] + ['MIT-LICENSE', 'Rakefile', 'README.rdoc']
   s.test_files = Dir['spec/**/*'] - Dir['spec/dummy/{log,tmp}/**/*'] - Dir['spec/dummy/db/*.sqlite3']
 
-  s.add_dependency 'rails', '~> 5.0.2'
+  s.add_dependency 'rails', '~> 5.1.1'
   s.add_dependency 'friendly_id', '~> 5.2'
-  s.add_dependency 'devise', '~> 4.2'
+  s.add_dependency 'devise', '~> 4.3'
   s.add_dependency 'pundit', '~> 1.1'
   s.add_dependency 'acts_as_list', '~> 0.9'
   s.add_dependency 'strip_attributes', '~> 1.8'
@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails_autolink'
   s.add_dependency 'shrine'
   s.add_dependency 'kramdown'
-  s.add_dependency 'browser', '~> 2.3'
+  s.add_dependency 'browser', '~> 2.4'
   s.add_dependency 'simple_form'
   s.add_dependency 'validates_timeliness', '~> 4.0'
   s.add_dependency 'json_translate'
