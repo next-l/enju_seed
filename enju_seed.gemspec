@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'simple_form'
   s.add_dependency 'validates_timeliness', '~> 4.0'
   s.add_dependency 'json_translate'
-  s.add_dependency 'statesman', '~> 2.0'
+  s.add_dependency 'statesman', '~> 3.0'
   s.add_dependency 'rsolr', '~> 1.1'
 
   # s.add_development_dependency "enju_leaf", "~> 1.2.0"
