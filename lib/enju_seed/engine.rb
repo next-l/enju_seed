@@ -15,6 +15,7 @@ require 'simple_form'
 require 'validates_timeliness'
 require 'shrine'
 require 'json_translate'
+require 'statesman'
 
 module EnjuSeed
   class Engine < ::Rails::Engine

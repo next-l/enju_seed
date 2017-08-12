@@ -314,7 +314,7 @@ describe ProfilesController do
   describe 'PUT update' do
     before(:each) do
       @profile = profiles(:user1)
-      @attrs = { user_group_id: '3', locale: 'en' }
+      @attrs = { user_group_id: user_groups(:user_group_00003).id, locale: 'en' }
       @invalid_attrs = { user_group_id: '', user_number: '日本語' }
     end
 
@@ -391,23 +391,23 @@ describe ProfilesController do
       end
 
       it 'should update other user' do
-        put :update, params: { id: profiles(:user1).id, profile: { user_number: '00003', locale: 'en', user_group_id: 3, library_id: 3, note: 'test' } }
+        put :update, params: { id: profiles(:user1).id, profile: { user_number: '00003', locale: 'en', user_group_id: user_groups(:user_group_00003).id, library_id: libraries(:library_00003).id, note: 'test' } }
         response.should redirect_to profile_url(assigns(:profile))
       end
 
       it 'should not update other admin' do
-        put :update, params: { id: profiles(:admin).id, profile: { user_number: '00003', locale: 'en', user_group_id: 3, library_id: 3, note: 'test' } }
+        put :update, params: { id: profiles(:admin).id, profile: { user_number: '00003', locale: 'en', user_group_id: user_groups(:user_group_00003).id, library_id: libraries(:library_00003).id, note: 'test' } }
         response.should be_forbidden
       end
 
       it "should update other user's user_group" do
-        put :update, params: { id: profiles(:user1).id, profile: { user_group_id: 3, library_id: 3, locale: 'en' } }
+        put :update, params: { id: profiles(:user1).id, profile: { user_group_id: user_groups(:user_group_00003).id, library_id: libraries(:library_00003).id, locale: 'en' } }
         response.should redirect_to profile_url(assigns(:profile))
-        assigns(:profile).user_group_id.should eq 3
+        assigns(:profile).user_group_id.should eq user_groups(:user_group_00003).id
       end
 
       it "should update other user's note" do
-        put :update, params: { id: profiles(:user1).id, profile: { user_group_id: 3, library_id: 3, note: 'test', locale: 'en' } }
+        put :update, params: { id: profiles(:user1).id, profile: { user_group_id: user_groups(:user_group_00003).id, library_id: libraries(:library_00003).id, note: 'test', locale: 'en' } }
         response.should redirect_to profile_url(assigns(:profile))
         assert_equal assigns(:profile).note, 'test'
       end
@@ -457,13 +457,13 @@ describe ProfilesController do
       end
 
       it 'should not update my user_group' do
-        put :update, params: { id: profiles(:user1).id, profile: { user_group_id: 3, library_id: 3 } }
+        put :update, params: { id: profiles(:user1).id, profile: { user_group_id: user_groups(:user_group_00003).id, library_id: libraries(:library_00003).id } }
         response.should redirect_to profile_url(assigns(:profile))
-        assigns(:profile).user_group_id.should eq 1
+        assigns(:profile).user_group_id.should eq user_groups(:user_group_00001).id
       end
 
       it 'should not update my note' do
-        put :update, params: { id: profiles(:user1).id, profile: { user_group_id: 3, library_id: 3, note: 'test' } }
+        put :update, params: { id: profiles(:user1).id, profile: { user_group_id: user_groups(:user_group_00003).id, library_id: libraries(:library_00003).id, note: 'test' } }
         response.should redirect_to profile_url(assigns(:profile))
         assigns(:profile).note.should be_nil
       end
@@ -504,20 +504,24 @@ describe ProfilesController do
   end
 
   describe 'DELETE destroy' do
+    before(:each) do
+      @profile = FactoryGirl.create(:profile)
+    end
+
     describe 'When logged in as Administrator' do
       login_fixture_admin
 
       it 'destroys the requested user' do
-        delete :destroy, params: { id: profiles(:user2).id }
+        delete :destroy, params: { id: @profile.id }
       end
 
       it 'redirects to the profiles list' do
-        delete :destroy, params: { id: profiles(:user2).id }
+        delete :destroy, params: { id: @profile.id }
         response.should redirect_to(profiles_url)
       end
 
       it 'should destroy librarian' do
-        delete :destroy, params: { id: profiles(:librarian2).id }
+        delete :destroy, params: { id: FactoryGirl.create(:librarian).profile.id }
         response.should redirect_to(profiles_url)
       end
     end
@@ -526,17 +530,17 @@ describe ProfilesController do
       login_fixture_librarian
 
       it 'destroys the requested user' do
-        delete :destroy, params: { id: profiles(:user2).id }
+        delete :destroy, params: { id: @profile.id }
         response.should redirect_to(profiles_url)
       end
 
       it 'redirects to the profiles list' do
-        delete :destroy, params: { id: profiles(:user2).id }
+        delete :destroy, params: { id: @profile.id }
         response.should redirect_to(profiles_url)
       end
 
       it 'should not destroy librarian' do
-        delete :destroy, params: { id: profiles(:librarian2).id }
+        delete :destroy, params: { id: FactoryGirl.create(:librarian_profile).id }
         response.should be_forbidden
       end
 
@@ -551,8 +555,7 @@ describe ProfilesController do
       end
 
       it 'should not be able to delete other librarian user' do
-        librarian = FactoryGirl.create(:librarian_profile)
-        delete :destroy, params: { id: librarian.id }
+        delete :destroy, params: { id: FactoryGirl.create(:librarian_profile).id }
         response.should be_forbidden
       end
     end
@@ -561,11 +564,11 @@ describe ProfilesController do
       login_fixture_user
 
       it 'destroys the requested user' do
-        delete :destroy, params: { id: profiles(:user2).id }
+        delete :destroy, params: { id: @profile.id }
       end
 
       it 'should be forbidden' do
-        delete :destroy, params: { id: profiles(:user2).id }
+        delete :destroy, params: { id: @profile.id }
         response.should be_forbidden
       end
 
@@ -577,12 +580,12 @@ describe ProfilesController do
 
     describe 'When not logged in' do
       it 'destroys the requested user' do
-        delete :destroy, params: { id: profiles(:user2).id }
+        delete :destroy, params: { id: @profile.id }
         response.should redirect_to(new_user_session_url)
       end
 
       it 'should be forbidden' do
-        delete :destroy, params: { id: profiles(:user2).id }
+        delete :destroy, params: { id: @profile.id }
         response.should redirect_to(new_user_session_url)
       end
     end

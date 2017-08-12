@@ -14,7 +14,7 @@ describe Profile do
   end
 
   it 'should not set expired_at if its user group does not have valid period' do
-    profile = FactoryGirl.create(:profile)
+    profile = FactoryGirl.build(:profile, user_group_id: '')
     profile.expired_at.should be_nil
   end
 
