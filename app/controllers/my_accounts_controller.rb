@@ -15,35 +15,14 @@ class MyAccountsController < ApplicationController
   end
 
   def update
-    user_attrs = [
-      :id, :email, :current_password, :password, :password_confirmation
-    ]
-    if current_user.has_role?('Administrator')
-      user_attrs += [
-        { user_has_role_attributes: [:id, :role_id] }
-      ]
-    end
-
-    user_params = ActionController::Parameters.new(params[:profile][:user_attributes]).permit(*user_attrs)
-
     respond_to do |format|
-      saved = current_user.update_attributes(user_params)
-      @profile.assign_attributes(profile_params)
+      @profile.assign_attributes(profile_update_params)
 
-      if saved
-        if @profile.save
-          bypass_sign_in(current_user)
-          format.html { redirect_to my_account_url, notice: t('controller.successfully_updated', model: t('activerecord.models.user')) }
-          format.json { head :no_content }
-        else
-          prepare_options
-          format.html { render action: 'edit' }
-          format.json { render json: current_user.errors, status: :unprocessable_entity }
-        end
+      if @profile.save
+        bypass_sign_in(current_user)
+        format.html { redirect_to my_account_url, notice: t('controller.successfully_updated', model: t('activerecord.models.user')) }
+        format.json { head :no_content }
       else
-        current_user.errors.full_messages.each do |msg|
-          @profile.errors[:base] << msg
-        end
         prepare_options
         format.html { render action: 'edit' }
         format.json { render json: current_user.errors, status: :unprocessable_entity }
@@ -69,14 +48,40 @@ class MyAccountsController < ApplicationController
 
   def profile_params
     attrs = [
-      :full_name, :full_name_transcription, :user_number,
+      :full_name, :full_name_transcription,
       :library_id, :keyword_list, :note,
-      :locale, :required_role_id, :expired_at,
+      :locale, :required_role_id,
       :locked, :birth_date,
       :save_checkout_history, :checkout_icalendar_token, # EnjuCirculation
-      :save_search_history # EnjuSearchLog
+      :save_search_history, { # EnjuSearchLog
+        user_attributes: [
+          :id, :username, :email, :locked,
+          { user_has_role_attributes: [:id, :role_id] }
+        ]
+      }
     ]
     attrs << :user_group_id if current_user.has_role?('Librarian')
+    params.require(:profile).permit(*attrs)
+  end
+
+  def profile_update_params
+    attrs = [
+      :full_name, :full_name_transcription,
+      :keyword_list, :locale,
+      :save_checkout_history, :checkout_icalendar_token, # EnjuCirculation
+      :save_search_history, # EnjuSearchLog
+    ]
+    if current_user.has_role?('Librarian')
+      attrs += [
+        :library_id, :expired_at, :birth_date,
+        :user_group_id, :required_role_id, :note, :user_number, {
+          user_attributes: [
+            :id, :email, :locked,
+            { user_has_role_attributes: [:id, :role_id] }
+          ]
+        }
+      ]
+    end
     params.require(:profile).permit(*attrs)
   end
 
