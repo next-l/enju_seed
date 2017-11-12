@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/{log,tmp}/**/*"] - Dir["spec/dummy/db/*.sqlite3"]
 
-  #s.add_dependency "rails", ">= 4.2.8"
+  s.add_dependency "rails", "~> 4.2.6"
   s.add_dependency "friendly_id", "~> 5.2"
   s.add_dependency "devise", "~> 4.2"
   s.add_dependency "pundit", "~> 1.1"
@@ -34,10 +34,10 @@ Gem::Specification.new do |s|
   s.add_dependency "simple_form"
   s.add_dependency "validates_timeliness", "~> 4.0"
   s.add_dependency "rsolr", "~> 1.1"
+  s.add_dependency "globalize", "~> 5.1.0.beta2"
+  s.add_dependency "globalize-accessors"
 
   s.add_development_dependency "enju_leaf", "~> 1.2.1"
-  s.add_development_dependency "globalize", "~> 5.1.0.beta2"
-  s.add_development_dependency "globalize-accessors"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "factory_girl_rails"
@@ -45,5 +45,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec-activemodel-mocks"
   s.add_development_dependency "sunspot_matchers"
   s.add_development_dependency "coveralls"
-  s.add_development_dependency "appraisal"
 end
