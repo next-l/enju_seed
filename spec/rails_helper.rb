@@ -8,7 +8,7 @@ require File.expand_path('../../spec/dummy/config/environment', __FILE__)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
-require 'factory_girl'
+require 'factory_bot'
 require 'rspec/active_model/mocks'
 require 'sunspot_matchers'
 require 'pundit/rspec'
@@ -70,5 +70,5 @@ RSpec.configure do |config|
   config.include SunspotMatchers
 end
 
-FactoryGirl.definition_file_paths << "#{::Rails.root}/../../spec/factories"
-FactoryGirl.find_definitions
+FactoryBot.definition_file_paths << "#{::Rails.root}/../../spec/factories"
+FactoryBot.find_definitions

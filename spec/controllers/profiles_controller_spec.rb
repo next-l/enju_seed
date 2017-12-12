@@ -71,7 +71,7 @@ describe ProfilesController do
         assigns(:profile).should eq(profiles(:admin))
       end
       it 'assigns the another requested user as @profile' do
-        admin_profile = FactoryGirl.create :admin_profile
+        admin_profile = FactoryBot.create :admin_profile
         get :show, params: { id: admin_profile.id }
         expect(response).not_to be_forbidden
         expect(assigns(:profile)).to eq admin_profile
@@ -86,12 +86,12 @@ describe ProfilesController do
         assigns(:profile).should eq(profiles(:librarian1))
       end
       it 'should not assign the requested user as @admin' do
-        admin = FactoryGirl.create(:admin_profile)
+        admin = FactoryBot.create(:admin_profile)
         get :show, params: { id: admin.id }
         response.should be_forbidden
       end
       it 'should assign the requested user as @librarian' do
-        librarian = FactoryGirl.create(:librarian_profile)
+        librarian = FactoryBot.create(:librarian_profile)
         get :show, params: { id: librarian.id }
         response.should_not be_forbidden
         assigns(:profile).should eq librarian
@@ -170,7 +170,7 @@ describe ProfilesController do
       login_fixture_admin
 
       it 'assigns the requested user as @profile' do
-        profile = FactoryGirl.create(:profile)
+        profile = FactoryBot.create(:profile)
         get :edit, params: { id: profile.id }
         assigns(:profile).should eq(profile)
       end
@@ -180,25 +180,25 @@ describe ProfilesController do
       login_fixture_librarian
 
       it 'should assign the requested user as @profile' do
-        profile = FactoryGirl.create(:profile)
+        profile = FactoryBot.create(:profile)
         get :edit, params: { id: profile.id }
         assigns(:profile).should eq(profile)
       end
       it 'should not get edit page for admin required user' do
-        admin = FactoryGirl.create(:admin_profile)
+        admin = FactoryBot.create(:admin_profile)
         get :edit, params: { id: admin.id }
         response.should be_forbidden
         # assigns(:profile).should_not eq(admin)
       end
       it 'should get edit page for other librarian user' do
-        librarian = FactoryGirl.create(:librarian_profile)
+        librarian = FactoryBot.create(:librarian_profile)
         get :edit, params: { id: librarian.id }
         response.should_not be_forbidden
         assigns(:profile).should eq librarian
       end
 
       it 'should get edit page for other librarian user' do
-        admin = FactoryGirl.create(:admin_profile, required_role_id: Role.where(name: 'Librarian').first.id)
+        admin = FactoryBot.create(:admin_profile, required_role_id: Role.where(name: 'Librarian').first.id)
         get :edit, params: { id: admin.id }
         response.should be_forbidden
         assigns(:profile).should eq admin
@@ -209,7 +209,7 @@ describe ProfilesController do
       login_fixture_user
 
       it 'should not assign the requested user as @profile' do
-        profile = FactoryGirl.create(:profile)
+        profile = FactoryBot.create(:profile)
         get :edit, params: { id: profile.id }
         assigns(:profile).should eq(profile)
         response.should be_forbidden
@@ -223,7 +223,7 @@ describe ProfilesController do
 
     describe 'When not logged in' do
       it 'should not assign the requested user as @profile' do
-        profile = FactoryGirl.create(:profile)
+        profile = FactoryBot.create(:profile)
         get :edit, params: { id: profile.id }
         assigns(:profile).should eq(profile)
         response.should redirect_to(new_user_session_url)
@@ -233,7 +233,7 @@ describe ProfilesController do
 
   describe 'POST create' do
     before(:each) do
-      @attrs = FactoryGirl.attributes_for(:profile)
+      @attrs = FactoryBot.attributes_for(:profile)
       @invalid_attrs = { user_group_id: '', user_number: '日本語' }
     end
 
@@ -505,7 +505,7 @@ describe ProfilesController do
 
   describe 'DELETE destroy' do
     before(:each) do
-      @profile = FactoryGirl.create(:profile)
+      @profile = FactoryBot.create(:profile)
     end
 
     describe 'When logged in as Administrator' do
@@ -521,7 +521,7 @@ describe ProfilesController do
       end
 
       it 'should destroy librarian' do
-        delete :destroy, params: { id: FactoryGirl.create(:librarian).profile.id }
+        delete :destroy, params: { id: FactoryBot.create(:librarian).profile.id }
         response.should redirect_to(profiles_url)
       end
     end
@@ -540,7 +540,7 @@ describe ProfilesController do
       end
 
       it 'should not destroy librarian' do
-        delete :destroy, params: { id: FactoryGirl.create(:librarian_profile).id }
+        delete :destroy, params: { id: FactoryBot.create(:librarian_profile).id }
         response.should be_forbidden
       end
 
@@ -555,7 +555,7 @@ describe ProfilesController do
       end
 
       it 'should not be able to delete other librarian user' do
-        delete :destroy, params: { id: FactoryGirl.create(:librarian_profile).id }
+        delete :destroy, params: { id: FactoryBot.create(:librarian_profile).id }
         response.should be_forbidden
       end
     end

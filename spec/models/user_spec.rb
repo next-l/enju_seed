@@ -5,42 +5,42 @@ describe User do
   fixtures :all
 
   it 'should create an user' do
-    FactoryGirl.create(:user)
+    FactoryBot.create(:user)
   end
 
   it 'should destroy an user' do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     user.destroy.should be_truthy
   end
 
   it 'should respond to has_role(Administrator)' do
-    admin = FactoryGirl.create(:admin)
+    admin = FactoryBot.create(:admin)
     admin.has_role?('Administrator').should be_truthy
   end
 
   it 'should respond to has_role(Librarian)' do
-    librarian = FactoryGirl.create(:librarian)
+    librarian = FactoryBot.create(:librarian)
     librarian.has_role?('Administrator').should be_falsy
     librarian.has_role?('Librarian').should be_truthy
     librarian.has_role?('User').should be_truthy
   end
 
   it 'should respond to has_role(User)' do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     user.has_role?('Administrator').should be_falsy
     user.has_role?('Librarian').should be_falsy
     user.has_role?('User').should be_truthy
   end
 
   it 'should lock an user' do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     user.locked = '1'
     user.save
     user.active_for_authentication?.should be_falsy
   end
 
   it 'should unlock an user' do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     user.lock_access!
     user.locked = '0'
     user.save
@@ -48,26 +48,26 @@ describe User do
   end
 
   it 'should create user' do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     assert !user.new_record?, user.errors.full_messages.to_sentence.to_s
   end
 
   it 'should require username' do
     old_count = User.count
-    user = FactoryGirl.build(:user, username: nil)
+    user = FactoryBot.build(:user, username: nil)
     user.save
     user.errors[:username].should be_truthy
     User.count.should eq old_count
   end
 
   it 'should require password' do
-    user = FactoryGirl.build(:user, password: nil)
+    user = FactoryBot.build(:user, password: nil)
     user.save
     user.errors[:password].should be_truthy
   end
 
   it 'should not require password_confirmation on create' do
-    user = FactoryGirl.build(:user, password: 'new_password', password_confirmation: nil)
+    user = FactoryBot.build(:user, password: 'new_password', password_confirmation: nil)
     user.save
     user.errors[:email].should be_empty
   end

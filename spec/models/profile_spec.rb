@@ -5,35 +5,35 @@ describe Profile do
   fixtures :all
 
   it 'should create a profile' do
-    FactoryGirl.create(:profile)
+    FactoryBot.create(:profile)
   end
 
   it 'should destroy a profile' do
-    profile = FactoryGirl.create(:profile)
+    profile = FactoryBot.create(:profile)
     profile.destroy.should be_truthy
   end
 
   it 'should not set expired_at if its user group does not have valid period' do
-    profile = FactoryGirl.build(:profile, user_group_id: '')
+    profile = FactoryBot.build(:profile, user_group_id: '')
     profile.expired_at.should be_nil
   end
 
   it 'should set expired_at if its user group has valid period' do
-    profile = FactoryGirl.build(:profile)
-    user_group = FactoryGirl.create(:user_group, valid_period_for_new_user: 10)
+    profile = FactoryBot.build(:profile)
+    user_group = FactoryBot.create(:user_group, valid_period_for_new_user: 10)
     user_group.profiles << profile
     profile.user_group.valid_period_for_new_user.should eq 10
     profile.expired_at.should eq 10.days.from_now.end_of_day
   end
 
   it 'should create profile' do
-    profile = FactoryGirl.create(:profile)
+    profile = FactoryBot.create(:profile)
     assert !profile.new_record?, profile.errors.full_messages.to_sentence.to_s
   end
 
   it 'should create profile with empty user_number' do
-    profile1 = FactoryGirl.create(:profile, user_number: '')
-    profile2 = FactoryGirl.create(:profile, user_number: '')
+    profile1 = FactoryBot.create(:profile, user_number: '')
+    profile2 = FactoryBot.create(:profile, user_number: '')
     profile1.should be_valid
     profile2.should be_valid
   end

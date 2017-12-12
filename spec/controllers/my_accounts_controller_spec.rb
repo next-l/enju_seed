@@ -27,7 +27,7 @@ describe MyAccountsController do
   describe 'GET edit' do
     describe 'When logged in as Administrator' do
       before(:each) do
-        @user = FactoryGirl.create(:admin)
+        @user = FactoryBot.create(:admin)
         sign_in @user
       end
 
@@ -39,7 +39,7 @@ describe MyAccountsController do
 
     describe 'When logged in as Librarian' do
       before(:each) do
-        @user = FactoryGirl.create(:librarian)
+        @user = FactoryBot.create(:librarian)
         sign_in @user
       end
 
@@ -51,7 +51,7 @@ describe MyAccountsController do
 
     describe 'When logged in as User' do
       before(:each) do
-        @user = FactoryGirl.create(:user)
+        @user = FactoryBot.create(:user)
         sign_in @user
       end
 
@@ -80,7 +80,7 @@ describe MyAccountsController do
 
     describe 'When logged in as Administrator' do
       before(:each) do
-        @user = FactoryGirl.create(:admin, password: 'password', password_confirmation: 'password')
+        @user = FactoryBot.create(:admin, password: 'password', password_confirmation: 'password')
         sign_in @user
       end
 
@@ -126,7 +126,7 @@ describe MyAccountsController do
 
     describe 'When logged in as Librarian' do
       before(:each) do
-        @user = FactoryGirl.create(:librarian, password: 'password', password_confirmation: 'password')
+        @user = FactoryBot.create(:librarian, password: 'password', password_confirmation: 'password')
         sign_in @user
       end
 
@@ -167,7 +167,7 @@ describe MyAccountsController do
 
     describe 'When logged in as User' do
       before(:each) do
-        @user = FactoryGirl.create(:user, password: 'password', password_confirmation: 'password')
+        @user = FactoryBot.create(:user, password: 'password', password_confirmation: 'password')
         sign_in @user
       end
 
