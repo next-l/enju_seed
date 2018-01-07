@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rails_autolink"
   s.add_dependency "paperclip"
   s.add_dependency "kramdown"
-  s.add_dependency "browser", "~> 2.3"
+  s.add_dependency "browser", "~> 2.5"
   s.add_dependency "simple_form"
   s.add_dependency "validates_timeliness", "~> 4.0"
   s.add_dependency "rsolr", "~> 1.1"
