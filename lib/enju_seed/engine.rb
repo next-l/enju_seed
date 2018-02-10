@@ -13,7 +13,6 @@ require 'sitemap_generator'
 require 'browser'
 require 'simple_form'
 require 'validates_timeliness'
-require 'shrine'
 require 'json_translate'
 require 'statesman'
 

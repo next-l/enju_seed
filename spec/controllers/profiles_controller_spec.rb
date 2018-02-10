@@ -27,7 +27,7 @@ describe ProfilesController do
 
       it 'should get index with query' do
         get :index, params: { query: 'user1' }
-        response.should be_success
+        response.should be_successful
         Sunspot.session.should be_a_search_for(Profile)
         Sunspot.session.should have_search_params(:fulltext, 'user1')
         assigns(:profiles).should_not be_nil
@@ -35,7 +35,7 @@ describe ProfilesController do
 
       it 'should get sorted index' do
         get :index, params: { query: 'user1', sort_by: 'username', order: 'desc' }
-        response.should be_success
+        response.should be_successful
         Sunspot.session.should be_a_search_for(Profile)
         Sunspot.session.should have_search_params(:fulltext, 'user1')
         Sunspot.session.should have_search_params(:order_by, :username, :desc)
@@ -439,7 +439,7 @@ describe ProfilesController do
         it 'assigns the requested user as @profile' do
           put :update, params: { id: @profile.id, profile: @invalid_attrs }
           # assigns(:profile).should_not be_valid
-          # response.should be_success
+          # response.should be_successful
           assigns(:profile).should be_valid
           response.should redirect_to profile_url(assigns(:profile))
         end
