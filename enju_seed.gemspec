@@ -33,11 +33,11 @@ Gem::Specification.new do |s|
   s.add_dependency 'simple_form'
   s.add_dependency 'validates_timeliness', '~> 4.0'
   s.add_dependency 'json_translate'
-  s.add_dependency 'statesman', '~> 3.2'
+  s.add_dependency 'statesman', '~> 3.4'
   s.add_dependency 'rsolr', '~> 1.1'
 
   # s.add_development_dependency "enju_leaf", "~> 1.2.0"
-  s.add_development_dependency 'pg', '~> 0.18'
+  s.add_development_dependency 'pg'
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'factory_bot_rails'
   s.add_development_dependency 'capybara'
