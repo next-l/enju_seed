@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency "strip_attributes", "~> 1.8"
   s.add_dependency "kaminari", "~> 0.17"
   s.add_dependency "addressable", "~> 2.5"
-  s.add_dependency "sunspot_rails", "~> 2.2.7"
+  s.add_dependency "sunspot_rails", "~> 2.2.8"
   s.add_dependency "cocoon"
   s.add_dependency "sitemap_generator", "~> 6.0"
   s.add_dependency "rails_autolink"
