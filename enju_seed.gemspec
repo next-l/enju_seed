@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib}/**/*'] + ['MIT-LICENSE', 'Rakefile', 'README.rdoc']
   s.test_files = Dir['spec/**/*'] - Dir['spec/dummy/{log,tmp}/**/*'] - Dir['spec/dummy/db/*.sqlite3']
 
-  s.add_dependency 'rails', '>= 5.1.5'
+  s.add_dependency 'rails', '>= 5.1.6'
   s.add_dependency 'friendly_id', '~> 5.2'
   s.add_dependency 'devise', '~> 4.4'
   s.add_dependency 'pundit', '~> 1.1'
@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'strip_attributes', '~> 1.8'
   s.add_dependency 'kaminari', '~> 1.1'
   s.add_dependency 'addressable', '~> 2.5'
-  s.add_dependency 'sunspot_rails', '~> 2.2.7'
+  s.add_dependency 'sunspot_rails', '~> 2.3.0'
   s.add_dependency 'cocoon'
   s.add_dependency 'sitemap_generator', '~> 6.0'
   s.add_dependency 'rails_autolink'
