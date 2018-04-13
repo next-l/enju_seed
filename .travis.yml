@@ -21,6 +21,3 @@ env:
 sudo: false
 addons:
   postgresql: "9.6"
-  code_climate:
-    repo_token:
-      secure: "eHxNW77Xzrz2i4KC71VzQVhipCpDCDBrnwYveyNsIlnJLxsQ97wcLnVmDWoKmci4CgmI4cZzSQraJXeHHFMLvnO837q74ebkocsxdkjmZH39t3aY9oNebghnPLyKVYm1IKVOLcEpUw6+LBp/oeHNAsVwKuBpNteudTBdOANHMjQ="
