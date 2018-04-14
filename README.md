@@ -1,28 +1,10 @@
 # EnjuSeed
-Short description and motivation.
+[![Build Status](https://travis-ci.org/next-l/enju_seed.svg?branch=master)](https://travis-ci.org/next-l/enju_seed)
+[![security](https://hakiri.io/github/next-l/enju_seed/master.svg)](https://hakiri.io/github/next-l/enju_seed/master)
 
-## Usage
-How to use my plugin.
-
-## Installation
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'enju_seed'
-```
-
-And then execute:
-```bash
-$ bundle
-```
-
-Or install it yourself as:
-```bash
-$ gem install enju_seed
-```
-
-## Contributing
-Contribution directions go here.
+##  製作者・貢献者 (Authors and contributors)
+- [TANABE, Kosuke](https://github.com/nabeta) ([@nabeta](https://twitter.com/nabeta))
+- [Project Next-L](http://www.next-l.jp) ([@ProjectNextL]([https://twitter.com/ProjectNextL))
 
 ## License
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
