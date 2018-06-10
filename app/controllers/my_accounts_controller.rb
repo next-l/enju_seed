@@ -19,7 +19,7 @@ class MyAccountsController < ApplicationController
       :id, :email, :current_password, :password, :password_confirmation
     ]
     user_attrs += [
-      {:user_has_role_attributes => [:id, :role_id]}
+      {user_has_role_attributes: [:id, :role_id]}
     ] if current_user.has_role?('Administrator')
 
     user_params = ActionController::Parameters.new(params[:profile][:user_attributes]).permit(*user_attrs)

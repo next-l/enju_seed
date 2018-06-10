@@ -182,9 +182,9 @@ class ProfilesController < ApplicationController
     attrs += [
       :library_id, :expired_at, :birth_date,
       :user_group_id, :required_role_id, :note, :user_number, {
-        :user_attributes => [
+        user_attributes: [
           :id, :username, :email, :current_password, :locked,
-          {:user_has_role_attributes => [:id, :role_id]}
+          {user_has_role_attributes: [:id, :role_id]}
         ]
       }
     ] if current_user.has_role?('Librarian')
@@ -201,9 +201,9 @@ class ProfilesController < ApplicationController
     attrs += [
       :library_id, :expired_at, :birth_date,
       :user_group_id, :required_role_id, :note, :user_number, {
-        :user_attributes => [
+        user_attributes: [
           :id, :email, :current_password, :auto_generated_password, :locked,
-          {:user_has_role_attributes => [:id, :role_id]}
+          {user_has_role_attributes: [:id, :role_id]}
         ]
       }
     ] if current_user.has_role?('Librarian')
