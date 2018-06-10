@@ -26,7 +26,7 @@ describe ProfilesController do
       end
 
       it "should get index with query" do
-        get :index, :query => 'user1'
+        get :index, params: { query: 'user1' }
         response.should be_success
         Sunspot.session.should be_a_search_for(Profile)
         Sunspot.session.should have_search_params(:fulltext, 'user1')
@@ -34,7 +34,7 @@ describe ProfilesController do
       end
 
       it "should get sorted index" do
-        get :index, :query => 'user1', :sort_by => 'username', :order => 'desc'
+        get :index, params: { query: 'user1', sort_by: 'username', order: 'desc' }
         response.should be_success
         Sunspot.session.should be_a_search_for(Profile)
         Sunspot.session.should have_search_params(:fulltext, 'user1')
@@ -67,12 +67,12 @@ describe ProfilesController do
       login_fixture_admin
 
       it "assigns the requested user as @profile" do
-        get :show, id: profiles(:admin).id
+        get :show, params: { id: profiles(:admin).id }
         assigns(:profile).should eq(profiles(:admin))
       end
       it "assigns the another requested user as @profile" do
         admin_profile = FactoryBot.create :admin_profile
-        get :show, id: admin_profile.id
+        get :show, params: { id: admin_profile.id }
         expect(response).not_to be_forbidden
         expect(assigns(:profile)).to eq admin_profile
       end
@@ -82,17 +82,17 @@ describe ProfilesController do
       login_fixture_librarian
 
       it "assigns the requested user as @profile" do
-        get :show, id: profiles(:librarian1).id
+        get :show, params: { id: profiles(:librarian1).id }
         assigns(:profile).should eq(profiles(:librarian1))
       end
       it "should not assign the requested user as @admin" do
         admin = FactoryBot.create(:admin_profile)
-        get :show, id: admin.id
+        get :show, params: { id: admin.id }
         response.should be_forbidden
       end
       it "should assign the requested user as @librarian" do
         librarian = FactoryBot.create(:librarian_profile)
-        get :show, id: librarian.id
+        get :show, params: { id: librarian.id }
         response.should_not be_forbidden
         assigns(:profile).should eq librarian
       end
@@ -102,17 +102,17 @@ describe ProfilesController do
       login_fixture_user
 
       it "assigns the requested user as @profile" do
-        get :show, id: profiles(:user1).id
+        get :show, params: { id: profiles(:user1).id }
         assigns(:profile).should eq(profiles(:user1))
       end
 
       it "should redirect to my user account" do
-        get :show, id: profiles(:user1).id
+        get :show, params: { id: profiles(:user1).id }
         assert_redirected_to my_account_url
       end
 
       it "should show other user's account" do
-        get :show, id: profiles(:admin).id
+        get :show, params: { id: profiles(:admin).id }
         assigns(:profile).should eq(profiles(:admin))
         response.should be_forbidden
       end
@@ -120,7 +120,7 @@ describe ProfilesController do
 
     describe "When not logged in" do
       it "assigns the requested user as @profile" do
-        get :show, id: profiles(:admin).id
+        get :show, params: { id: profiles(:admin).id }
         assigns(:profile).should eq(profiles(:admin))
         response.should redirect_to(new_user_session_url)
       end
@@ -171,7 +171,7 @@ describe ProfilesController do
 
       it "assigns the requested user as @profile" do
         profile = FactoryBot.create(:profile)
-        get :edit, id: profile.id
+        get :edit, params: { id: profile.id }
         assigns(:profile).should eq(profile)
       end
     end
@@ -181,25 +181,25 @@ describe ProfilesController do
 
       it "should assign the requested user as @profile" do
         profile = FactoryBot.create(:profile)
-        get :edit, id: profile.id
+        get :edit, params: { id: profile.id }
         assigns(:profile).should eq(profile)
       end
       it "should not get edit page for admin required user" do
         admin = FactoryBot.create(:admin_profile)
-        get :edit, id: admin.id
+        get :edit, params: { id: admin.id }
         response.should be_forbidden
         #assigns(:profile).should_not eq(admin)
       end
       it "should get edit page for other librarian user" do
         librarian = FactoryBot.create(:librarian_profile)
-        get :edit, id: librarian.id
+        get :edit, params: { id: librarian.id }
         response.should_not be_forbidden
         assigns(:profile).should eq librarian
       end
 
       it "should get edit page for other librarian user" do
         admin = FactoryBot.create(:admin_profile, required_role_id: Role.where(name: 'Librarian').first.id)
-        get :edit, id: admin.id
+        get :edit, params: { id: admin.id }
         response.should be_forbidden
         assigns(:profile).should eq admin
       end
@@ -210,13 +210,13 @@ describe ProfilesController do
 
       it "should not assign the requested user as @profile" do
         profile = FactoryBot.create(:profile)
-        get :edit, id: profile.id
+        get :edit, params: { id: profile.id }
         assigns(:profile).should eq(profile)
         response.should be_forbidden
       end
 
       it "should edit myself" do
-        get :edit, id: profiles(:user1).id
+        get :edit, params: { id: profiles(:user1).id }
         response.should redirect_to edit_my_account_url
       end
     end
@@ -224,7 +224,7 @@ describe ProfilesController do
     describe "When not logged in" do
       it "should not assign the requested user as @profile" do
         profile = FactoryBot.create(:profile)
-        get :edit, id: profile.id
+        get :edit, params: { id: profile.id }
         assigns(:profile).should eq(profile)
         response.should redirect_to(new_user_session_url)
       end
@@ -234,7 +234,7 @@ describe ProfilesController do
   describe "POST create" do
     before(:each) do
       @attrs = FactoryBot.attributes_for(:profile)
-      @invalid_attrs = {:user_group_id => '', :user_number => '日本語'}
+      @invalid_attrs = {user_group_id: '', user_number: '日本語'}
     end
 
     describe "When logged in as Administrator" do
@@ -242,24 +242,24 @@ describe ProfilesController do
 
       describe "with valid params" do
         it "assigns a newly created user as @profile" do
-          post :create, profile: @attrs
+          post :create, params: { profile: @attrs }
           assigns(:profile).should be_valid
         end
 
         it "redirects to the created user" do
-          post :create, profile: @attrs
+          post :create, params: { profile: @attrs }
           response.should redirect_to(profile_url(assigns(:profile)))
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved user as @profile" do
-          post :create, profile: @invalid_attrs
+          post :create, params: { profile: @invalid_attrs }
           assigns(:profile).should_not be_valid
         end
 
         it "re-renders the 'new' template" do
-          post :create, profile: @invalid_attrs
+          post :create, params: { profile: @invalid_attrs }
           response.should render_template("new")
         end
       end
@@ -270,24 +270,24 @@ describe ProfilesController do
 
       describe "with valid params" do
         it "assigns a newly created user as @profile" do
-          post :create, profile: @attrs
+          post :create, params: { profile: @attrs }
           assigns(:profile).should be_valid
         end
 
         it "redirects to the created user" do
-          post :create, profile: @attrs
+          post :create, params: { profile: @attrs }
           response.should redirect_to(profile_url(assigns(:profile)))
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved user as @profile" do
-          post :create, profile: @invalid_attrs
+          post :create, params: { profile: @invalid_attrs }
           assigns(:profile).should_not be_valid
         end
 
         it "re-renders the 'new' template" do
-          post :create, profile: @invalid_attrs
+          post :create, params: { profile: @invalid_attrs }
           response.should render_template("new")
         end
       end
@@ -297,7 +297,7 @@ describe ProfilesController do
       login_fixture_user
 
       it "should not create user" do
-        post :create, profile: { :username => 'test10' }
+        post :create, params: { profile: { username: 'test10' } }
         assigns(:profile).should be_nil
         response.should be_forbidden
       end
@@ -305,7 +305,7 @@ describe ProfilesController do
 
     describe "When not logged in" do
       it "should not create user" do
-        post :create, profile: { :username => 'test10' }
+        post :create, params: { profile: { username: 'test10' } }
         response.should redirect_to new_user_session_url
       end
     end
@@ -314,8 +314,8 @@ describe ProfilesController do
   describe "PUT update" do
     before(:each) do
       @profile = profiles(:user1)
-      @attrs = {:user_group_id => '3', :locale => 'en'}
-      @invalid_attrs = {:user_group_id => '', :user_number => '日本語'}
+      @attrs = {user_group_id: '3', locale: 'en'}
+      @invalid_attrs = {user_group_id: '', user_number: '日本語'}
     end
 
     describe "When logged in as Administrator" do
@@ -323,16 +323,16 @@ describe ProfilesController do
 
       describe "with valid params" do
         it "updates the requested user" do
-          put :update, id: @profile.id, profile: @attrs
+          put :update, params: { id: @profile.id, profile: @attrs }
         end
 
         it "assigns the requested user as @profile" do
-          put :update, id: @profile.id, profile: @attrs
+          put :update, params: { id: @profile.id, profile: @attrs }
           assigns(:profile).should eq(@profile)
         end
 
         it "redirects to the user" do
-          put :update, id: @profile.id, profile: @attrs
+          put :update, params: { id: @profile.id, profile: @attrs }
           assigns(:profile).should eq(@profile)
           response.should redirect_to(@profile)
         end
@@ -340,18 +340,18 @@ describe ProfilesController do
 
       describe "with invalid params" do
         it "assigns the requested user as @profile" do
-          put :update, id: @profile.id, profile: @invalid_attrs
+          put :update, params: { id: @profile.id, profile: @invalid_attrs }
           assigns(:profile).should eq(@profile)
         end
 
         it "re-renders the 'edit' template" do
-          put :update, id: @profile, profile: @invalid_attrs
+          put :update, params: { id: @profile, profile: @invalid_attrs }
           response.should render_template("edit")
         end
       end
 
       it "should update other user's role" do
-        put :update, id: profiles(:user1).id, profile: {:user_attributes => {:user_has_role_attributes => {:role_id => 4}, :email => profiles(:user1).user.email, :locale => 'en', id: profiles(:user1).user.id}}
+        put :update, params: { id: profiles(:user1).id, profile: {user_attributes: {user_has_role_attributes: {role_id: 4}, email: profiles(:user1).user.email, locale: 'en', id: profiles(:user1).user.id}} }
         response.should redirect_to profile_url(assigns(:profile))
         assigns(:profile).reload
         assigns(:profile).user.role.should eq Role.where(name: 'Administrator').first
@@ -363,16 +363,16 @@ describe ProfilesController do
 
       describe "with valid params" do
         it "updates the requested user" do
-          put :update, id: @profile.id, profile: @attrs
+          put :update, params: { id: @profile.id, profile: @attrs }
         end
 
         it "assigns the requested user as @profile" do
-          put :update, id: @profile.id, profile: @attrs
+          put :update, params: { id: @profile.id, profile: @attrs }
           assigns(:profile).should eq(@profile)
         end
 
         it "redirects to the user" do
-          put :update, id: @profile.id, profile: @attrs
+          put :update, params: { id: @profile.id, profile: @attrs }
           assigns(:profile).should eq(@profile)
           response.should redirect_to(@profile)
         end
@@ -380,40 +380,40 @@ describe ProfilesController do
 
       describe "with invalid params" do
         it "assigns the user as @profile" do
-          put :update, id: @profile, profile: @invalid_attrs
+          put :update, params: { id: @profile, profile: @invalid_attrs }
           assigns(:profile).should_not be_valid
         end
 
         it "re-renders the 'edit' template" do
-          put :update, id: @profile, profile: @invalid_attrs
+          put :update, params: { id: @profile, profile: @invalid_attrs }
           response.should render_template("edit")
         end
       end
 
       it "should update other user" do
-        put :update, id: profiles(:user1).id, profile: {:user_number => '00003', :locale => 'en', :user_group_id => 3, :library_id => 3, :note => 'test'}
+        put :update, params: { id: profiles(:user1).id, profile: {user_number: '00003', locale: 'en', user_group_id: 3, library_id: 3, note: 'test'} }
         response.should redirect_to profile_url(assigns(:profile))
       end
 
       it "should not update other admin" do
-        put :update, id: profiles(:admin).id, profile: {:user_number => '00003', :locale => 'en', :user_group_id => 3, :library_id => 3, :note => 'test'}
+        put :update, params: { id: profiles(:admin).id, profile: {user_number: '00003', locale: 'en', user_group_id: 3, library_id: 3, note: 'test'} }
         response.should be_forbidden
       end
 
       it "should update other user's user_group" do
-        put :update, id: profiles(:user1).id, profile: {:user_group_id => 3, :library_id => 3, :locale => 'en'}
+        put :update, params: { id: profiles(:user1).id, profile: {user_group_id: 3, library_id: 3, locale: 'en'} }
         response.should redirect_to profile_url(assigns(:profile))
         assigns(:profile).user_group_id.should eq 3
       end
 
       it "should update other user's note" do
-        put :update, id: profiles(:user1).id, profile: {:user_group_id => 3, :library_id => 3, :note => 'test', :locale => 'en'}
+        put :update, params: { id: profiles(:user1).id, profile: {user_group_id: 3, library_id: 3, note: 'test', locale: 'en'} }
         response.should redirect_to profile_url(assigns(:profile))
         assert_equal assigns(:profile).note, 'test'
       end
 
       it "should update other user's locked status" do
-        put :update, id: profiles(:user1).id, profile: {:user_attributes => {:id => 3, :locked => '1', :username => 'user1'}}
+        put :update, params: { id: profiles(:user1).id, profile: {user_attributes: {id: 3, locked: '1', username: 'user1'}} }
         response.should redirect_to profile_url(assigns(:profile))
         assigns(:profile).user.locked_at.should be_truthy
         assigns(:profile).user.access_locked?.should be_truthy
@@ -425,11 +425,11 @@ describe ProfilesController do
 
       describe "with valid params" do
         it "updates the requested user" do
-          put :update, id: @profile.id, profile: @attrs
+          put :update, params: { id: @profile.id, profile: @attrs }
         end
 
         it "assigns the requested user as @profile" do
-          put :update, id: @profile.id, profile: @attrs
+          put :update, params: { id: @profile.id, profile: @attrs }
           assigns(:profile).should be_valid
           response.should redirect_to profile_url(assigns(:profile))
         end
@@ -437,7 +437,7 @@ describe ProfilesController do
 
       describe "with invalid params" do
         it "assigns the requested user as @profile" do
-          put :update, id: @profile.id, profile: @invalid_attrs
+          put :update, params: { id: @profile.id, profile: @invalid_attrs }
           #assigns(:profile).should_not be_valid
           #response.should be_success
           assigns(:profile).should be_valid
@@ -446,37 +446,37 @@ describe ProfilesController do
       end
 
       it "should update myself" do
-        put :update, id: profiles(:user1).id, profile: {keyword_list: 'test'}
+        put :update, params: { id: profiles(:user1).id, profile: {keyword_list: 'test'} }
         response.should redirect_to profile_url(assigns(:profile))
       end
 
       it "should not update my role" do
-        put :update, id: profiles(:user1).id, profile: {:user_has_role_attributes => {:role_id => 4}}
+        put :update, params: { id: profiles(:user1).id, profile: {user_has_role_attributes: {role_id: 4}} }
         response.should redirect_to profile_url(assigns(:profile))
         assigns(:profile).user.role.should_not eq Role.where(name: 'Administrator').first
       end
 
       it "should not update my user_group" do
-        put :update, id: profiles(:user1).id, profile: {:user_group_id => 3, :library_id => 3}
+        put :update, params: { id: profiles(:user1).id, profile: {user_group_id: 3, library_id: 3} }
         response.should redirect_to profile_url(assigns(:profile))
         assigns(:profile).user_group_id.should eq 1
       end
 
       it "should not update my note" do
-        put :update, id: profiles(:user1).id, profile: {:user_group_id => 3, :library_id => 3, :note => 'test'}
+        put :update, params: { id: profiles(:user1).id, profile: {user_group_id: 3, library_id: 3, note: 'test'} }
         response.should redirect_to profile_url(assigns(:profile))
         assigns(:profile).note.should be_nil
       end
 
       it "should update my keyword_list" do
-        put :update, id: profiles(:user1).id, profile: {:keyword_list => 'test'}
+        put :update, params: { id: profiles(:user1).id, profile: {keyword_list: 'test'} }
         response.should redirect_to profile_url(assigns(:profile))
         assigns(:profile).keyword_list.should eq 'test'
         assigns(:profile).user.role.name.should eq 'User'
       end
 
       it "should not update other user" do
-        put :update, id: profiles(:user2).id, profile: { }
+        put :update, params: { id: profiles(:user2).id, profile: { } }
         assigns(:profile).should be_valid
         response.should be_forbidden
       end
@@ -485,18 +485,18 @@ describe ProfilesController do
     describe "When not logged in" do
       describe "with valid params" do
         it "updates the requested user" do
-          put :update, id: @profile.id, profile: @attrs
+          put :update, params: { id: @profile.id, profile: @attrs }
         end
 
         it "should be forbidden" do
-          put :update, id: @profile.id, profile: @attrs
+          put :update, params: { id: @profile.id, profile: @attrs }
           response.should redirect_to(new_user_session_url)
         end
       end
 
       describe "with invalid params" do
         it "assigns the requested user as @profile" do
-          put :update, id: @profile.id, profile: @invalid_attrs
+          put :update, params: { id: @profile.id, profile: @invalid_attrs }
           response.should redirect_to(new_user_session_url)
         end
       end
@@ -508,16 +508,16 @@ describe ProfilesController do
       login_fixture_admin
 
       it "destroys the requested user" do
-        delete :destroy, id: profiles(:user2).id
+        delete :destroy, params: { id: profiles(:user2).id }
       end
 
       it "redirects to the profiles list" do
-        delete :destroy, id: profiles(:user2).id
+        delete :destroy, params: { id: profiles(:user2).id }
         response.should redirect_to(profiles_url)
       end
 
       it "should destroy librarian" do
-        delete :destroy, id: profiles(:librarian2).id
+        delete :destroy, params: { id: profiles(:librarian2).id }
         response.should redirect_to(profiles_url)
       end
     end
@@ -526,33 +526,33 @@ describe ProfilesController do
       login_fixture_librarian
 
       it "destroys the requested user" do
-        delete :destroy, id: profiles(:user2).id
+        delete :destroy, params: { id: profiles(:user2).id }
         response.should redirect_to(profiles_url)
       end
 
       it "redirects to the profiles list" do
-        delete :destroy, id: profiles(:user2).id
+        delete :destroy, params: { id: profiles(:user2).id }
         response.should redirect_to(profiles_url)
       end
 
       it "should not destroy librarian" do
-        delete :destroy, id: profiles(:librarian2).id
+        delete :destroy, params: { id: profiles(:librarian2).id }
         response.should be_forbidden
       end
 
       it "should not destroy admin" do
-        delete :destroy, id: profiles(:admin).id
+        delete :destroy, params: { id: profiles(:admin).id }
         response.should be_forbidden
       end
 
       it "should not destroy myself" do
-        delete :destroy, id: profiles(:librarian1).id
+        delete :destroy, params: { id: profiles(:librarian1).id }
         response.should be_forbidden
       end
 
       it "should not be able to delete other librarian user" do
         librarian = FactoryBot.create(:librarian_profile)
-        delete :destroy, id: librarian.id
+        delete :destroy, params: { id: librarian.id }
         response.should be_forbidden
       end
     end
@@ -561,28 +561,28 @@ describe ProfilesController do
       login_fixture_user
 
       it "destroys the requested user" do
-        delete :destroy, id: profiles(:user2).id
+        delete :destroy, params: { id: profiles(:user2).id }
       end
 
       it "should be forbidden" do
-        delete :destroy, id: profiles(:user2).id
+        delete :destroy, params: { id: profiles(:user2).id }
         response.should be_forbidden
       end
 
       it "should not destroy myself" do
-        delete :destroy, id: profiles(:user1).id
+        delete :destroy, params: { id: profiles(:user1).id }
         response.should be_forbidden
       end
     end
 
     describe "When not logged in" do
       it "destroys the requested user" do
-        delete :destroy, id: profiles(:user2).id
+        delete :destroy, params: { id: profiles(:user2).id }
         response.should redirect_to(new_user_session_url)
       end
 
       it "should be forbidden" do
-        delete :destroy, id: profiles(:user2).id
+        delete :destroy, params: { id: profiles(:user2).id }
         response.should redirect_to(new_user_session_url)
       end
     end

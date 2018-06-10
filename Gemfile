@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Declare your gem's dependencies in enju_seed.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
@@ -13,4 +14,8 @@ gem 'jquery-rails'
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
-
+gem 'enju_leaf', path: '../enju_leaf' #github: 'next-l/enju_leaf', branch: '1.2'
+gem 'enju_biblio', github: 'next-l/enju_biblio', branch: '1.2'
+gem 'enju_library', github: 'next-l/enju_library', branch: '1.2'
+gem 'enju_manifestation_viewer', github: 'next-l/enju_manifestation_viewer', branch: '1.2'
+gem 'rails-controller-testing'
