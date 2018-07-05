@@ -3,8 +3,8 @@ class Profile < ActiveRecord::Base
 
   scope :administrators, -> { joins(user: :role).where('roles.name = ?', 'Administrator') }
   scope :librarians, -> { joins(user: :role).where('roles.name = ? OR roles.name = ?', 'Administrator', 'Librarian') }
-  belongs_to :user, dependent: :destroy
-  belongs_to :library, validate: true
+  belongs_to :user, dependent: :destroy, optional: true
+  belongs_to :library
   belongs_to :user_group
   belongs_to :required_role, class_name: 'Role', foreign_key: 'required_role_id' #, validate: true
   has_many :identities
