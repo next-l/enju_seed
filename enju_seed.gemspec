@@ -33,11 +33,10 @@ Gem::Specification.new do |s|
   s.add_dependency "browser", "~> 2.5"
   s.add_dependency "simple_form"
   s.add_dependency "validates_timeliness", "~> 4.0"
-  s.add_dependency "rsolr", "~> 1.1"
   s.add_dependency "globalize", "~> 5.1.0"
   s.add_dependency "globalize-accessors"
 
-  #s.add_development_dependency "enju_leaf", "~> 1.2.2"
+  s.add_development_dependency "enju_leaf", "~> 1.3.0.beta1"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "factory_bot_rails"
