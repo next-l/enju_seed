@@ -82,8 +82,8 @@ describe RolesController do
   describe "PUT update" do
     before(:each) do
       @role = Role.find(1)
-      @attrs = {display_name: 'guest user'}
-      @invalid_attrs = {name: ''}
+      @attrs = { display_name: 'guest user' }
+      @invalid_attrs = { name: '' }
     end
 
     describe "When logged in as Administrator" do

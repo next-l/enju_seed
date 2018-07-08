@@ -188,7 +188,7 @@ describe ProfilesController do
         admin = FactoryBot.create(:admin_profile)
         get :edit, params: { id: admin.id }
         response.should be_forbidden
-        #assigns(:profile).should_not eq(admin)
+        # assigns(:profile).should_not eq(admin)
       end
       it "should get edit page for other librarian user" do
         librarian = FactoryBot.create(:librarian_profile)
@@ -234,7 +234,7 @@ describe ProfilesController do
   describe "POST create" do
     before(:each) do
       @attrs = FactoryBot.attributes_for(:profile)
-      @invalid_attrs = {user_group_id: '', user_number: '日本語'}
+      @invalid_attrs = { user_group_id: '', user_number: '日本語' }
     end
 
     describe "When logged in as Administrator" do
@@ -314,8 +314,8 @@ describe ProfilesController do
   describe "PUT update" do
     before(:each) do
       @profile = profiles(:user1)
-      @attrs = {user_group_id: '3', locale: 'en'}
-      @invalid_attrs = {user_group_id: '', user_number: '日本語'}
+      @attrs = { user_group_id: '3', locale: 'en' }
+      @invalid_attrs = { user_group_id: '', user_number: '日本語' }
     end
 
     describe "When logged in as Administrator" do
@@ -351,7 +351,7 @@ describe ProfilesController do
       end
 
       it "should update other user's role" do
-        put :update, params: { id: profiles(:user1).id, profile: {user_attributes: {user_has_role_attributes: {role_id: 4}, email: profiles(:user1).user.email, locale: 'en', id: profiles(:user1).user.id}} }
+        put :update, params: { id: profiles(:user1).id, profile: { user_attributes: { user_has_role_attributes: { role_id: 4 }, email: profiles(:user1).user.email, locale: 'en', id: profiles(:user1).user.id } } }
         response.should redirect_to profile_url(assigns(:profile))
         assigns(:profile).reload
         assigns(:profile).user.role.should eq Role.where(name: 'Administrator').first
@@ -391,29 +391,29 @@ describe ProfilesController do
       end
 
       it "should update other user" do
-        put :update, params: { id: profiles(:user1).id, profile: {user_number: '00003', locale: 'en', user_group_id: 3, library_id: 3, note: 'test'} }
+        put :update, params: { id: profiles(:user1).id, profile: { user_number: '00003', locale: 'en', user_group_id: 3, library_id: 3, note: 'test' } }
         response.should redirect_to profile_url(assigns(:profile))
       end
 
       it "should not update other admin" do
-        put :update, params: { id: profiles(:admin).id, profile: {user_number: '00003', locale: 'en', user_group_id: 3, library_id: 3, note: 'test'} }
+        put :update, params: { id: profiles(:admin).id, profile: { user_number: '00003', locale: 'en', user_group_id: 3, library_id: 3, note: 'test' } }
         response.should be_forbidden
       end
 
       it "should update other user's user_group" do
-        put :update, params: { id: profiles(:user1).id, profile: {user_group_id: 3, library_id: 3, locale: 'en'} }
+        put :update, params: { id: profiles(:user1).id, profile: { user_group_id: 3, library_id: 3, locale: 'en' } }
         response.should redirect_to profile_url(assigns(:profile))
         assigns(:profile).user_group_id.should eq 3
       end
 
       it "should update other user's note" do
-        put :update, params: { id: profiles(:user1).id, profile: {user_group_id: 3, library_id: 3, note: 'test', locale: 'en'} }
+        put :update, params: { id: profiles(:user1).id, profile: { user_group_id: 3, library_id: 3, note: 'test', locale: 'en' } }
         response.should redirect_to profile_url(assigns(:profile))
         assert_equal assigns(:profile).note, 'test'
       end
 
       it "should update other user's locked status" do
-        put :update, params: { id: profiles(:user1).id, profile: {user_attributes: {id: 3, locked: '1', username: 'user1'}} }
+        put :update, params: { id: profiles(:user1).id, profile: { user_attributes: { id: 3, locked: '1', username: 'user1' } } }
         response.should redirect_to profile_url(assigns(:profile))
         assigns(:profile).user.locked_at.should be_truthy
         assigns(:profile).user.access_locked?.should be_truthy
@@ -438,45 +438,45 @@ describe ProfilesController do
       describe "with invalid params" do
         it "assigns the requested user as @profile" do
           put :update, params: { id: @profile.id, profile: @invalid_attrs }
-          #assigns(:profile).should_not be_valid
-          #response.should be_success
+          # assigns(:profile).should_not be_valid
+          # response.should be_success
           assigns(:profile).should be_valid
           response.should redirect_to profile_url(assigns(:profile))
         end
       end
 
       it "should update myself" do
-        put :update, params: { id: profiles(:user1).id, profile: {keyword_list: 'test'} }
+        put :update, params: { id: profiles(:user1).id, profile: { keyword_list: 'test' } }
         response.should redirect_to profile_url(assigns(:profile))
       end
 
       it "should not update my role" do
-        put :update, params: { id: profiles(:user1).id, profile: {user_has_role_attributes: {role_id: 4}} }
+        put :update, params: { id: profiles(:user1).id, profile: { user_has_role_attributes: { role_id: 4 } } }
         response.should redirect_to profile_url(assigns(:profile))
         assigns(:profile).user.role.should_not eq Role.where(name: 'Administrator').first
       end
 
       it "should not update my user_group" do
-        put :update, params: { id: profiles(:user1).id, profile: {user_group_id: 3, library_id: 3} }
+        put :update, params: { id: profiles(:user1).id, profile: { user_group_id: 3, library_id: 3 } }
         response.should redirect_to profile_url(assigns(:profile))
         assigns(:profile).user_group_id.should eq 1
       end
 
       it "should not update my note" do
-        put :update, params: { id: profiles(:user1).id, profile: {user_group_id: 3, library_id: 3, note: 'test'} }
+        put :update, params: { id: profiles(:user1).id, profile: { user_group_id: 3, library_id: 3, note: 'test' } }
         response.should redirect_to profile_url(assigns(:profile))
         assigns(:profile).note.should be_nil
       end
 
       it "should update my keyword_list" do
-        put :update, params: { id: profiles(:user1).id, profile: {keyword_list: 'test'} }
+        put :update, params: { id: profiles(:user1).id, profile: { keyword_list: 'test' } }
         response.should redirect_to profile_url(assigns(:profile))
         assigns(:profile).keyword_list.should eq 'test'
         assigns(:profile).user.role.name.should eq 'User'
       end
 
       it "should not update other user" do
-        put :update, params: { id: profiles(:user2).id, profile: { } }
+        put :update, params: { id: profiles(:user2).id, profile: {} }
         assigns(:profile).should be_valid
         response.should be_forbidden
       end
