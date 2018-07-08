@@ -55,20 +55,20 @@ describe User do
 
   it "should require username" do
     old_count = User.count
-    user = FactoryBot.build(:user, :username => nil)
+    user = FactoryBot.build(:user, username: nil)
     user.save
     user.errors[:username].should be_truthy
     User.count.should eq old_count
   end
 
   it "should require password" do
-    user = FactoryBot.build(:user, :password => nil)
+    user = FactoryBot.build(:user, password: nil)
     user.save
     user.errors[:password].should be_truthy
   end
 
   it "should not require password_confirmation on create" do
-    user = FactoryBot.build(:user, :password => 'new_password', :password_confirmation => nil)
+    user = FactoryBot.build(:user, password: 'new_password', password_confirmation: nil)
     user.save
     user.errors[:email].should be_empty
   end

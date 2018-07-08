@@ -4,7 +4,7 @@ describe RolesController do
   describe "routing" do
 
     it "recognizes and generates #index" do
-      { :get => "/roles" }.should route_to(:controller => "roles", :action => "index")
+      { get: "/roles" }.should route_to(controller: "roles", action: "index")
     end
 
     #it "recognizes and generates #new" do
@@ -12,11 +12,11 @@ describe RolesController do
     #end
 
     it "recognizes and generates #show" do
-      { :get => "/roles/1" }.should route_to(:controller => "roles", :action => "show", :id => "1")
+      { get: "/roles/1" }.should route_to(controller: "roles", action: "show", id: "1")
     end
 
     it "recognizes and generates #edit" do
-      { :get => "/roles/1/edit" }.should route_to(:controller => "roles", :action => "edit", :id => "1")
+      { get: "/roles/1/edit" }.should route_to(controller: "roles", action: "edit", id: "1")
     end
 
     #it "recognizes and generates #create" do
@@ -24,7 +24,7 @@ describe RolesController do
     #end
 
     it "recognizes and generates #update" do
-      { :put => "/roles/1" }.should route_to(:controller => "roles", :action => "update", :id => "1")
+      { put: "/roles/1" }.should route_to(controller: "roles", action: "update", id: "1")
     end
 
     #it "recognizes and generates #destroy" do

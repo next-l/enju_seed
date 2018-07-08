@@ -5,7 +5,7 @@ describe "profiles/new" do
 
   before(:each) do
     assign(:profile, stub_model(Profile,
-      :user_group_id => 1
+      user_group_id: 1
     ).as_new_record)
     assign(:user_groups, UserGroup.all)
     assign(:libraries, Library.all)
