@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 5.1"
   s.add_dependency "friendly_id", "~> 5.2"
   s.add_dependency "devise", "~> 4.4"
-  s.add_dependency "pundit", "~> 1.1"
+  s.add_dependency "pundit", "~> 2.0"
   s.add_dependency "acts_as_list", "~> 0.9"
   s.add_dependency "strip_attributes", "~> 1.8"
   s.add_dependency "kaminari", "~> 1.1"
