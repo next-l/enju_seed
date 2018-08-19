@@ -44,5 +44,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec-activemodel-mocks"
   s.add_development_dependency "sunspot_matchers"
   s.add_development_dependency "coveralls"
-  s.add_development_dependency "rails-controller-testing"
 end
