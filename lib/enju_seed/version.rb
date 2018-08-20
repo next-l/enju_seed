@@ -1,3 +1,3 @@
 module EnjuSeed
-  VERSION = '0.3.0.beta.5'.freeze
+  VERSION = '0.4.0.beta1'.freeze
 end
