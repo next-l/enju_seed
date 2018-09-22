@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails', '~> 5.2.0'
   s.add_dependency 'friendly_id', '~> 5.2'
-  s.add_dependency 'devise', '~> 4.4'
+  s.add_dependency 'devise', '~> 4.5'
   s.add_dependency 'pundit', '~> 2.0'
   s.add_dependency 'acts_as_list', '~> 0.9'
   s.add_dependency 'strip_attributes', '~> 1.8'
@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'browser', '~> 2.5'
   s.add_dependency 'simple_form'
   s.add_dependency 'validates_timeliness', '~> 4.0'
-  s.add_dependency 'json_translate'
+  s.add_dependency 'json_translate', '~> 4.0'
   s.add_dependency 'statesman', '~> 3.4'
 
   # s.add_development_dependency "enju_leaf", "~> 1.2.0"
