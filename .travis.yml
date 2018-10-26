@@ -4,16 +4,16 @@ rvm:
   - 2.3.7
   - 2.4.4
 before_script:
-  - mysql -e 'create database enju_test DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;'
-  - psql -c 'create database enju_test;' -U postgres
+  - psql -c 'create database enju_seed_dummy_test;' -U postgres
+  - psql enju_seed_dummy_test -c 'CREATE EXTENSION pgcrypto'
   - bundle exec rake db:migrate
 services:
   - redis-server
 env:
-  - DB=sqlite
-  - DB=mysql
   - DB=postgresql
 notifications:
   slack:
     secure: KnXsfukes8MbLEx1y74t5q7U2bzH4QkhaV1PRBTPFttaJkdFOVzID+z4h2WyJj1jBNzieVEpXV+zvsmR86BBExoG6O9rDbuRmPE/7cqc3yZqb/49VU9XSrwYcTdPyvWpAIP0barZjBvxC5Pjka5kS3ZV6ztYQ/Jl1pqeiWQYwTc=
 sudo: false
+addons:
+  postgresql: "10.1"

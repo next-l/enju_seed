@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/{log,tmp}/**/*"] - Dir["spec/dummy/db/*.sqlite3"]
 
-  s.add_dependency "rails", "~> 5.1"
+  s.add_dependency "rails", "~> 5.2"
   s.add_dependency "friendly_id", "~> 5.2"
   s.add_dependency "devise", "~> 4.5"
   s.add_dependency "pundit", "~> 2.0"
@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
   s.add_dependency "validates_timeliness", "~> 4.0"
 
   s.add_development_dependency "enju_leaf", "~> 1.3.0.beta.2"
-  s.add_development_dependency "sqlite3"
+  s.add_development_dependency "pg"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "factory_bot_rails"
   s.add_development_dependency "capybara"
