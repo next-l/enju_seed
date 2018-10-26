@@ -13,8 +13,7 @@ require 'sitemap_generator'
 require 'browser'
 require 'simple_form'
 require 'validates_timeliness'
-require 'globalize'
-require 'globalize-accessors'
+require 'mobility'
 
 module EnjuSeed
   class Engine < ::Rails::Engine
