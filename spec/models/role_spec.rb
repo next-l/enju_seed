@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 require 'spec_helper'
 
 describe Role do
@@ -16,7 +17,7 @@ describe Role do
   end
 
   it "should respond to localized_name" do
-    roles(:role_00001).display_name.should eq 'Guest'
+    roles(:role_00001).localized_name.should eq 'Guest'
   end
 
   it "should respond to default_role" do
@@ -28,11 +29,12 @@ end
 #
 # Table name: roles
 #
-#  id                        :bigint           not null, primary key
-#  name                      :string           not null
-#  display_name_translations :jsonb            not null
-#  note                      :text
-#  position                  :integer          default(1), not null
-#  created_at                :datetime         not null
-#  updated_at                :datetime         not null
+#  id           :integer          not null, primary key
+#  name         :string           not null
+#  display_name :string
+#  note         :text
+#  created_at   :datetime
+#  updated_at   :datetime
+#  score        :integer          default(0), not null
+#  position     :integer          default(1), not null
 #

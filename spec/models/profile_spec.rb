@@ -75,18 +75,21 @@ end
 #
 # Table name: profiles
 #
-#  id                      :bigint           not null, primary key
-#  locale                  :string
-#  user_number             :string
-#  full_name               :text
-#  note                    :text
-#  keyword_list            :text
-#  required_role_id        :bigint           not null
-#  created_at              :datetime         not null
-#  updated_at              :datetime         not null
-#  expired_at              :datetime
-#  full_name_transcription :text
-#  date_of_birth           :datetime
-#  user_group_id           :bigint           not null
-#  library_id              :bigint           not null
+#  id                       :integer          not null, primary key
+#  user_id                  :integer
+#  user_group_id            :integer          not null
+#  library_id               :integer
+#  locale                   :string
+#  user_number              :string
+#  full_name                :text
+#  note                     :text
+#  keyword_list             :text
+#  required_role_id         :integer          not null
+#  created_at               :datetime
+#  updated_at               :datetime
+#  checkout_icalendar_token :string
+#  save_checkout_history    :boolean          default(FALSE), not null
+#  expired_at               :datetime
+#  full_name_transcription  :text
+#  date_of_birth            :datetime
 #

@@ -71,10 +71,10 @@ describe ProfilesController do
         assigns(:profile).should eq(profiles(:admin))
       end
       it "assigns the another requested user as @profile" do
-        admin = FactoryBot.create(:admin).profile
-        get :show, params: { id: admin.id }
+        admin_profile = FactoryBot.create :admin_profile
+        get :show, params: { id: admin_profile.id }
         expect(response).not_to be_forbidden
-        expect(assigns(:profile)).to eq admin
+        expect(assigns(:profile)).to eq admin_profile
       end
     end
 
@@ -85,15 +85,13 @@ describe ProfilesController do
         get :show, params: { id: profiles(:librarian1).id }
         assigns(:profile).should eq(profiles(:librarian1))
       end
-
       it "should not assign the requested user as @admin" do
-        admin = FactoryBot.create(:admin).profile
+        admin = FactoryBot.create(:admin_profile)
         get :show, params: { id: admin.id }
         response.should be_forbidden
       end
-
       it "should assign the requested user as @librarian" do
-        librarian = FactoryBot.create(:librarian).profile
+        librarian = FactoryBot.create(:librarian_profile)
         get :show, params: { id: librarian.id }
         response.should_not be_forbidden
         assigns(:profile).should eq librarian
@@ -187,21 +185,20 @@ describe ProfilesController do
         assigns(:profile).should eq(profile)
       end
       it "should not get edit page for admin required user" do
-        admin = FactoryBot.create(:admin).profile
+        admin = FactoryBot.create(:admin_profile)
         get :edit, params: { id: admin.id }
         response.should be_forbidden
         # assigns(:profile).should_not eq(admin)
       end
       it "should get edit page for other librarian user" do
-        librarian = FactoryBot.create(:librarian).profile
+        librarian = FactoryBot.create(:librarian_profile)
         get :edit, params: { id: librarian.id }
         response.should_not be_forbidden
         assigns(:profile).should eq librarian
       end
 
       it "should get edit page for other librarian user" do
-        admin = FactoryBot.create(:admin).profile
-        admin.update(required_role_id: Role.where(name: 'Librarian').first.id)
+        admin = FactoryBot.create(:admin_profile, required_role_id: Role.where(name: 'Librarian').first.id)
         get :edit, params: { id: admin.id }
         response.should be_forbidden
         assigns(:profile).should eq admin
@@ -317,7 +314,7 @@ describe ProfilesController do
   describe "PUT update" do
     before(:each) do
       @profile = profiles(:user1)
-      @attrs = { user_group_id: user_groups(:user_group_00003).id, locale: 'en' }
+      @attrs = { user_group_id: '3', locale: 'en' }
       @invalid_attrs = { user_group_id: '', user_number: '日本語' }
     end
 
@@ -394,23 +391,23 @@ describe ProfilesController do
       end
 
       it "should update other user" do
-        put :update, params: { id: profiles(:user1).id, profile: { user_number: '00003', locale: 'en', user_group_id: user_groups(:user_group_00003).id, library_id: libraries(:library_00003).id, note: 'test' } }
+        put :update, params: { id: profiles(:user1).id, profile: { user_number: '00003', locale: 'en', user_group_id: 3, library_id: 3, note: 'test' } }
         response.should redirect_to profile_url(assigns(:profile))
       end
 
       it "should not update other admin" do
-        put :update, params: { id: profiles(:admin).id, profile: { user_number: '00003', locale: 'en', user_group_id: user_groups(:user_group_00003).id, library_id: libraries(:library_00003).id, note: 'test' } }
+        put :update, params: { id: profiles(:admin).id, profile: { user_number: '00003', locale: 'en', user_group_id: 3, library_id: 3, note: 'test' } }
         response.should be_forbidden
       end
 
       it "should update other user's user_group" do
-        put :update, params: { id: profiles(:user1).id, profile: { user_number: '00003', locale: 'en', user_group_id: user_groups(:user_group_00003).id, library_id: libraries(:library_00003).id, note: 'test' } }
+        put :update, params: { id: profiles(:user1).id, profile: { user_group_id: 3, library_id: 3, locale: 'en' } }
         response.should redirect_to profile_url(assigns(:profile))
-        assigns(:profile).user_group_id.should eq user_groups(:user_group_00003).id
+        assigns(:profile).user_group_id.should eq 3
       end
 
       it "should update other user's note" do
-        put :update, params: { id: profiles(:user1).id, profile: { user_number: '00003', locale: 'en', user_group_id: user_groups(:user_group_00003).id, library_id: libraries(:library_00003).id, note: 'test' } }
+        put :update, params: { id: profiles(:user1).id, profile: { user_group_id: 3, library_id: 3, note: 'test', locale: 'en' } }
         response.should redirect_to profile_url(assigns(:profile))
         assert_equal assigns(:profile).note, 'test'
       end
@@ -460,13 +457,13 @@ describe ProfilesController do
       end
 
       it "should not update my user_group" do
-        put :update, params: { id: profiles(:user1).id, profile: { user_group_id: user_groups(:user_group_00003), library_id: libraries(:library_00003).id } }
+        put :update, params: { id: profiles(:user1).id, profile: { user_group_id: 3, library_id: 3 } }
         response.should redirect_to profile_url(assigns(:profile))
-        assigns(:profile).user_group_id.should eq user_groups(:user_group_00001).id
+        assigns(:profile).user_group_id.should eq 1
       end
 
       it "should not update my note" do
-        put :update, params: { id: profiles(:user1).id, profile: { user_group_id: user_groups(:user_group_00003), library_id: libraries(:library_00003).id, note: 'test' } }
+        put :update, params: { id: profiles(:user1).id, profile: { user_group_id: 3, library_id: 3, note: 'test' } }
         response.should redirect_to profile_url(assigns(:profile))
         assigns(:profile).note.should be_nil
       end
@@ -554,7 +551,7 @@ describe ProfilesController do
       end
 
       it "should not be able to delete other librarian user" do
-        librarian = FactoryBot.create(:librarian).profile
+        librarian = FactoryBot.create(:librarian_profile)
         delete :destroy, params: { id: librarian.id }
         response.should be_forbidden
       end
