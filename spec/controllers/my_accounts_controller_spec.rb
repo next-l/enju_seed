@@ -11,7 +11,7 @@ describe MyAccountsController do
 
       it "assigns the requested user as @user" do
         get :show, params: { id: 'admin' }
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 
@@ -64,7 +64,7 @@ describe MyAccountsController do
       it "should assign the requested user as @user" do
         get :edit
         expect(assigns(:profile)).to eq(@user.profile)
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 
@@ -164,7 +164,7 @@ describe MyAccountsController do
         it "assigns the user as @user" do
           put :update, params: { profile: @invalid_attrs }
           expect(assigns(:profile)).to_not be_valid
-          expect(response).to be_success
+          expect(response).to be_successful
         end
 
         it "should ignore username" do
