@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
   s.add_dependency "simple_form"
   s.add_dependency "validates_timeliness", "~> 4.0"
 
-  s.add_development_dependency "enju_leaf", "~> 1.3.0.beta.2"
+  s.add_development_dependency "enju_leaf", "~> 1.4.0.beta.1"
   s.add_development_dependency "pg"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "factory_bot_rails"

@@ -16,5 +16,6 @@ gem 'jquery-rails'
 # gem 'byebug', group: [:development, :test]
 gem 'rails-controller-testing'
 gem 'mobility', '~> 0.8'
-gem 'enju_leaf', github: 'next-l/enju_leaf', branch: '1.3'
+gem 'enju_leaf', github: 'next-l/enju_leaf', branch: '1.4'
 gem 'enju_library', github: 'next-l/enju_library', branch: '1.4'
+gem 'enju_biblio', github: 'next-l/enju_biblio', branch: '1.4'
