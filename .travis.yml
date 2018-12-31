@@ -1,7 +1,6 @@
 language: ruby
 cache: bundler
 rvm:
-<<<<<<< HEAD
   - 2.4.4
   - 2.5.1
 before_script:
@@ -15,24 +14,11 @@ script:
   - bundle exec rspec
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-=======
-  - 2.3.7
-  - 2.4.4
-before_script:
-  - psql -c 'create database enju_seed_dummy_test;' -U postgres
-  - psql enju_seed_dummy_test -c 'CREATE EXTENSION pgcrypto'
-  - bundle exec rake db:migrate
->>>>>>> 1.4
 services:
   - redis-server
-env:
-  - DB=postgresql
-<<<<<<< HEAD
-=======
 notifications:
   slack:
     secure: KnXsfukes8MbLEx1y74t5q7U2bzH4QkhaV1PRBTPFttaJkdFOVzID+z4h2WyJj1jBNzieVEpXV+zvsmR86BBExoG6O9rDbuRmPE/7cqc3yZqb/49VU9XSrwYcTdPyvWpAIP0barZjBvxC5Pjka5kS3ZV6ztYQ/Jl1pqeiWQYwTc=
->>>>>>> 1.4
 sudo: false
 addons:
   postgresql: "9.6"
