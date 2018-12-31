@@ -6,26 +6,26 @@ module EnjuSeed
       scope :administrators, -> { joins(:role).where('roles.name = ?', 'Administrator') }
       scope :librarians, -> { joins(:role).where('roles.name = ? OR roles.name = ?', 'Administrator', 'Librarian') }
       scope :suspended, -> { where('locked_at IS NOT NULL') }
+      has_one :profile
       if defined?(EnjuBiblio)
         has_many :import_requests
         has_many :picture_files, as: :picture_attachable, dependent: :destroy
       end
       has_one :user_has_role, dependent: :destroy
       has_one :role, through: :user_has_role
-      belongs_to :profile
       accepts_nested_attributes_for :user_has_role
 
       validates :username, presence: true, uniqueness: true, format: {
         with: /\A[0-9A-Za-z][0-9A-Za-z_\-]*[0-9A-Za-z]\z/
       }
-      validates :email, format: Devise.email_regexp, allow_blank: true, uniqueness: true
+      validates :email, format: Devise::email_regexp, allow_blank: true, uniqueness: true
       validates_date :expired_at, allow_blank: true
 
       with_options if: :password_required? do |v|
         v.validates_presence_of     :password
         v.validates_confirmation_of :password
         v.validates_length_of       :password, allow_blank: true,
-                                               within: Devise.password_length
+          within: Devise::password_length
       end
 
       before_validation :set_lock_information
@@ -39,8 +39,8 @@ module EnjuSeed
       strip_attributes only: :email, allow_empty: true
 
       attr_accessor :password_not_verified,
-                    :update_own_account, :auto_generated_password,
-                    :locked, :current_password # , :agent_id
+        :update_own_account, :auto_generated_password,
+        :locked, :current_password #, :agent_id
 
       paginates_per 10
 
@@ -51,13 +51,13 @@ module EnjuSeed
       # 有効期限切れのユーザを一括で使用不可にします。
       def self.lock_expired_users
         User.find_each do |user|
-          user.lock_access! if user.expired? && user.active_for_authentication?
+          user.lock_access! if user.expired? and user.active_for_authentication?
         end
       end
 
       # ユーザの情報をエクスポートします。
       # @param [Hash] options
-      def self.export(options = { format: :txt })
+      def self.export(options = {format: :txt})
         header = %w(
           username
           full_name
@@ -76,16 +76,14 @@ module EnjuSeed
           keyword_list
           note
         )
-        if defined? EnjuCirculation
-          header += %w(
-            checkout_icalendar_token
-            save_checkout_history
-          )
-        end
-        header << 'save_search_history' if defined? EnjuSearchLog
-        header << 'share_bookmarks' if defined? EnjuBookmark
+        header += %w(
+          checkout_icalendar_token
+          save_checkout_history
+        ) if defined? EnjuCirculation
+        header << "save_search_history" if defined? EnjuSearchLog
+        header << "share_bookmarks" if defined? EnjuBookmark
         lines = []
-        User.find_each.map do |u|
+        User.find_each.map{|u|
           line = []
           line << u.username
           line << u.try(:profile).try(:full_name)
@@ -101,7 +99,7 @@ module EnjuSeed
           line << u.created_at
           line << u.updated_at
           line << u.try(:profile).try(:expired_at)
-          line << u.try(:profile).try(:keyword_list).try(:split).try(:join, '//')
+          line << u.try(:profile).try(:keyword_list).try(:split).try(:join, "//")
           line << u.try(:profile).try(:note)
           if defined? EnjuCirculation
             line << u.try(:profile).try(:checkout_icalendar_token)
@@ -110,11 +108,13 @@ module EnjuSeed
           if defined? EnjuSearchLog
             line << u.try(:profile).try(:save_search_history)
           end
-          line << u.try(:profile).try(:share_bookmarks) if defined? EnjuBookmark
+          if defined? EnjuBookmark
+            line << u.try(:profile).try(:share_bookmarks)
+          end
           lines << line
-        end
+        }
         if options[:format] == :txt
-          lines.map { |line| line.to_csv(col_sep: "\t") }.unshift(header.to_csv(col_sep: "\t")).join
+          lines.map{|line| line.to_csv(col_sep: "\t")}.unshift(header.to_csv(col_sep: "\t")).join
         else
           lines
         end
@@ -147,9 +147,9 @@ module EnjuSeed
 
     # ユーザに使用不可の設定を反映させます。
     def set_lock_information
-      if (locked == '1') && active_for_authentication?
+      if locked == '1' and self.active_for_authentication?
         lock_access!
-      elsif (locked == '0') && !active_for_authentication?
+      elsif locked == '0' and !self.active_for_authentication?
         unlock_access!
       end
     end
@@ -237,7 +237,9 @@ module EnjuSeed
           errors[:base] << I18n.t('user.only_administrator_can_destroy')
         end
         # 最後の図書館員を削除しようとした
-        errors[:base] << I18n.t('user.last_librarian') if last_librarian?
+        if last_librarian?
+          errors[:base] << I18n.t('user.last_librarian')
+        end
       end
 
       # 最後の管理者を削除しようとした
@@ -255,6 +257,7 @@ module EnjuSeed
     end
   end
 end
+
 
 # == Schema Information
 #
@@ -300,3 +303,4 @@ end
 #  save_search_history      :boolean
 #  answer_feed_token        :string(255)
 #
+
