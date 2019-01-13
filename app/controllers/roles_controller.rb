@@ -39,14 +39,13 @@ class RolesController < ApplicationController
         format.html { redirect_to @role, notice: t('controller.successfully_updated', model: t('activerecord.models.role')) }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render action: "edit" }
         format.json { render json: @role.errors, status: :unprocessable_entity }
       end
     end
   end
 
   private
-
   def set_role
     @role = Role.find(params[:id])
     authorize @role

@@ -1,2 +1,10 @@
+inherit_from: .rubocop_todo.yml
+
 Rails:
   Enabled: true
+AllCops:
+  TargetRubyVersion: 2.2
+Rails:
+  Enabled: true
+Style/StringLiterals:
+  Enabled: false

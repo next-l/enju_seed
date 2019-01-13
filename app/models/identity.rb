@@ -1,6 +1,6 @@
 class Identity < ActiveRecord::Base
   belongs_to :profile
-  validates :name, presence: true, uniqueness: { scope: :provider }
+  validates :name, presence: true, uniqueness: {scope: :provider}
   validates :provider, presence: true
 
   def self.find_for_oauth(auth)
@@ -19,5 +19,5 @@ end
 #  profile_id      :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  provider        :string           not null
+#  provider        :string
 #

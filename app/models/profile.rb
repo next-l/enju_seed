@@ -1,18 +1,19 @@
 class Profile < ActiveRecord::Base
   scope :administrators, -> { joins(user: :role).where('roles.name = ?', 'Administrator') }
   scope :librarians, -> { joins(user: :role).where('roles.name = ? OR roles.name = ?', 'Administrator', 'Librarian') }
-  has_one :user
-  belongs_to :library, validate: true
+  belongs_to :user, dependent: :destroy, optional: true
+  belongs_to :library
   belongs_to :user_group
-  belongs_to :required_role, class_name: 'Role', foreign_key: 'required_role_id' # , validate: true
+  belongs_to :required_role, class_name: 'Role', foreign_key: 'required_role_id' #, validate: true
   has_many :identities
   has_many :agents
   accepts_nested_attributes_for :identities, allow_destroy: true, reject_if: :all_blank
 
   validates_associated :user_group, :library
-  validates_associated :user
-  validates :user_group, :library, :locale, presence: true # , :user_number
+  validates :user, uniqueness: true, associated: true, allow_blank: true
+  validates_presence_of :user_group, :library, :locale #, :user_number
   validates :user_number, uniqueness: true, format: { with: /\A[0-9A-Za-z_]+\z/ }, allow_blank: true
+  validates :user_id, uniqueness: true, allow_blank: true
   validates :birth_date, format: { with: /\A\d{4}-\d{1,2}-\d{1,2}\z/ }, allow_blank: true
 
   strip_attributes only: :user_number
@@ -76,17 +77,18 @@ end
 #
 # Table name: profiles
 #
-#  id                       :uuid             not null, primary key
-#  user_group_id            :uuid
-#  library_id               :uuid
+#  id                       :integer          not null, primary key
+#  user_id                  :integer
+#  user_group_id            :integer
+#  library_id               :integer
 #  locale                   :string
 #  user_number              :string
 #  full_name                :text
 #  note                     :text
 #  keyword_list             :text
 #  required_role_id         :integer
-#  created_at               :datetime         not null
-#  updated_at               :datetime         not null
+#  created_at               :datetime
+#  updated_at               :datetime
 #  checkout_icalendar_token :string
 #  save_checkout_history    :boolean          default(FALSE), not null
 #  expired_at               :datetime

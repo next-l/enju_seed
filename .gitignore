@@ -2,6 +2,16 @@
 log/*.log
 pkg/
 spec/dummy/db/*.sqlite3
+<<<<<<< HEAD
 spec/dummy/db/*.sqlite3-journal
 spec/dummy/log/*.log
 spec/dummy/tmp/
+=======
+spec/dummy/log/*.log
+spec/dummy/tmp/
+spec/dummy/.sass-cache
+db/*.sqlite3
+tmp/
+solr/data/*
+coverage/
+>>>>>>> 1.4

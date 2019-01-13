@@ -1,7 +1,8 @@
+# -*- encoding: utf-8 -*-
 require 'rails_helper'
 
 describe User do
-  # pending "add some examples to (or delete) #{__FILE__}"
+  #pending "add some examples to (or delete) #{__FILE__}"
   fixtures :all
 
   it 'should create an user' do
@@ -47,12 +48,12 @@ describe User do
     user.active_for_authentication?.should be_truthy
   end
 
-  it 'should create user' do
+  it "should create user" do
     user = FactoryBot.create(:user)
-    assert !user.new_record?, user.errors.full_messages.to_sentence.to_s
+    assert !user.new_record?, "#{user.errors.full_messages.to_sentence}"
   end
 
-  it 'should require username' do
+  it "should require username" do
     old_count = User.count
     user = FactoryBot.build(:user, username: nil)
     user.save
@@ -60,26 +61,26 @@ describe User do
     User.count.should eq old_count
   end
 
-  it 'should require password' do
+  it "should require password" do
     user = FactoryBot.build(:user, password: nil)
     user.save
     user.errors[:password].should be_truthy
   end
 
-  it 'should not require password_confirmation on create' do
+  it "should not require password_confirmation on create" do
     user = FactoryBot.build(:user, password: 'new_password', password_confirmation: nil)
     user.save
     user.errors[:email].should be_empty
   end
 
-  it 'should reset password' do
+  it "should reset password" do
     users(:user1).password = 'new password'
     users(:user1).password_confirmation = 'new password'
     users(:user1).save
     users(:user1).valid_password?('new password').should be_truthy
   end
 
-  it 'should set temporary_password' do
+  it "should set temporary_password" do
     user = users(:user1)
     old_password = user.encrypted_password
     user.set_auto_generated_password
@@ -88,16 +89,16 @@ describe User do
     user.valid_password?('user1password').should be_falsy
   end
 
-  it 'should get highest_role' do
+  it "should get highest_role" do
     users(:admin).role.name.should eq 'Administrator'
   end
 
-  it 'should lock all expired users' do
+  it "should lock all expired users" do
     User.lock_expired_users
     users(:user4).active_for_authentication?.should be_falsy
   end
 
-  it 'should lock_expired users' do
+  it "should lock_expired users" do
     user = users(:user1)
     users(:user1).active_for_authentication?.should be_truthy
     user.expired_at = 1.day.ago
@@ -106,18 +107,18 @@ describe User do
   end
 
   if defined?(EnjuQuestion)
-    it 'should reset answer_feed_token' do
+    it "should reset answer_feed_token" do
       users(:user1).reset_answer_feed_token
       users(:user1).answer_feed_token.should be_truthy
     end
 
-    it 'should delete answer_feed_token' do
+    it "should delete answer_feed_token" do
       users(:user1).delete_answer_feed_token
       users(:user1).answer_feed_token.should be_nil
     end
   end
 
-  describe '.export' do
+  describe ".export" do
     it "should export all user's information" do
       lines = User.export
       CSV.parse(lines, col_sep: "\t")
@@ -171,3 +172,4 @@ end
 #  save_search_history      :boolean         default(FALSE), not null
 #  answer_feed_token        :string(255)
 #
+

@@ -17,7 +17,7 @@ class ProfilesController < ApplicationController
     @query = query.dup
     @count = {}
 
-    sort = { sort_by: 'created_at', order: 'desc' }
+    sort = {sort_by: 'created_at', order: 'desc'}
     case params[:sort_by]
     when 'username'
       sort[:sort_by] = 'username'
@@ -87,7 +87,7 @@ class ProfilesController < ApplicationController
         else
           @profile.reset_checkout_icalendar_token
         end
-        render partial: 'feed_token', locals: { profile: @profile }
+        render partial: 'feed_token', locals: {profile: @profile}
         return
       end
     end
@@ -95,7 +95,9 @@ class ProfilesController < ApplicationController
       redirect_to edit_my_account_url
       return
     end
-    @profile.user.locked = true if @profile.user.try(:locked_at?)
+    if @profile.user.try(:locked_at?)
+      @profile.user.locked = true
+    end
   end
 
   # POST /profiles
@@ -103,7 +105,9 @@ class ProfilesController < ApplicationController
   def create
     if current_user.has_role?('Librarian')
       @profile = Profile.new(profile_params)
-      password = @profile.user.set_auto_generated_password if @profile.user
+      if @profile.user
+        password = @profile.user.set_auto_generated_password
+      end
     else
       @profile = Profile.new(profile_params)
     end
@@ -118,7 +122,7 @@ class ProfilesController < ApplicationController
         format.json { render json: @profile, status: :created, location: @profile }
       else
         prepare_options
-        format.html { render action: 'new' }
+        format.html { render action: "new" }
         format.json { render json: @profile.errors, status: :unprocessable_entity }
       end
     end
@@ -129,7 +133,7 @@ class ProfilesController < ApplicationController
   def update
     @profile.update_attributes(profile_update_params)
     if @profile.user
-      if @profile.user.auto_generated_password == '1'
+      if @profile.user.auto_generated_password == "1"
         password = @profile.user.set_auto_generated_password
       end
     end
@@ -141,7 +145,7 @@ class ProfilesController < ApplicationController
         format.json { head :no_content }
       else
         prepare_options
-        format.html { render action: 'edit' }
+        format.html { render action: "edit" }
         format.json { render json: @profile.errors, status: :unprocessable_entity }
       end
     end
@@ -159,7 +163,6 @@ class ProfilesController < ApplicationController
   end
 
   private
-
   def set_profile
     @profile = Profile.find(params[:id])
     authorize @profile
@@ -176,17 +179,15 @@ class ProfilesController < ApplicationController
       :save_checkout_history, :checkout_icalendar_token, # EnjuCirculation
       :save_search_history, # EnjuSearchLog
     ]
-    if current_user.has_role?('Librarian')
-      attrs += [
-        :library_id, :expired_at, :birth_date,
-        :user_group_id, :required_role_id, :note, :user_number, {
-          user_attributes: [
-            :id, :username, :email, :current_password, :locked,
-            { user_has_role_attributes: [:id, :role_id] }
-          ]
-        }
-      ]
-    end
+    attrs += [
+      :library_id, :expired_at, :birth_date,
+      :user_group_id, :required_role_id, :note, :user_number, {
+        user_attributes: [
+          :id, :username, :email, :current_password, :locked,
+          {user_has_role_attributes: [:id, :role_id]}
+        ]
+      }
+    ] if current_user.has_role?('Librarian')
     params.require(:profile).permit(*attrs)
   end
 
@@ -197,17 +198,15 @@ class ProfilesController < ApplicationController
       :save_checkout_history, :checkout_icalendar_token, # EnjuCirculation
       :save_search_history, # EnjuSearchLog
     ]
-    if current_user.has_role?('Librarian')
-      attrs += [
-        :library_id, :expired_at, :birth_date,
-        :user_group_id, :required_role_id, :note, :user_number, {
-          user_attributes: [
-            :id, :email, :current_password, :auto_generated_password, :locked,
-            { user_has_role_attributes: [:id, :role_id] }
-          ]
-        }
-      ]
-    end
+    attrs += [
+      :library_id, :expired_at, :birth_date,
+      :user_group_id, :required_role_id, :note, :user_number, {
+        user_attributes: [
+          :id, :email, :current_password, :auto_generated_password, :locked,
+          {user_has_role_attributes: [:id, :role_id]}
+        ]
+      }
+    ] if current_user.has_role?('Librarian')
     params.require(:profile).permit(*attrs)
   end
 
