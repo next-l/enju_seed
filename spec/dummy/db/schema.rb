@@ -415,11 +415,11 @@ ActiveRecord::Schema.define(version: 2018_10_26_064038) do
     t.index ["manifestation_id"], name: "index_identifiers_on_manifestation_id"
   end
 
-  create_table "identities", id: :serial, force: :cascade do |t|
+  create_table "identities", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
-    t.integer "profile_id"
+    t.bigint "profile_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "provider"
@@ -844,18 +844,18 @@ ActiveRecord::Schema.define(version: 2018_10_26_064038) do
     t.index ["manifestation_id"], name: "index_produces_on_manifestation_id"
   end
 
-  create_table "profiles", id: :serial, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "user_group_id"
-    t.integer "library_id"
+  create_table "profiles", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "user_group_id"
+    t.bigint "library_id"
     t.string "locale"
     t.string "user_number"
     t.text "full_name"
     t.text "note"
     t.text "keyword_list"
-    t.integer "required_role_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.bigint "required_role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "checkout_icalendar_token"
     t.boolean "save_checkout_history", default: false, null: false
     t.datetime "expired_at"
@@ -1030,7 +1030,7 @@ ActiveRecord::Schema.define(version: 2018_10_26_064038) do
     t.index ["resource_import_file_id"], name: "index_resource_import_results_on_resource_import_file_id"
   end
 
-  create_table "roles", id: :serial, force: :cascade do |t|
+  create_table "roles", force: :cascade do |t|
     t.string "name", null: false
     t.string "display_name"
     t.text "note"
@@ -1223,11 +1223,11 @@ ActiveRecord::Schema.define(version: 2018_10_26_064038) do
     t.integer "number_of_time_to_notify_overdue", default: 3, null: false
   end
 
-  create_table "user_has_roles", id: :serial, force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "role_id", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "user_has_roles", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "role_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["role_id"], name: "index_user_has_roles_on_role_id"
     t.index ["user_id"], name: "index_user_has_roles_on_user_id"
   end
