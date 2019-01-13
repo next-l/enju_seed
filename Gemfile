@@ -14,4 +14,5 @@ gem 'jquery-rails'
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
-gem 'rails-controller-testing'
+gem 'rails-controller-testing', group: :test
+gem 'rspec_junit_formatter', group: :test
