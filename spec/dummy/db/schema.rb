@@ -1032,12 +1032,12 @@ ActiveRecord::Schema.define(version: 2018_10_26_064038) do
 
   create_table "roles", force: :cascade do |t|
     t.string "name", null: false
-    t.string "display_name"
+    t.jsonb "display_name", default: {}, null: false
     t.text "note"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer "score", default: 0, null: false
     t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "search_engines", id: :serial, force: :cascade do |t|
@@ -1312,7 +1312,6 @@ ActiveRecord::Schema.define(version: 2018_10_26_064038) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "username"
-    t.datetime "deleted_at"
     t.datetime "expired_at"
     t.integer "failed_attempts", default: 0
     t.string "unlock_token"

@@ -41,10 +41,10 @@ end
 #
 #  id           :bigint(8)        not null, primary key
 #  name         :string           not null
-#  display_name :string
+#  display_name :jsonb            not null
 #  note         :text
-#  created_at   :datetime
-#  updated_at   :datetime
 #  score        :integer          default(0), not null
 #  position     :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #
