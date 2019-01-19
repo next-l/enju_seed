@@ -86,7 +86,7 @@ end
 #  full_name                :text
 #  note                     :text
 #  keyword_list             :text
-#  required_role_id         :bigint(8)
+#  required_role_id         :bigint(8)        not null
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  checkout_icalendar_token :string
