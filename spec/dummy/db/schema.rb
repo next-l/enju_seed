@@ -902,7 +902,6 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.bigint "user_id"
     t.bigint "user_group_id"
     t.bigint "library_id"
     t.string "locale"
@@ -921,7 +920,6 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.index ["checkout_icalendar_token"], name: "index_profiles_on_checkout_icalendar_token", unique: true
     t.index ["library_id"], name: "index_profiles_on_library_id"
     t.index ["user_group_id"], name: "index_profiles_on_user_group_id"
-    t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "realize_types", force: :cascade do |t|
@@ -1378,7 +1376,9 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.datetime "confirmed_at"
+    t.bigint "profile_id"
     t.index ["email"], name: "index_users_on_email"
+    t.index ["profile_id"], name: "index_users_on_profile_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
@@ -1417,7 +1417,6 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   add_foreign_key "library_groups", "users"
   add_foreign_key "manifestation_relationships", "manifestations", column: "child_id"
   add_foreign_key "manifestation_relationships", "manifestations", column: "parent_id"
-  add_foreign_key "profiles", "users"
   add_foreign_key "reserves", "manifestations"
   add_foreign_key "resource_export_files", "users"
   add_foreign_key "resource_import_files", "users"
@@ -1429,4 +1428,5 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   add_foreign_key "subscribes", "subscriptions"
   add_foreign_key "user_has_roles", "roles"
   add_foreign_key "user_has_roles", "users"
+  add_foreign_key "users", "profiles", on_delete: :cascade
 end

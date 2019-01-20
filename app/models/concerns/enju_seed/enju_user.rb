@@ -6,7 +6,7 @@ module EnjuSeed
       scope :administrators, -> { joins(:role).where('roles.name = ?', 'Administrator') }
       scope :librarians, -> { joins(:role).where('roles.name = ? OR roles.name = ?', 'Administrator', 'Librarian') }
       scope :suspended, -> { where('locked_at IS NOT NULL') }
-      has_one :profile
+      belongs_to :profile
       if defined?(EnjuBiblio)
         has_many :import_requests
         has_many :picture_files, as: :picture_attachable, dependent: :destroy
@@ -176,8 +176,8 @@ module EnjuSeed
     # @return [Object]
     def check_role_before_destroy
       if has_role?('Administrator')
-        if Role.where(name: 'Administrator').first.users.count == 1
-          raise username + 'This is the last administrator in this system.'
+        if User.administrators.count == 1
+          raise "#{username}: This is the last administrator in this system." if User.administrators.first.username == username
         end
       end
     end
