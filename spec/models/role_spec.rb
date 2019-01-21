@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 require 'spec_helper'
 
 describe Role do
@@ -17,7 +16,7 @@ describe Role do
   end
 
   it "should respond to localized_name" do
-    roles(:role_00001).localized_name.should eq 'Guest'
+    roles(:role_00001).display_name.should eq 'Guest'
   end
 
   it "should respond to default_role" do
