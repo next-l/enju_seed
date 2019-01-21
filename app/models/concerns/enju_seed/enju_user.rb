@@ -7,10 +7,6 @@ module EnjuSeed
       scope :librarians, -> { joins(:role).where('roles.name = ? OR roles.name = ?', 'Administrator', 'Librarian') }
       scope :suspended, -> { where('locked_at IS NOT NULL') }
       belongs_to :profile
-      if defined?(EnjuBiblio)
-        has_many :import_requests
-        has_many :picture_files, as: :picture_attachable, dependent: :destroy
-      end
       has_one :user_has_role, dependent: :destroy
       has_one :role, through: :user_has_role
       accepts_nested_attributes_for :user_has_role
