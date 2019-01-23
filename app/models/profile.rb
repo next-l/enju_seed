@@ -77,7 +77,7 @@ end
 # Table name: profiles
 #
 #  id                       :uuid             not null, primary key
-#  user_group_id            :bigint(8)
+#  user_group_id            :uuid             not null
 #  library_id               :bigint(8)
 #  locale                   :string
 #  user_number              :string

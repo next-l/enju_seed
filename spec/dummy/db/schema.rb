@@ -902,7 +902,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   end
 
   create_table "profiles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.bigint "user_group_id"
+    t.uuid "user_group_id", null: false
     t.bigint "library_id"
     t.string "locale"
     t.string "user_number"
@@ -1222,7 +1222,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "user_export_file_transitions", force: :cascade do |t|
     t.string "to_state"
-    t.text "metadata", default: "{}"
+    t.jsonb "metadata", default: {}
     t.integer "sort_key"
     t.bigint "user_export_file_id"
     t.datetime "created_at", null: false
@@ -1230,7 +1230,6 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.boolean "most_recent", null: false
     t.index ["sort_key", "user_export_file_id"], name: "index_user_export_file_transitions_on_sort_key_and_file_id", unique: true
     t.index ["user_export_file_id", "most_recent"], name: "index_user_export_file_transitions_parent_most_recent", unique: true, where: "most_recent"
-    t.index ["user_export_file_id"], name: "index_user_export_file_transitions_on_file_id"
     t.index ["user_export_file_id"], name: "index_user_export_file_transitions_on_user_export_file_id"
   end
 
@@ -1265,8 +1264,8 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.index ["user_group_id"], name: "index_user_group_has_checkout_types_on_user_group_id"
   end
 
-  create_table "user_groups", force: :cascade do |t|
-    t.string "name"
+  create_table "user_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
     t.jsonb "display_name", default: {}, null: false
     t.text "note"
     t.integer "position", default: 1, null: false
@@ -1290,7 +1289,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "user_import_file_transitions", force: :cascade do |t|
     t.string "to_state"
-    t.text "metadata", default: "{}"
+    t.jsonb "metadata", default: {}
     t.integer "sort_key"
     t.bigint "user_import_file_id"
     t.datetime "created_at", null: false
@@ -1424,7 +1423,6 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   add_foreign_key "series_statement_merges", "series_statement_merge_lists"
   add_foreign_key "series_statement_merges", "series_statements"
   add_foreign_key "series_statements", "manifestations"
-  add_foreign_key "subscribes", "manifestations", column: "work_id"
   add_foreign_key "subscribes", "subscriptions"
   add_foreign_key "user_has_roles", "roles"
   add_foreign_key "user_has_roles", "users"
