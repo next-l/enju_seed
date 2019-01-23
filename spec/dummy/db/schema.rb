@@ -1092,10 +1092,10 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.string "name", null: false
     t.jsonb "display_name", default: {}, null: false
     t.text "note"
-    t.integer "score", default: 0, null: false
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_roles_on_name", unique: true
   end
 
   create_table "search_engines", force: :cascade do |t|
