@@ -78,7 +78,7 @@ end
 #
 #  id                       :uuid             not null, primary key
 #  user_group_id            :uuid             not null
-#  library_id               :bigint(8)
+#  library_id               :uuid
 #  locale                   :string
 #  user_number              :string
 #  full_name                :text
