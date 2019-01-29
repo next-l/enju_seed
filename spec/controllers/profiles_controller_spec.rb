@@ -394,23 +394,23 @@ describe ProfilesController do
       end
 
       it "should update other user" do
-        put :update, params: { id: profiles(:user1).id, profile: { user_number: '00003', locale: 'en', user_group_id: user_groups(:user_group_00003).id, library_id: 3, note: 'test' } }
+        put :update, params: { id: profiles(:user1).id, profile: { user_number: '00003', locale: 'en', user_group_id: user_groups(:user_group_00003).id, library_id: libraries(:library_00003).id, note: 'test' } }
         response.should redirect_to profile_url(assigns(:profile))
       end
 
       it "should not update other admin" do
-        put :update, params: { id: profiles(:admin).id, profile: { user_number: '00003', locale: 'en', user_group_id: user_groups(:user_group_00003).id, library_id: 3, note: 'test' } }
+        put :update, params: { id: profiles(:admin).id, profile: { user_number: '00003', locale: 'en', user_group_id: user_groups(:user_group_00003).id, library_id: libraries(:library_00003).id, note: 'test' } }
         response.should be_forbidden
       end
 
       it "should update other user's user_group" do
-        put :update, params: { id: profiles(:user1).id, profile: { user_number: '00003', locale: 'en', user_group_id: user_groups(:user_group_00003).id, library_id: 3, note: 'test' } }
+        put :update, params: { id: profiles(:user1).id, profile: { user_number: '00003', locale: 'en', user_group_id: user_groups(:user_group_00003).id, library_id: libraries(:library_00003).id, note: 'test' } }
         response.should redirect_to profile_url(assigns(:profile))
         assigns(:profile).user_group_id.should eq user_groups(:user_group_00003).id
       end
 
       it "should update other user's note" do
-        put :update, params: { id: profiles(:user1).id, profile: { user_number: '00003', locale: 'en', user_group_id: user_groups(:user_group_00003).id, library_id: 3, note: 'test' } }
+        put :update, params: { id: profiles(:user1).id, profile: { user_number: '00003', locale: 'en', user_group_id: user_groups(:user_group_00003).id, library_id: libraries(:library_00003).id, note: 'test' } }
         response.should redirect_to profile_url(assigns(:profile))
         assert_equal assigns(:profile).note, 'test'
       end
@@ -460,13 +460,13 @@ describe ProfilesController do
       end
 
       it "should not update my user_group" do
-        put :update, params: { id: profiles(:user1).id, profile: { user_group_id: user_groups(:user_group_00003), library_id: 3 } }
+        put :update, params: { id: profiles(:user1).id, profile: { user_group_id: user_groups(:user_group_00003), library_id: libraries(:library_00003).id } }
         response.should redirect_to profile_url(assigns(:profile))
         assigns(:profile).user_group_id.should eq user_groups(:user_group_00001).id
       end
 
       it "should not update my note" do
-        put :update, params: { id: profiles(:user1).id, profile: { user_group_id: user_groups(:user_group_00003), library_id: 3, note: 'test' } }
+        put :update, params: { id: profiles(:user1).id, profile: { user_group_id: user_groups(:user_group_00003), library_id: libraries(:library_00003).id, note: 'test' } }
         response.should redirect_to profile_url(assigns(:profile))
         assigns(:profile).note.should be_nil
       end
