@@ -191,7 +191,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "budget_types", force: :cascade do |t|
     t.string "name", null: false
-    t.jsonb "display_name", default: {}, null: false
+    t.text "display_name", null: false
     t.text "note"
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
@@ -475,7 +475,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "libraries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
-    t.jsonb "display_name", default: {}, null: false
+    t.jsonb "display_name_translations", default: {}, null: false
     t.string "short_display_name", null: false
     t.string "zip_code"
     t.text "street"
@@ -504,7 +504,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "library_groups", force: :cascade do |t|
     t.string "name", null: false
-    t.jsonb "display_name", default: {}, null: false
+    t.jsonb "display_name_translations", default: {}, null: false
     t.string "short_name", null: false
     t.text "my_networks"
     t.text "old_login_banner"
@@ -786,7 +786,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "request_status_types", force: :cascade do |t|
     t.string "name", null: false
-    t.jsonb "display_name", default: {}, null: false
+    t.jsonb "display_name_translations", default: {}, null: false
     t.text "note"
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
@@ -795,7 +795,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "request_types", force: :cascade do |t|
     t.string "name", null: false
-    t.jsonb "display_name", default: {}, null: false
+    t.jsonb "display_name_translations", default: {}, null: false
     t.text "note"
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
@@ -872,7 +872,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "roles", force: :cascade do |t|
     t.string "name", null: false
-    t.jsonb "display_name", default: {}, null: false
+    t.text "display_name", null: false
     t.text "note"
     t.integer "position"
     t.datetime "created_at", null: false
@@ -882,7 +882,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "search_engines", force: :cascade do |t|
     t.string "name", null: false
-    t.jsonb "display_name", default: {}, null: false
+    t.jsonb "display_name_translations", default: {}, null: false
     t.string "url", null: false
     t.text "base_url", null: false
     t.text "http_method", null: false
@@ -935,7 +935,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "shelves", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
-    t.jsonb "display_name", default: {}, null: false
+    t.jsonb "display_name_translations", default: {}, null: false
     t.text "note"
     t.uuid "library_id", null: false
     t.integer "items_count", default: 0, null: false
@@ -992,7 +992,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "user_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
-    t.jsonb "display_name", default: {}, null: false
+    t.jsonb "display_name_translations", default: {}, null: false
     t.text "note"
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false

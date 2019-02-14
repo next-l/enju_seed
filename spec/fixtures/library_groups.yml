@@ -2,7 +2,7 @@
 one:
   id: 1
   name: enju_library
-  display_name: {"en": "Enju Library", "ja": "えんじゅ図書館"}
+  display_name_translations: {"en": "Enju Library", "ja": "えんじゅ図書館"}
   short_name: enju_library
   note: 
   my_networks: "0.0.0.0/0\r\n\
@@ -24,7 +24,7 @@ one:
 #
 #  id                            :bigint(8)        not null, primary key
 #  name                          :string           not null
-#  display_name                  :jsonb            not null
+#  display_name_translations                  :jsonb            not null
 #  short_name                    :string           not null
 #  my_networks                   :text
 #  old_login_banner              :text
