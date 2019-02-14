@@ -872,7 +872,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "roles", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name", null: false
+    t.jsonb "display_name_translations", default: {}, null: false
     t.text "note"
     t.integer "position"
     t.datetime "created_at", null: false

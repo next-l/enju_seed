@@ -3,6 +3,7 @@ class Role < ActiveRecord::Base
   validates :name, presence: true, format: { with: /\A[A-Za-z][a-z_,]*[a-z]\z/ }
   has_many :user_has_roles
   has_many :users, through: :user_has_roles
+  translates :display_name
 
   extend FriendlyId
   friendly_id :name
@@ -21,11 +22,11 @@ end
 #
 # Table name: roles
 #
-#  id           :bigint(8)        not null, primary key
-#  name         :string           not null
-#  display_name :jsonb            not null
-#  note         :text
-#  position     :integer
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id                        :bigint(8)        not null, primary key
+#  name                      :string           not null
+#  display_name_translations :jsonb            not null
+#  note                      :text
+#  position                  :integer
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
 #
