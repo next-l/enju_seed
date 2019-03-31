@@ -12,6 +12,7 @@ require 'rails_autolink'
 require 'browser'
 require 'simple_form'
 require 'validates_timeliness'
+require 'json_translate'
 
 module EnjuSeed
   class Engine < ::Rails::Engine

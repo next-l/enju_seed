@@ -14,7 +14,6 @@ gem 'jquery-rails'
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
-gem 'json_translate'
 gem 'enju_leaf', github: 'next-l/enju_leaf'
 gem 'enju_library', github: 'next-l/enju_library'
 gem 'enju_biblio', github: 'next-l/enju_biblio'
