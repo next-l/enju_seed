@@ -1,35 +1,25 @@
 language: ruby
 cache: bundler
 rvm:
+  - 2.3.8
   - 2.4.6
-  - 2.5.5
 before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-  - psql -c 'CREATE DATABASE enju_seed_dummy_test'
-  - psql enju_seed_dummy_test -c 'CREATE EXTENSION pgcrypto'
+  - mysql -e 'create database enju_test DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;'
+  - psql -c 'create database enju_test;' -U postgres
   - bundle exec rake db:migrate
-script:
-  - bundle exec rspec
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 services:
   - redis-server
-  - postgresql
+env:
+  - DB=sqlite
+  - DB=mysql
+  - DB=postgresql
 notifications:
   slack:
     secure: KnXsfukes8MbLEx1y74t5q7U2bzH4QkhaV1PRBTPFttaJkdFOVzID+z4h2WyJj1jBNzieVEpXV+zvsmR86BBExoG6O9rDbuRmPE/7cqc3yZqb/49VU9XSrwYcTdPyvWpAIP0barZjBvxC5Pjka5kS3ZV6ztYQ/Jl1pqeiWQYwTc=
 sudo: false
 addons:
-  postgresql: "10"
   apt:
     sources:
       - google-chrome
     packages:
-    - postgresql-10
-    - postgresql-client-10
-    - google-chrome-stable
-jdk:
-  - openjdk8
-dist: xenial
+      - google-chrome-stable
