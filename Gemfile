@@ -14,5 +14,12 @@ gem 'jquery-rails'
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
-gem 'rails-controller-testing', group: :test
-gem 'rspec_junit_formatter', group: :test
+gem 'enju_leaf', github: 'next-l/enju_leaf'
+gem 'enju_library', github: 'next-l/enju_library'
+gem 'enju_biblio', github: 'next-l/enju_biblio'
+gem 'sassc-rails'
+group :test do
+  gem 'rails-controller-testing'
+  gem 'rspec_junit_formatter'
+  gem 'webdrivers'
+end
