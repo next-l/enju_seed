@@ -123,7 +123,7 @@ describe ProfilesController do
     describe "When not logged in" do
       it "assigns the requested user as @profile" do
         get :show, params: { id: profiles(:admin).id }
-        assigns(:profile).should eq(profiles(:admin))
+        assigns(:profile).should eq nil
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -228,7 +228,7 @@ describe ProfilesController do
       it "should not assign the requested user as @profile" do
         profile = FactoryBot.create(:profile)
         get :edit, params: { id: profile.id }
-        assigns(:profile).should eq(profile)
+        assigns(:profile).should eq nil
         response.should redirect_to(new_user_session_url)
       end
     end
