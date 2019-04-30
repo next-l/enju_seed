@@ -5,7 +5,7 @@ describe "profiles/show" do
 
   before(:each) do
     @profile = assign(:profile, profiles(:admin))
-    view.stub(:current_user).and_return(User.friendly.find('enjuadmin'))
+    view.stub(:current_user).and_return(User.find_by(username: 'enjuadmin'))
   end
 
   describe "when logged in as Librarian" do

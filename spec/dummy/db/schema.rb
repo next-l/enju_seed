@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180102162311) do
+ActiveRecord::Schema.define(version: 2018_01_02_162311) do
 
   create_table "accepts", force: :cascade do |t|
     t.integer "basket_id"
@@ -1233,8 +1233,7 @@ ActiveRecord::Schema.define(version: 20180102162311) do
     t.integer "role_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["role_id"], name: "index_user_has_roles_on_role_id"
-    t.index ["user_id"], name: "index_user_has_roles_on_user_id"
+    t.index ["user_id", "role_id"], name: "index_user_has_roles_on_user_id_and_role_id", unique: true
   end
 
   create_table "user_import_file_transitions", force: :cascade do |t|
