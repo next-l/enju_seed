@@ -16,6 +16,7 @@ after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 services:
   - redis-server
+  - postgresql
 notifications:
   slack:
     secure: KnXsfukes8MbLEx1y74t5q7U2bzH4QkhaV1PRBTPFttaJkdFOVzID+z4h2WyJj1jBNzieVEpXV+zvsmR86BBExoG6O9rDbuRmPE/7cqc3yZqb/49VU9XSrwYcTdPyvWpAIP0barZjBvxC5Pjka5kS3ZV6ztYQ/Jl1pqeiWQYwTc=
