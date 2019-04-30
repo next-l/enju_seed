@@ -75,15 +75,15 @@ end
 #
 # Table name: profiles
 #
-#  id                      :bigint(8)        not null, primary key
-#  user_group_id           :bigint(8)        not null
-#  library_id              :bigint(8)
+#  id                      :bigint           not null, primary key
+#  user_group_id           :bigint           not null
+#  library_id              :bigint
 #  locale                  :string
 #  user_number             :string
 #  full_name               :text
 #  note                    :text
 #  keyword_list            :text
-#  required_role_id        :bigint(8)        not null
+#  required_role_id        :bigint           not null
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  expired_at              :datetime
