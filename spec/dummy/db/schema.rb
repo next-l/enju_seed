@@ -10,15 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2019_03_14_151124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
-=======
-ActiveRecord::Schema.define(version: 2018_01_02_162311) do
->>>>>>> 5a60ac3... add unique index to user_has_roles table
 
   create_table "accepts", force: :cascade do |t|
     t.bigint "basket_id"
@@ -1015,7 +1011,6 @@ ActiveRecord::Schema.define(version: 2018_01_02_162311) do
   end
 
   create_table "user_has_roles", force: :cascade do |t|
-<<<<<<< HEAD
     t.bigint "user_id", null: false
     t.bigint "role_id", null: false
     t.datetime "created_at", null: false
@@ -1023,13 +1018,6 @@ ActiveRecord::Schema.define(version: 2018_01_02_162311) do
     t.index ["role_id"], name: "index_user_has_roles_on_role_id"
     t.index ["user_id", "role_id"], name: "index_user_has_roles_on_user_id_and_role_id", unique: true
     t.index ["user_id"], name: "index_user_has_roles_on_user_id"
-=======
-    t.integer "user_id", null: false
-    t.integer "role_id", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["user_id", "role_id"], name: "index_user_has_roles_on_user_id_and_role_id", unique: true
->>>>>>> 5a60ac3... add unique index to user_has_roles table
   end
 
   create_table "user_import_file_transitions", force: :cascade do |t|
