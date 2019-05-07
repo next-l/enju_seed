@@ -772,6 +772,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
     t.datetime "date_of_birth"
     t.index ["library_id"], name: "index_profiles_on_library_id"
     t.index ["user_group_id"], name: "index_profiles_on_user_group_id"
+    t.index ["user_number"], name: "index_profiles_on_user_number", unique: true
   end
 
   create_table "realize_types", force: :cascade do |t|
@@ -879,7 +880,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
     t.string "name", null: false
     t.jsonb "display_name_translations", default: {}, null: false
     t.text "note"
-    t.integer "position"
+    t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_roles_on_name", unique: true
