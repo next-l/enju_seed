@@ -76,8 +76,6 @@ end
 # Table name: profiles
 #
 #  id                      :bigint           not null, primary key
-#  user_group_id           :bigint           not null
-#  library_id              :bigint
 #  locale                  :string
 #  user_number             :string
 #  full_name               :text
@@ -89,4 +87,6 @@ end
 #  expired_at              :datetime
 #  full_name_transcription :text
 #  date_of_birth           :datetime
+#  user_group_id           :bigint           not null
+#  library_id              :bigint           not null
 #
