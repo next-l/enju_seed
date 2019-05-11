@@ -236,8 +236,8 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
 
   create_table "colors", force: :cascade do |t|
     t.bigint "library_group_id"
-    t.string "property"
-    t.string "code"
+    t.string "property", null: false
+    t.string "code", null: false
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1016,9 +1016,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
     t.bigint "role_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["role_id"], name: "index_user_has_roles_on_role_id"
     t.index ["user_id", "role_id"], name: "index_user_has_roles_on_user_id_and_role_id", unique: true
-    t.index ["user_id"], name: "index_user_has_roles_on_user_id"
   end
 
   create_table "user_import_file_transitions", force: :cascade do |t|
@@ -1045,8 +1043,6 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
     t.string "user_encoding"
     t.bigint "default_library_id"
     t.bigint "default_user_group_id"
-    t.index ["default_library_id"], name: "index_user_import_files_on_default_library_id"
-    t.index ["default_user_group_id"], name: "index_user_import_files_on_default_user_group_id"
     t.index ["user_id"], name: "index_user_import_files_on_user_id"
   end
 
