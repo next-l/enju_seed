@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.add_dependency "kramdown"
   s.add_dependency "browser", "~> 2.5"
   s.add_dependency "simple_form"
-  s.add_dependency "validates_timeliness", "~> 4.0"
+  s.add_dependency "validates_timeliness", "~> 5.0.0.alpha4"
   s.add_dependency "json_translate", "~> 4.0"
 
   s.add_development_dependency "enju_leaf", "~> 1.4.0.beta.1"
