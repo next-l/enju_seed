@@ -22,11 +22,13 @@ end
 #
 # Table name: roles
 #
-#  id                        :bigint           not null, primary key
+#  id                        :integer          not null, primary key
 #  name                      :string           not null
-#  display_name_translations :jsonb            not null
+#  display_name              :string
 #  note                      :text
-#  position                  :integer          default(1), not null
-#  created_at                :datetime         not null
-#  updated_at                :datetime         not null
+#  created_at                :datetime
+#  updated_at                :datetime
+#  score                     :integer          default(0), not null
+#  position                  :integer
+#  display_name_translations :jsonb            not null
 #

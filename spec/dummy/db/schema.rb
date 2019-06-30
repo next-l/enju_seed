@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_11_145706) do
+ActiveRecord::Schema.define(version: 2019_06_30_151446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -756,22 +756,24 @@ ActiveRecord::Schema.define(version: 2019_05_11_145706) do
     t.index ["manifestation_id"], name: "index_produces_on_manifestation_id"
   end
 
-  create_table "profiles", force: :cascade do |t|
+  create_table "profiles", id: :serial, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "user_group_id"
+    t.integer "library_id"
     t.string "locale"
     t.string "user_number"
     t.text "full_name"
     t.text "note"
     t.text "keyword_list"
-    t.bigint "required_role_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "required_role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.datetime "expired_at"
     t.text "full_name_transcription"
     t.datetime "date_of_birth"
-    t.bigint "user_group_id", null: false
-    t.bigint "library_id", null: false
     t.index ["library_id"], name: "index_profiles_on_library_id"
     t.index ["user_group_id"], name: "index_profiles_on_user_group_id"
+    t.index ["user_id"], name: "index_profiles_on_user_id"
     t.index ["user_number"], name: "index_profiles_on_user_number", unique: true
   end
 
@@ -876,14 +878,15 @@ ActiveRecord::Schema.define(version: 2019_05_11_145706) do
     t.index ["resource_import_file_id"], name: "index_resource_import_results_on_resource_import_file_id"
   end
 
-  create_table "roles", force: :cascade do |t|
+  create_table "roles", id: :serial, force: :cascade do |t|
     t.string "name", null: false
-    t.jsonb "display_name_translations", default: {}, null: false
+    t.string "display_name"
     t.text "note"
-    t.integer "position", default: 1, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_roles_on_name", unique: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer "score", default: 0, null: false
+    t.integer "position"
+    t.jsonb "display_name_translations", default: {}, null: false
   end
 
   create_table "search_engines", force: :cascade do |t|
@@ -1011,11 +1014,11 @@ ActiveRecord::Schema.define(version: 2019_05_11_145706) do
     t.index ["name"], name: "index_user_groups_on_name", unique: true
   end
 
-  create_table "user_has_roles", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "role_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "user_has_roles", id: :serial, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "role_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["user_id", "role_id"], name: "index_user_has_roles_on_user_id_and_role_id", unique: true
   end
 
@@ -1071,6 +1074,7 @@ ActiveRecord::Schema.define(version: 2019_05_11_145706) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "username"
+    t.datetime "deleted_at"
     t.datetime "expired_at"
     t.integer "failed_attempts", default: 0
     t.string "unlock_token"
@@ -1135,8 +1139,7 @@ ActiveRecord::Schema.define(version: 2019_05_11_145706) do
   add_foreign_key "periodicals", "frequencies"
   add_foreign_key "produces", "agents"
   add_foreign_key "produces", "manifestations"
-  add_foreign_key "profiles", "libraries"
-  add_foreign_key "profiles", "user_groups"
+  add_foreign_key "profiles", "users"
   add_foreign_key "realizes", "agents"
   add_foreign_key "realizes", "manifestations", column: "expression_id"
   add_foreign_key "resource_export_files", "users"

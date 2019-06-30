@@ -74,18 +74,19 @@ user4:
 #
 # Table name: profiles
 #
-#  id                      :bigint           not null, primary key
+#  id                      :integer          not null, primary key
+#  user_id                 :integer
+#  user_group_id           :integer
+#  library_id              :integer
 #  locale                  :string
 #  user_number             :string
 #  full_name               :text
 #  note                    :text
 #  keyword_list            :text
-#  required_role_id        :bigint           not null
-#  created_at              :datetime         not null
-#  updated_at              :datetime         not null
+#  required_role_id        :integer
+#  created_at              :datetime
+#  updated_at              :datetime
 #  expired_at              :datetime
 #  full_name_transcription :text
 #  date_of_birth           :datetime
-#  user_group_id           :bigint           not null
-#  library_id              :bigint           not null
 #
