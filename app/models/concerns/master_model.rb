@@ -15,7 +15,7 @@ module MasterModel
 
   # 表示名を設定します。
   def set_display_name
-    self.display_name = name if display_name.blank?
+    self.display_name = "#{I18n.locale}: #{name}" if display_name.blank?
   end
 
   private

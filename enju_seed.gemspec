@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 5.2"
   s.add_dependency "friendly_id", "~> 5.2"
-  s.add_dependency "devise", "~> 4.5"
+  s.add_dependency "devise", "~> 4.6"
   s.add_dependency "pundit", "~> 2.0"
   s.add_dependency "acts_as_list", "~> 0.9"
   s.add_dependency "strip_attributes", "~> 1.9"
@@ -26,12 +26,13 @@ Gem::Specification.new do |s|
   s.add_dependency "addressable", "~> 2.6"
   s.add_dependency "sunspot_rails", "~> 2.3"
   s.add_dependency "cocoon"
+  s.add_dependency "sitemap_generator", "~> 6.0"
   s.add_dependency "rails_autolink"
   s.add_dependency "paperclip"
   s.add_dependency "kramdown"
   s.add_dependency "browser", "~> 2.5"
   s.add_dependency "simple_form"
-  s.add_dependency "validates_timeliness", "~> 5.0.0.alpha4"
+  s.add_dependency "validates_timeliness", "~> 4.1"
   s.add_dependency "json_translate", "~> 4.0"
 
   s.add_development_dependency "enju_leaf", "~> 1.4.0.beta.1"

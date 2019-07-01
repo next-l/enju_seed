@@ -6,7 +6,11 @@ module EnjuSeed
       scope :administrators, -> { joins(:role).where('roles.name = ?', 'Administrator') }
       scope :librarians, -> { joins(:role).where('roles.name = ? OR roles.name = ?', 'Administrator', 'Librarian') }
       scope :suspended, -> { where('locked_at IS NOT NULL') }
-      belongs_to :profile
+      has_one :profile
+      if defined?(EnjuBiblio)
+        has_many :import_requests
+        has_many :picture_files, as: :picture_attachable, dependent: :destroy
+      end
       has_one :user_has_role, dependent: :destroy
       has_one :role, through: :user_has_role
       accepts_nested_attributes_for :user_has_role
@@ -15,7 +19,6 @@ module EnjuSeed
         with: /\A[0-9A-Za-z][0-9A-Za-z_\-]*[0-9A-Za-z]\z/
       }
       validates :email, format: Devise::email_regexp, allow_blank: true, uniqueness: true
-      validates :profile_id, uniqueness: true, presence: true
       validates_date :expired_at, allow_blank: true
 
       with_options if: :password_required? do |v|
@@ -173,8 +176,8 @@ module EnjuSeed
     # @return [Object]
     def check_role_before_destroy
       if has_role?('Administrator')
-        if User.administrators.count == 1
-          raise "#{username}: This is the last administrator in this system." if User.administrators.first.username == username
+        if Role.where(name: 'Administrator').first.users.count == 1
+          raise username + 'This is the last administrator in this system.'
         end
       end
     end
