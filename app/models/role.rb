@@ -6,6 +6,7 @@ class Role < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :name
+  translates :display_name
 
   def self.default_role
     Role.find_by(name: 'Guest')
