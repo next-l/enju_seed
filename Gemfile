@@ -17,6 +17,7 @@ gem 'jquery-rails'
 gem 'enju_leaf', github: 'next-l/enju_leaf'
 gem 'enju_library', github: 'next-l/enju_library'
 gem 'enju_biblio', github: 'next-l/enju_biblio'
+gem 'paper_trail'
 gem 'sassc-rails'
 group :test do
   gem 'rails-controller-testing'
