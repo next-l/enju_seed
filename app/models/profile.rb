@@ -94,4 +94,5 @@ end
 #  expired_at               :datetime
 #  full_name_transcription  :text
 #  date_of_birth            :datetime
+#  full_name_translations   :jsonb            not null
 #

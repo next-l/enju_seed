@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_13_114940) do
+ActiveRecord::Schema.define(version: 2019_07_13_115451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -851,6 +851,7 @@ ActiveRecord::Schema.define(version: 2019_07_13_114940) do
     t.datetime "expired_at"
     t.text "full_name_transcription"
     t.datetime "date_of_birth"
+    t.jsonb "full_name_translations", default: {}, null: false
     t.index ["checkout_icalendar_token"], name: "index_profiles_on_checkout_icalendar_token", unique: true
     t.index ["library_id"], name: "index_profiles_on_library_id"
     t.index ["user_group_id"], name: "index_profiles_on_user_group_id"

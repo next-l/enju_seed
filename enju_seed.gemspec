@@ -1,4 +1,4 @@
-$:.push File.expand_path("../lib", __FILE__)
+$:.push File.expand_path("lib", __dir__)
 
 # Maintain your gem's version:
 require "enju_seed/version"
@@ -46,4 +46,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "selenium-webdriver"
   s.add_development_dependency "puma"
   s.add_development_dependency "annotate"
+  s.add_development_dependency "simplecov"
 end
