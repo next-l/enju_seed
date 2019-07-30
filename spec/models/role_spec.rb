@@ -36,5 +36,5 @@ end
 #  created_at   :datetime
 #  updated_at   :datetime
 #  score        :integer          default(0), not null
-#  position     :integer          default(1), not null
+#  position     :integer
 #
