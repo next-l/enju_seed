@@ -1,4 +1,4 @@
-class Identity < ActiveRecord::Base
+class Identity < ApplicationRecord
   belongs_to :profile
   validates :name, presence: true, uniqueness: {scope: :provider}
   validates :provider, presence: true
