@@ -1,9 +1,28 @@
 # EnjuSeed
-[![CircleCI](https://circleci.com/gh/next-l/enju_seed/tree/2.x.svg?style=svg)](https://circleci.com/gh/next-l/enju_seed/tree/2.x)
-[![Coverage Status](https://coveralls.io/repos/github/next-l/enju_seed/badge.svg?branch=2.x)](https://coveralls.io/github/next-l/enju_seed?branch=2.x)
+Short description and motivation.
 
-This project rocks and uses MIT-LICENSE.
+## Usage
+How to use my plugin.
 
-## 製作者・貢献者 (Authors and contributors)
-* [TANABE, Kosuke](https://github.com/nabeta) ([@nabeta](https://twitter.com/nabeta))
-* [Project Next-L](https://www.next-l.jp) ([@ProjectNextL](https://twitter.com/ProjectNextL))
+## Installation
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'enju_seed'
+```
+
+And then execute:
+```bash
+$ bundle
+```
+
+Or install it yourself as:
+```bash
+$ gem install enju_seed
+```
+
+## Contributing
+Contribution directions go here.
+
+## License
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
