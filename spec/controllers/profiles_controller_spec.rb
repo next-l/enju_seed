@@ -71,10 +71,10 @@ describe ProfilesController do
         assigns(:profile).should eq(profiles(:admin))
       end
       it "assigns the another requested user as @profile" do
-        admin_profile = FactoryBot.create :admin_profile
-        get :show, params: { id: admin_profile.id }
+        admin = FactoryBot.create(:admin).profile
+        get :show, params: { id: admin.id }
         expect(response).not_to be_forbidden
-        expect(assigns(:profile)).to eq admin_profile
+        expect(assigns(:profile)).to eq admin
       end
     end
 
@@ -85,16 +85,20 @@ describe ProfilesController do
         get :show, params: { id: profiles(:librarian1).id }
         assigns(:profile).should eq(profiles(:librarian1))
       end
+
       it "should not assign the requested user as @admin" do
-        admin = FactoryBot.create(:admin_profile)
-        get :show, params: { id: admin.id }
+        admin = FactoryBot.create(:admin)
+        admin.profile.update(required_role: Role.find_by(name: 'Administrator'))
+        get :show, params: { id: admin.profile.id }
         response.should be_forbidden
       end
+
       it "should assign the requested user as @librarian" do
-        librarian = FactoryBot.create(:librarian_profile)
-        get :show, params: { id: librarian.id }
+        librarian = FactoryBot.create(:librarian)
+        librarian.profile.update(required_role: Role.find_by(name: 'Librarian'))
+        get :show, params: { id: librarian.profile.id }
         response.should_not be_forbidden
-        assigns(:profile).should eq librarian
+        assigns(:profile).should eq librarian.profile
       end
     end
 
@@ -185,23 +189,24 @@ describe ProfilesController do
         assigns(:profile).should eq(profile)
       end
       it "should not get edit page for admin required user" do
-        admin = FactoryBot.create(:admin_profile)
+        admin = FactoryBot.create(:admin).profile
         get :edit, params: { id: admin.id }
         response.should be_forbidden
         # assigns(:profile).should_not eq(admin)
       end
       it "should get edit page for other librarian user" do
-        librarian = FactoryBot.create(:librarian_profile)
+        librarian = FactoryBot.create(:librarian).profile
         get :edit, params: { id: librarian.id }
         response.should_not be_forbidden
         assigns(:profile).should eq librarian
       end
 
       it "should get edit page for other librarian user" do
-        admin = FactoryBot.create(:admin_profile, required_role_id: Role.where(name: 'Librarian').first.id)
-        get :edit, params: { id: admin.id }
+        admin = FactoryBot.create(:admin)
+        admin.profile.update(required_role: Role.find_by(name: 'Librarian'))
+        get :edit, params: { id: admin.profile.id }
         response.should be_forbidden
-        assigns(:profile).should eq admin
+        assigns(:profile).should eq admin.profile
       end
     end
 
@@ -551,8 +556,8 @@ describe ProfilesController do
       end
 
       it "should not be able to delete other librarian user" do
-        librarian = FactoryBot.create(:librarian_profile)
-        delete :destroy, params: { id: librarian.id }
+        librarian = FactoryBot.create(:librarian)
+        delete :destroy, params: { id: librarian.profile.id }
         response.should be_forbidden
       end
     end

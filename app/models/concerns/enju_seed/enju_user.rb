@@ -6,7 +6,7 @@ module EnjuSeed
       scope :administrators, -> { joins(:role).where('roles.name = ?', 'Administrator') }
       scope :librarians, -> { joins(:role).where('roles.name = ? OR roles.name = ?', 'Administrator', 'Librarian') }
       scope :suspended, -> { where('locked_at IS NOT NULL') }
-      has_one :profile, dependent: :nullify
+      belongs_to :profile
       if defined?(EnjuBiblio)
         has_many :import_requests
         has_many :picture_files, as: :picture_attachable, dependent: :destroy
@@ -19,6 +19,7 @@ module EnjuSeed
         with: /\A[0-9A-Za-z][0-9A-Za-z_\-]*[0-9A-Za-z]\z/
       }
       validates :email, format: Devise::email_regexp, allow_blank: true, uniqueness: true
+      validates :profile_id, uniqueness: true
       validates_date :expired_at, allow_blank: true
 
       with_options if: :password_required? do |v|
@@ -29,7 +30,6 @@ module EnjuSeed
       end
 
       before_validation :set_lock_information
-      before_destroy :check_role_before_destroy
       before_save :check_expiration
       after_create :set_confirmation
 
@@ -168,16 +168,6 @@ module EnjuSeed
       if expired_at
         if expired_at.beginning_of_day < Time.zone.now.beginning_of_day
           lock_access! if active_for_authentication?
-        end
-      end
-    end
-
-    # ユーザの削除前に、管理者ユーザが不在にならないかどうかをチェックします。
-    # @return [Object]
-    def check_role_before_destroy
-      if has_role?('Administrator')
-        if Role.where(name: 'Administrator').first.users.count == 1
-          raise username + 'This is the last administrator in this system.'
         end
       end
     end

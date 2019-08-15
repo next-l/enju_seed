@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 require 'rails_helper'
 
 describe User do
@@ -104,6 +103,12 @@ describe User do
     user.expired_at = 1.day.ago
     user.save
     users(:user1).active_for_authentication?.should be_falsy
+  end
+
+  it "should not destroy all administrators" do
+    expect { Role.find_by(name: 'Administrator').users.each do |user|
+      user.destroy
+    end }.to raise_error(RuntimeError, "#{users(:admin).username}: This is the last administrator in this system.")
   end
 
   if defined?(EnjuQuestion)
