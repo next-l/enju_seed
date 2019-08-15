@@ -27,7 +27,6 @@ Gem::Specification.new do |s|
   s.add_dependency "cocoon"
   s.add_dependency "sitemap_generator", "~> 6.0"
   s.add_dependency "rails_autolink"
-  s.add_dependency "paperclip"
   s.add_dependency "kramdown"
   s.add_dependency "browser", "~> 2.6"
   s.add_dependency "simple_form"
