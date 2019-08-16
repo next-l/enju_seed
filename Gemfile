@@ -13,7 +13,6 @@ gemspec
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
-gem 'enju_leaf', github: 'next-l/enju_leaf', branch: '2.x'
 gem 'paper_trail'
 gem 'sassc-rails'
 group :test do
