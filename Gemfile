@@ -16,7 +16,8 @@ gemspec
 gem 'enju_leaf', github: 'next-l/enju_leaf'
 gem 'enju_library', github: 'next-l/enju_library'
 gem 'enju_biblio', github: 'next-l/enju_biblio'
-gem 'paperclip'
+gem 'rails', '~> 5.2'
+gem 'paperclip-meta'
 gem 'paper_trail'
 gem 'sassc-rails'
 group :test do
