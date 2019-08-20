@@ -4,7 +4,7 @@ class Profile < ActiveRecord::Base
   has_one :user, dependent: :destroy
   belongs_to :library
   belongs_to :user_group
-  belongs_to :required_role, class_name: 'Role', foreign_key: 'required_role_id' #, validate: true
+  belongs_to :required_role, class_name: 'Role', foreign_key: 'required_role_id'
   has_many :identities
   has_many :agents
   accepts_nested_attributes_for :identities, allow_destroy: true, reject_if: :all_blank
