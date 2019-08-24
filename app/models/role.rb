@@ -26,9 +26,9 @@ end
 #  name                      :string           not null
 #  display_name              :string
 #  note                      :text
-#  created_at                :datetime
-#  updated_at                :datetime
 #  score                     :integer          default(0), not null
 #  position                  :integer
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
 #  display_name_translations :jsonb            not null
 #

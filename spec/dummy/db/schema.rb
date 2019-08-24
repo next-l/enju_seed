@@ -898,10 +898,10 @@ ActiveRecord::Schema.define(version: 2019_08_18_075628) do
     t.string "name", null: false
     t.string "display_name"
     t.text "note"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer "score", default: 0, null: false
     t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.jsonb "display_name_translations", default: {}, null: false
   end
 
