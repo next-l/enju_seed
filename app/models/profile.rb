@@ -6,7 +6,6 @@ class Profile < ActiveRecord::Base
   belongs_to :user_group
   belongs_to :required_role, class_name: 'Role', foreign_key: 'required_role_id'
   has_many :agents
-  accepts_nested_attributes_for :identities, allow_destroy: true, reject_if: :all_blank
 
   validates_associated :user_group, :library
   validates_presence_of :user_group, :library, :locale #, :user_number
