@@ -15,6 +15,7 @@ gemspec
 # gem 'byebug', group: [:development, :test]
 gem 'paper_trail'
 gem 'sassc-rails'
+gem 'sprockets', '~> 3.7'
 group :test do
   gem 'rails-controller-testing'
   gem 'rspec_junit_formatter'
