@@ -2,13 +2,9 @@ class Profile < ActiveRecord::Base
   scope :administrators, -> { joins(user: :role).where('roles.name = ?', 'Administrator') }
   scope :librarians, -> { joins(user: :role).where('roles.name = ? OR roles.name = ?', 'Administrator', 'Librarian') }
   has_one :user, dependent: :destroy
-  belongs_to :library
-  belongs_to :user_group
   belongs_to :required_role, class_name: 'Role', foreign_key: 'required_role_id'
   has_many :agents
 
-  validates_associated :user_group, :library
-  validates_presence_of :user_group, :library, :locale #, :user_number
   validates :user_number, uniqueness: true, format: { with: /\A[0-9A-Za-z_]+\z/ }, allow_blank: true
   validates :birth_date, format: { with: /\A\d{4}-\d{1,2}-\d{1,2}\z/ }, allow_blank: true
 
@@ -40,7 +36,7 @@ class Profile < ActiveRecord::Base
   end
 
   before_validation :set_role_and_agent, on: :create
-  before_save :set_expired_at, :set_date_of_birth
+  before_save :set_date_of_birth
   accepts_nested_attributes_for :user
 
   # 既定のユーザ権限を設定します。
@@ -48,16 +44,6 @@ class Profile < ActiveRecord::Base
   def set_role_and_agent
     self.required_role = Role.where(name: 'Librarian').first unless required_role
     self.locale = I18n.default_locale.to_s unless locale
-  end
-
-  # ユーザの有効期限を設定します。
-  # @return [Time]
-  def set_expired_at
-    if expired_at.blank?
-      if user_group.valid_period_for_new_user > 0
-        self.expired_at = user_group.valid_period_for_new_user.days.from_now.end_of_day
-      end
-    end
   end
 
   # ユーザの誕生日を設定します。

@@ -69,9 +69,11 @@ class ProfilesController < ApplicationController
   def new
     @profile = Profile.new
     @profile.user = User.new
-    @profile.user_group = current_user.profile.user_group
-    @profile.library = current_user.profile.library
     @profile.locale = current_user.profile.locale
+    if defined?(EnjuLibrary)
+      @profile.user_group = current_user.profile.user_group
+      @profile.library = current_user.profile.library
+    end
 
     respond_to do |format|
       format.html # new.html.erb

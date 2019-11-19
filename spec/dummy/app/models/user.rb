@@ -5,3 +5,5 @@ class User < ActiveRecord::Base
 
   include EnjuSeed::EnjuUser
 end
+
+Profile.include(EnjuLibrary::EnjuProfile)
