@@ -143,6 +143,7 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       if @profile.save
+        @profile.user.set_lock_information
         flash[:temporary_password] = password
         format.html { redirect_to @profile, notice: t('controller.successfully_updated', model: t('activerecord.models.profile')) }
         format.json { head :no_content }
