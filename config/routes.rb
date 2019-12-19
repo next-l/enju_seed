@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resource :profiles
+  resources :profiles
 
   resource :my_account
 
