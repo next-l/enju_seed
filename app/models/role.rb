@@ -26,7 +26,6 @@ end
 #  name                      :string           not null
 #  display_name              :string
 #  note                      :text
-#  score                     :integer          default(0), not null
 #  position                  :integer
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
