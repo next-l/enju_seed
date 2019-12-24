@@ -36,7 +36,7 @@ Gem::Specification.new do |s|
   s.add_dependency "globalize", "~> 5.2"
   s.add_dependency "globalize-accessors"
 
-  s.add_development_dependency "enju_leaf", "~> 1.3.2"
+  s.add_development_dependency "enju_leaf", "~> 1.3.3"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "factory_bot_rails"
@@ -47,4 +47,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "selenium-webdriver"
   s.add_development_dependency "puma"
   s.add_development_dependency "annotate"
+  s.add_development_dependency "sprockets", '~> 3.7'
 end
