@@ -122,15 +122,6 @@ describe User do
       users(:user1).answer_feed_token.should be_nil
     end
   end
-
-  describe ".export" do
-    it "should export all user's information" do
-      lines = User.export
-      CSV.parse(lines, col_sep: "\t")
-      expect(lines).not_to be_empty
-      expect(lines.split(/\n/).size).to eq User.count + 1
-    end
-  end
 end
 
 # == Schema Information
