@@ -1,4 +1,4 @@
-class UserHasRole < ActiveRecord::Base
+class UserHasRole < ApplicationRecord
   belongs_to :user
   belongs_to :role
   accepts_nested_attributes_for :role
