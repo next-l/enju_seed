@@ -1,4 +1,4 @@
-class Profile < ActiveRecord::Base
+class Profile < ApplicationRecord
   scope :administrators, -> { joins(user: :role).where('roles.name = ?', 'Administrator') }
   scope :librarians, -> { joins(user: :role).where('roles.name = ? OR roles.name = ?', 'Administrator', 'Librarian') }
   has_one :user, dependent: :destroy
