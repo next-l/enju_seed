@@ -1,5 +1,5 @@
 # EnjuSeed
-![](https://github.com/next-l/enju_seed/workflows/Ruby/badge.svg?branch=2.x)
+[![CircleCI](https://circleci.com/gh/next-l/enju_seed/tree/2.x.svg?style=svg)](https://circleci.com/gh/next-l/enju_seed/tree/2.x)
 [![Coverage Status](https://coveralls.io/repos/github/next-l/enju_seed/badge.svg?branch=2.x)](https://coveralls.io/github/next-l/enju_seed?branch=2.x)
 
 This project rocks and uses MIT-LICENSE.

@@ -1,4 +1,4 @@
-class Role < ActiveRecord::Base
+class Role < ApplicationRecord
   include MasterModel
   validates :name, presence: true, format: { with: /\A[A-Za-z][a-z_,]*[a-z]\z/ }
   has_many :user_has_roles

@@ -132,7 +132,7 @@ class ProfilesController < ApplicationController
   # PUT /profiles/1
   # PUT /profiles/1.json
   def update
-    @profile.update_attributes(profile_update_params)
+    @profile.update(profile_update_params)
     if @profile.user
       if @profile.user.auto_generated_password == "1"
         password = @profile.user.set_auto_generated_password
