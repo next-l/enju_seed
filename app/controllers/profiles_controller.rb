@@ -8,7 +8,7 @@ class ProfilesController < ApplicationController
   # GET /profiles.json
   def index
     if params[:username].present?
-      profile = User.where(username: params[:username]).first.try(:profile)
+      profile = User.find_by(username: params[:username]).try(:profile)
       if profile
         redirect_to profile
         return
@@ -118,7 +118,7 @@ class ProfilesController < ApplicationController
     respond_to do |format|
       if @profile.save
         if @profile.user
-          @profile.user.role = Role.where(name: 'User').first
+          @profile.user.role = Role.find_by(name: 'User')
           flash[:temporary_password] = password
         end
         format.html { redirect_to @profile, notice: t('controller.successfully_created', model: t('activerecord.models.profile')) }
