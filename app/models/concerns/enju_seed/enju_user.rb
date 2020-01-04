@@ -176,7 +176,7 @@ module EnjuSeed
     # @return [Object]
     def check_role_before_destroy
       if has_role?('Administrator')
-        if Role.where(name: 'Administrator').first.users.count == 1
+        if Role.find_by(name: 'Administrator').users.count == 1
           raise username + 'This is the last administrator in this system.'
         end
       end
@@ -209,7 +209,7 @@ module EnjuSeed
     # @return [Boolean]
     def last_librarian?
       if has_role?('Librarian')
-        role = Role.where(name: 'Librarian').first
+        role = Role.find_by(name: 'Librarian')
         return true if role.users.count == 1
         false
       end
@@ -244,7 +244,7 @@ module EnjuSeed
 
       # 最後の管理者を削除しようとした
       if has_role?('Administrator')
-        if Role.where(name: 'Administrator').first.users.count == 1
+        if Role.find_by(name: 'Administrator').users.count == 1
           errors[:base] << I18n.t('user.last_administrator')
         end
       end

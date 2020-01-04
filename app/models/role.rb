@@ -26,7 +26,7 @@ class Role < ApplicationRecord
   end
 
   def self.default_role
-    Role.where(name: 'Guest').first
+    Role.find_by(name: 'Guest')
   end
 
   private

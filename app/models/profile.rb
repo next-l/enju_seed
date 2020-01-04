@@ -50,7 +50,7 @@ class Profile < ApplicationRecord
   # 既定のユーザ権限を設定します。
   # @return [void]
   def set_role_and_agent
-    self.required_role = Role.where(name: 'Librarian').first unless required_role
+    self.required_role = Role.find_by(name: 'Librarian') unless required_role
     self.locale = I18n.default_locale.to_s unless locale
   end
 
