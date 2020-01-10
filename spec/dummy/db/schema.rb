@@ -771,7 +771,6 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
   end
 
   create_table "profiles", comment: "プロフィール", force: :cascade do |t|
-    t.bigint "user_id"
     t.string "locale", comment: "ロケール"
     t.string "user_number", comment: "利用者番号"
     t.text "full_name", comment: "氏名"
@@ -789,7 +788,6 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.index ["library_id"], name: "index_profiles_on_library_id"
     t.index ["required_role_id"], name: "index_profiles_on_required_role_id"
     t.index ["user_group_id"], name: "index_profiles_on_user_group_id"
-    t.index ["user_id"], name: "index_profiles_on_user_id"
     t.index ["user_number"], name: "index_profiles_on_user_number", unique: true
   end
 
@@ -1138,7 +1136,6 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
   add_foreign_key "profiles", "libraries"
   add_foreign_key "profiles", "roles", column: "required_role_id"
   add_foreign_key "profiles", "user_groups"
-  add_foreign_key "profiles", "users"
   add_foreign_key "resource_import_files", "users"
   add_foreign_key "subscriptions", "users"
   add_foreign_key "user_export_files", "users"

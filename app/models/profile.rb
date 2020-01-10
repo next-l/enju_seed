@@ -60,9 +60,6 @@ end
 # Table name: profiles
 #
 #  id                      :bigint           not null, primary key
-#  user_id                 :bigint
-#  user_group_id           :bigint
-#  library_id              :bigint
 #  locale                  :string
 #  user_number             :string
 #  full_name               :text
@@ -75,4 +72,6 @@ end
 #  full_name_transcription :text
 #  date_of_birth           :datetime
 #  full_name_translations  :jsonb            not null
+#  user_group_id           :bigint
+#  library_id              :bigint
 #
