@@ -13,6 +13,7 @@ gemspec
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
+gem 'jquery-rails'
 gem 'paper_trail'
 gem 'sassc-rails'
 gem 'sprockets', '~> 3.7'
