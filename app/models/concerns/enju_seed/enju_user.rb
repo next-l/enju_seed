@@ -82,9 +82,9 @@ module EnjuSeed
 
     # ユーザに使用不可の設定を反映させます。
     def set_lock_information
-      if locked == '1' and self.active_for_authentication?
+      if locked == '1' and active_for_authentication?
         lock_access!
-      elsif locked == '0' and !self.active_for_authentication?
+      elsif locked == '0' and !active_for_authentication?
         unlock_access!
       end
     end

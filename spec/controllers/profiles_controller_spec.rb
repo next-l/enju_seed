@@ -423,6 +423,14 @@ describe ProfilesController do
         assigns(:profile).user.locked_at.should be_truthy
         assigns(:profile).user.access_locked?.should be_truthy
       end
+
+      it "should unlock other user" do
+        profiles(:user1).user.lock_access!
+        put :update, params: { id: profiles(:user1).id, profile: { user_attributes: { id: 3, locked: '0', username: 'user1' } } }
+        response.should redirect_to profile_url(assigns(:profile))
+        expect(assigns(:profile).user.locked_at).to be_falsy
+        expect(assigns(:profile).user.access_locked?).to be_falsy
+      end
     end
 
     describe "When logged in as User" do
