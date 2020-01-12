@@ -4,6 +4,5 @@ class EnjuSeed::SetupGenerator < Rails::Generators::Base
 
   def copy_setup_files
     directory("db/fixtures", "db/fixtures/enju_seed")
-    rake("enju_seed_engine:install:migrations")
   end
 end
