@@ -16,7 +16,7 @@ gemspec
 gem 'jquery-rails'
 gem 'paper_trail'
 gem 'sassc-rails'
-gem 'sprockets', '~> 3.7'
+gem 'webpacker'
 gem 'rails', '~> 5.2'
 group :test do
   gem 'rails-controller-testing'
