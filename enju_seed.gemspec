@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency "pundit", "~> 2.1"
   s.add_dependency "acts_as_list", "~> 1.0"
   s.add_dependency "strip_attributes", "~> 1.9"
-  s.add_dependency "kaminari", "~> 1.1"
+  s.add_dependency "kaminari", "~> 1.2"
   s.add_dependency "addressable", "~> 2.6"
   s.add_dependency "sunspot_rails", "~> 2.5"
   s.add_dependency "cocoon"
