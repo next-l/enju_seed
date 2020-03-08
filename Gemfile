@@ -16,9 +16,9 @@ gemspec
 gem 'enju_leaf', github: 'next-l/enju_leaf'
 gem 'enju_library', github: 'next-l/enju_library'
 gem 'enju_biblio', github: 'next-l/enju_biblio'
-gem 'rails', '~> 5.2'
 gem 'sassc-rails'
 gem 'webpacker'
+gem 'rails', '~> 6.0'
 group :test do
   gem 'rails-controller-testing'
   gem 'rspec_junit_formatter'
