@@ -16,7 +16,6 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/{log,tmp}/**/*"]
 
-  s.add_dependency "rails", "~> 5.2"
   s.add_dependency "friendly_id", "~> 5.3"
   s.add_dependency "devise", "~> 4.7"
   s.add_dependency "pundit", "~> 2.1"
@@ -30,7 +29,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rails_autolink"
   s.add_dependency "paperclip"
   s.add_dependency "kramdown"
-  s.add_dependency "browser", "~> 2.7"
+  s.add_dependency "browser", "~> 4.0"
   s.add_dependency "simple_form"
   s.add_dependency "validates_timeliness", "~> 4.1"
   s.add_dependency "json_translate", "~> 4.0"
@@ -42,7 +41,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "capybara"
   s.add_development_dependency "rspec-activemodel-mocks"
   s.add_development_dependency "sunspot_matchers"
-  s.add_development_dependency "coveralls"
+  s.add_development_dependency "coveralls", '~> 0.8.23'
   s.add_development_dependency "selenium-webdriver"
   s.add_development_dependency "puma"
   s.add_development_dependency "annotate"
