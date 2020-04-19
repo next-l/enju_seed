@@ -13,11 +13,8 @@ gemspec
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
-gem 'jquery-rails'
-gem 'paper_trail'
 gem 'sassc-rails'
 gem 'webpacker'
-gem 'rails', '~> 5.2'
 group :test do
   gem 'rails-controller-testing'
   gem 'rspec_junit_formatter'
