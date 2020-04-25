@@ -8,6 +8,7 @@ class Profile < ApplicationRecord
   validates :user_number, uniqueness: true, format: { with: /\A[0-9A-Za-z_]+\z/ }, allow_blank: true
   validates :birth_date, format: { with: /\A\d{4}-\d{1,2}-\d{1,2}\z/ }, allow_blank: true
 
+  translates :full_name
   strip_attributes only: :user_number
 
   attr_accessor :birth_date
