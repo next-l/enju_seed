@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_16_131755) do
+ActiveRecord::Schema.define(version: 2020_04_26_182308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -781,10 +781,12 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.datetime "updated_at", null: false
     t.datetime "expired_at"
     t.text "full_name_transcription"
-    t.datetime "date_of_birth"
+    t.date "date_of_birth"
     t.jsonb "full_name_translations", default: {}, null: false
     t.bigint "user_group_id"
     t.bigint "library_id"
+    t.string "zip_code"
+    t.string "address"
     t.index ["library_id"], name: "index_profiles_on_library_id"
     t.index ["required_role_id"], name: "index_profiles_on_required_role_id"
     t.index ["user_group_id"], name: "index_profiles_on_user_group_id"
