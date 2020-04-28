@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency "friendly_id", "~> 5.2"
   s.add_dependency "devise", "~> 4.7"
   s.add_dependency "pundit", "~> 2.1"
-  s.add_dependency "acts_as_list", "~> 1.0"
+  s.add_dependency "acts_as_list"
   s.add_dependency "strip_attributes", "~> 1.11"
   s.add_dependency "kaminari", "~> 1.2"
   s.add_dependency "addressable", "~> 2.7"
@@ -47,10 +47,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "selenium-webdriver"
   s.add_development_dependency "puma"
   s.add_development_dependency "annotate"
-<<<<<<< HEAD
   s.add_development_dependency "sprockets", '~> 3.7'
-=======
   s.add_development_dependency "simplecov"
   s.add_development_dependency "brakeman"
->>>>>>> 68d2552... run brakeman in CircleCI
 end
