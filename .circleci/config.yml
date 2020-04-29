@@ -2,7 +2,9 @@
 #
 # Check https://circleci.com/docs/2.0/language-ruby/ for more details
 #
-version: 2
+version: 2.1
+orbs:
+  slack: circleci/slack@3.4.2
 jobs:
   build:
     docker:
@@ -15,7 +17,7 @@ jobs:
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
-       - image: circleci/postgres:11
+       - image: circleci/postgres:11-alpine
          environment:
            POSTGRES_USER: postgres
            POSTGRES_DB: enju_seed_dummy_test
