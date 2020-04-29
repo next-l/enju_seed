@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency "devise", "~> 4.7"
   s.add_dependency "pundit", "~> 2.1"
   s.add_dependency "acts_as_list"
-  s.add_dependency "strip_attributes", "~> 1.9"
+  s.add_dependency "strip_attributes", "~> 1.11"
   s.add_dependency "kaminari", "~> 1.2"
   s.add_dependency "addressable", "~> 2.7"
   s.add_dependency "sunspot_rails", "~> 2.5"
@@ -43,7 +43,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "capybara"
   s.add_development_dependency "rspec-activemodel-mocks"
   s.add_development_dependency "sunspot_matchers"
-  s.add_development_dependency "coveralls"
+  s.add_development_dependency "coveralls", '~> 0.8.23'
   s.add_development_dependency "selenium-webdriver"
   s.add_development_dependency "puma"
   s.add_development_dependency "annotate"
