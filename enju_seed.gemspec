@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
   s.add_dependency "kramdown"
   s.add_dependency "browser", "~> 4.0"
   s.add_dependency "simple_form"
-  s.add_dependency "validates_timeliness", "~> 4.0"
+  s.add_dependency "validates_timeliness", "~> 5.0"
   s.add_dependency "globalize", "~> 5.2"
   s.add_dependency "globalize-accessors"
 
