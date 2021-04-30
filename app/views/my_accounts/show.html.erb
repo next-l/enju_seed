@@ -25,7 +25,9 @@
       <% end %>
       <ul>
         <li><%= link_to t('page.edit'), edit_my_account_path -%></li>
-        <li><%= link_to t('activerecord.models.registration'), edit_user_registration_path -%></li>
+        <% if User.devise_modules.include?(:registerable) %>
+          <li><%= link_to t('activerecord.models.registration'), edit_user_registration_path -%></li>
+        <% end %>
         <%- if policy(@profile).destroy? -%>
           <li><%= link_to t('page.destroy'), @profile, data: {confirm: t('page.are_you_sure')}, method: :delete -%></li>
         <%- end -%>
