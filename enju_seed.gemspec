@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 5.1"
   s.add_dependency "friendly_id", "~> 5.2"
-  s.add_dependency "devise", "~> 4.7"
+  s.add_dependency "devise", "~> 4.8"
   s.add_dependency "pundit", "~> 2.1"
   s.add_dependency "acts_as_list"
   s.add_dependency "strip_attributes", "~> 1.11"
@@ -36,7 +36,7 @@ Gem::Specification.new do |s|
   s.add_dependency "globalize", "~> 5.2"
   s.add_dependency "globalize-accessors"
 
-  s.add_development_dependency "enju_leaf", "~> 1.3.4.rc.2"
+  s.add_development_dependency "enju_leaf", "~> 1.3.5"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "factory_bot_rails"
