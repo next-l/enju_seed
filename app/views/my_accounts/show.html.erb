@@ -25,7 +25,7 @@
       <% end %>
       <ul>
         <li><%= link_to t('page.edit'), edit_my_account_path -%></li>
-        <% if devise_mapping.registerable? %>
+        <% if User.devise_modules.include?(:registerable) %>
           <li><%= link_to t('activerecord.models.registration'), edit_user_registration_path -%></li>
         <% end %>
         <%- if policy(@profile).destroy? -%>
