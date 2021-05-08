@@ -809,10 +809,12 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
     t.datetime "updated_at", null: false
     t.datetime "expired_at"
     t.text "full_name_transcription"
-    t.datetime "date_of_birth"
+    t.date "date_of_birth"
     t.jsonb "full_name_translations", default: {}, null: false
     t.bigint "user_group_id"
     t.bigint "library_id"
+    t.string "zip_code"
+    t.string "address"
     t.index ["library_id"], name: "index_profiles_on_library_id"
     t.index ["required_role_id"], name: "index_profiles_on_required_role_id"
     t.index ["user_group_id"], name: "index_profiles_on_user_group_id"

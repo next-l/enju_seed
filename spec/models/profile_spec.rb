@@ -86,8 +86,10 @@ end
 #  updated_at              :datetime         not null
 #  expired_at              :datetime
 #  full_name_transcription :text
-#  date_of_birth           :datetime
+#  date_of_birth           :date
 #  full_name_translations  :jsonb            not null
 #  user_group_id           :bigint
 #  library_id              :bigint
+#  zip_code                :string
+#  address                 :string
 #
