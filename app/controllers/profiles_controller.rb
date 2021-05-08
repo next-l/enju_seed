@@ -32,7 +32,7 @@ class ProfilesController < ApplicationController
 
     query = params[:query]
     page = params[:page] || 1
-    role = current_user.try(:role) || Role.default_role
+    role = current_user.try(:role) || Role.default
 
     search = Profile.search
     search.build do

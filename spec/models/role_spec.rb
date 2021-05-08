@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 require 'spec_helper'
 
 describe Role do
@@ -20,8 +19,8 @@ describe Role do
     roles(:role_00001).display_name.should eq 'Guest'
   end
 
-  it "should respond to default_role" do
-    Role.default_role.should eq roles(:role_00001)
+  it "should respond to default" do
+    Role.default.should eq roles(:role_00001)
   end
 end
 
