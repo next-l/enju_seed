@@ -183,7 +183,7 @@ class ProfilesController < ApplicationController
       :save_search_history, # EnjuSearchLog
     ]
     attrs += [
-      :library_id, :expired_at, :birth_date,
+      :library_id, :expired_at, :date_of_birth,
       :user_group_id, :required_role_id, :note, :user_number, {
         user_attributes: [
           :id, :username, :email, :current_password, :locked,
@@ -202,7 +202,7 @@ class ProfilesController < ApplicationController
       :save_search_history, # EnjuSearchLog
     ]
     attrs += [
-      :library_id, :expired_at, :birth_date,
+      :library_id, :expired_at, :date_of_birth, :zip_code, :address,
       :user_group_id, :required_role_id, :note, :user_number, {
         user_attributes: [
           :id, :email, :current_password, :auto_generated_password, :locked,

@@ -6,12 +6,10 @@ class Profile < ApplicationRecord
   has_many :agents
 
   validates :user_number, uniqueness: true, format: { with: /\A[0-9A-Za-z_]+\z/ }, allow_blank: true
-  validates :birth_date, format: { with: /\A\d{4}-\d{1,2}-\d{1,2}\z/ }, allow_blank: true
+  validates :date_of_birth, format: { with: /\A\d{4}-\d{1,2}-\d{1,2}\z/ }, allow_blank: true
 
   translates :full_name
   strip_attributes only: :user_number
-
-  attr_accessor :birth_date
 
   searchable do
     text :user_number, :full_name, :full_name_transcription, :note
@@ -37,7 +35,6 @@ class Profile < ApplicationRecord
   end
 
   before_validation :set_role_and_agent, on: :create
-  before_save :set_date_of_birth
   accepts_nested_attributes_for :user
 
   # 既定のユーザ権限を設定します。
@@ -45,14 +42,6 @@ class Profile < ApplicationRecord
   def set_role_and_agent
     self.required_role = Role.find_by(name: 'Librarian') unless required_role
     self.locale = I18n.default_locale.to_s unless locale
-  end
-
-  # ユーザの誕生日を設定します。
-  # @return [Time]
-  def set_date_of_birth
-    self.date_of_birth = Time.zone.parse(birth_date) if birth_date
-  rescue ArgumentError
-    nil
   end
 end
 
@@ -71,8 +60,10 @@ end
 #  updated_at              :datetime         not null
 #  expired_at              :datetime
 #  full_name_transcription :text
-#  date_of_birth           :datetime
+#  date_of_birth           :date
 #  full_name_translations  :jsonb            not null
 #  user_group_id           :bigint
 #  library_id              :bigint
+#  zip_code                :string
+#  address                 :string
 #
