@@ -8,7 +8,7 @@ class Role < ApplicationRecord
   friendly_id :name
   translates :display_name
 
-  def self.default_role
+  def self.default
     Role.find_by(name: 'Guest')
   end
 
