@@ -14,7 +14,9 @@ require 'browser'
 require 'simple_form'
 require 'validates_timeliness'
 require 'paperclip'
-require 'json_translate'
+require 'globalize'
+require 'globalize-accessors'
+# require 'json_translate'
 
 module EnjuSeed
   class Engine < ::Rails::Engine
