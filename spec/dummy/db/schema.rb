@@ -469,18 +469,6 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
     t.index ["manifestation_id"], name: "index_identifiers_on_manifestation_id"
   end
 
-  create_table "identities", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "password_digest"
-    t.integer "profile_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_identities_on_email"
-    t.index ["name"], name: "index_identities_on_name"
-    t.index ["profile_id"], name: "index_identities_on_profile_id"
-  end
-
   create_table "import_request_transitions", id: :serial, force: :cascade do |t|
     t.string "to_state"
     t.text "metadata", default: "{}"
@@ -1037,6 +1025,8 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
     t.datetime "expired_at"
     t.text "full_name_transcription"
     t.datetime "date_of_birth"
+    t.string "zip_code"
+    t.string "address"
     t.index ["checkout_icalendar_token"], name: "index_profiles_on_checkout_icalendar_token", unique: true
     t.index ["library_id"], name: "index_profiles_on_library_id"
     t.index ["user_group_id"], name: "index_profiles_on_user_group_id"
@@ -1506,7 +1496,9 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.datetime "confirmed_at"
+    t.bigint "profile_id", comment: "プロフィールID"
     t.index ["email"], name: "index_users_on_email"
+    t.index ["profile_id"], name: "index_users_on_profile_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
@@ -1544,4 +1536,5 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
   add_foreign_key "reserves", "manifestations"
   add_foreign_key "user_has_roles", "roles"
   add_foreign_key "user_has_roles", "users"
+  add_foreign_key "users", "profiles"
 end
