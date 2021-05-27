@@ -30,7 +30,7 @@ end
 #
 #  id                        :bigint           not null, primary key
 #  name                      :string           not null
-#  display_name              :string
+#  old_display_name          :string
 #  note                      :text
 #  created_at                :datetime
 #  updated_at                :datetime

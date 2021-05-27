@@ -94,5 +94,7 @@ end
 #  expired_at               :datetime
 #  full_name_transcription  :text
 #  date_of_birth            :datetime
+#  zip_code                 :string
+#  address                  :string
 #  full_name_translations   :jsonb            not null
 #

@@ -32,8 +32,7 @@ Gem::Specification.new do |s|
   s.add_dependency "browser", "~> 5.3"
   s.add_dependency "simple_form"
   s.add_dependency "validates_timeliness", "~> 5.0"
-  s.add_dependency "globalize", "~> 5.3"
-  s.add_dependency "globalize-accessors"
+  s.add_dependency "json_translate", "~> 4.0"
 
   s.add_development_dependency "enju_leaf", "~> 2.0.0.rc.1"
   s.add_development_dependency "pg"

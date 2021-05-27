@@ -6,6 +6,7 @@ class Role < ApplicationRecord
 
   extend FriendlyId
   friendly_id :name
+  translates :display_name
 
   def self.default
     Role.find_by(name: 'Guest')
@@ -23,7 +24,7 @@ end
 #
 #  id                        :bigint           not null, primary key
 #  name                      :string           not null
-#  display_name              :string
+#  old_display_name          :string
 #  note                      :text
 #  created_at                :datetime
 #  updated_at                :datetime
