@@ -11,6 +11,8 @@ class Profile < ApplicationRecord
   translates :full_name
   strip_attributes only: :user_number
 
+  attr_accessor :birth_date
+
   searchable do
     text :user_number, :full_name, :full_name_transcription, :note
     string :user_number
@@ -42,6 +44,14 @@ class Profile < ApplicationRecord
   def set_role_and_agent
     self.required_role = Role.find_by(name: 'Librarian') unless required_role
     self.locale = I18n.default_locale.to_s unless locale
+  end
+
+  # ユーザの誕生日を設定します。
+  # @return [Time]
+  def set_date_of_birth
+    self.date_of_birth = Time.zone.parse(birth_date) if birth_date
+  rescue ArgumentError
+    nil
   end
 end
 
