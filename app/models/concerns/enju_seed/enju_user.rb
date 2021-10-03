@@ -57,7 +57,7 @@ module EnjuSeed
 
       # ユーザの情報をエクスポートします。
       # @param [Hash] options
-      def self.export(options = {format: :txt})
+      def self.export(options = {format: :text})
         header = %w(
           username
           full_name
@@ -113,7 +113,7 @@ module EnjuSeed
           end
           lines << line
         }
-        if options[:format] == :txt
+        if options[:format] == :text
           lines.map{|line| line.to_csv(col_sep: "\t")}.unshift(header.to_csv(col_sep: "\t")).join
         else
           lines
