@@ -16,10 +16,10 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/{log,tmp}/**/*"] - Dir["spec/dummy/db/*.sqlite3"]
 
-  s.add_dependency "rails", "~> 5.1"
+  s.add_dependency "rails", "~> 5.2"
   s.add_dependency "friendly_id", "~> 5.2"
   s.add_dependency "devise", "~> 4.8"
-  s.add_dependency "pundit", "~> 2.1"
+  s.add_dependency "pundit", "~> 2.2"
   s.add_dependency "acts_as_list"
   s.add_dependency "strip_attributes", "~> 1.11"
   s.add_dependency "kaminari", "~> 1.2"
